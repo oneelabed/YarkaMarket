@@ -1,4 +1,4 @@
-package students.student.JWT;
+package yarkaMarket.market.JWT;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -32,9 +32,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             String token = getTokenFromRequest(request);
             
             if (token != null && jwtTokenProvider.validateToken(token)) {
-                String username = jwtTokenProvider.getUsernameFromToken(token);
+                String email = jwtTokenProvider.getUsernameFromToken(token);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                    username,
+                    email,
                     null,
                     Collections.emptyList()
                 );

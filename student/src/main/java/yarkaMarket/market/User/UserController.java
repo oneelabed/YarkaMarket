@@ -1,10 +1,10 @@
-package students.student.student;
+package yarkaMarket.market.User;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
-import students.student.JWT.JwtTokenProvider;
+import yarkaMarket.market.JWT.JwtTokenProvider;
 
 import java.util.List;
 import java.util.Map;
@@ -12,50 +12,50 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000") 
 @RestController
-@RequestMapping(path = "/students")
+@RequestMapping(path = "/yarkaMarket")
 @RequiredArgsConstructor
-public class StudentController {
+public class UserController {
 
-    private final StudentService studentService;
-    private final StudentRepository studentRepository;
+    private final UserService userService;
+    private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
     @GetMapping
-    public List<Student> getStudents() {
-        return studentService.getStudents();
+    public List<User> getUsers() {
+        return userService.getUsers();
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");
         String password = credentials.get("password");
-        Optional<Student> studentByUsername = studentRepository.findStudentByUsername(email);
+        Optional<User> userByEmail = userRepository.findUserByEmail(email);
 
         System.out.println(email + "  " + password);
 
-        if (studentByUsername.isPresent()) {
-            if (studentByUsername.get().getPassword().equals(password))
+        if (userByEmail.isPresent()) {
+            if (userByEmail.get().getPassword().equals(password))
                 return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(email)));
             else
                 return ResponseEntity.ok(Map.of("error", "Invalid credentials"));
         }
         
-        return ResponseEntity.ok(Map.of("error", "Username not found"));
+        return ResponseEntity.ok(Map.of("error", "Email not found"));
     }
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody Map<String, String> credentials) {
-        String username = credentials.get("username");
+        String email = credentials.get("email");
         String password = credentials.get("password");
-        Optional<Student> studentByUsername = studentRepository.findStudentByUsername(username);
+        Optional<User> userByEmail = userRepository.findUserByEmail(email);
 
-        System.out.println(username + "  " + password);
+        System.out.println(email + "  " + password);
         
-        if (studentByUsername.isPresent())
-            return ResponseEntity.ok(Map.of("error", "Username already exists"));
+        if (userByEmail.isPresent())
+            return ResponseEntity.ok(Map.of("error", "Email already exists"));
 
-        if (username.length() < 4)
-            return ResponseEntity.ok(Map.of("error", "Username needs to be at least 4 characters"));
+        if (email.length() < 4)
+            return ResponseEntity.ok(Map.of("error", "Email needs to be at least 4 characters"));
 
         if (password.length() < 8)
             return ResponseEntity.ok(Map.of("error", "Password needs to be at least 8 characters"));
@@ -63,9 +63,9 @@ public class StudentController {
         if (password.length() > 30)
             return ResponseEntity.ok(Map.of("error", "Password needs to be least than 30 characters"));
 
-        studentRepository.save(new Student(username, password));
+        userRepository.save(new User(email, password));
 
-        return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(username)));
+        return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(email)));
     }
 
     /*@DeleteMapping(path = "{studentId}")

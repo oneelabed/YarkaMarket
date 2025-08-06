@@ -1,28 +1,28 @@
-package students.student.student;
+package yarkaMarket.market.User;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table
-public class Student {
+@Table(name = "users")
+public class User {
     @Id
     @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
+            name = "user_sequence",
+            sequenceName = "user_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
+            generator = "user_sequence"
     )
     private Long id;
     private String email, password;
 
-    public Student() {
+    public User() {
 
     }
 
-    public Student(String email,
+    public User(String email,
                    String password) {
         this.email = email;
         this.password = password;
@@ -40,7 +40,7 @@ public class Student {
         return password;
     }
 
-    public void setUsername(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -50,7 +50,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

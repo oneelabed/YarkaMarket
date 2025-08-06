@@ -1,6 +1,5 @@
-package students.student.Security;
+package yarkaMarket.market.Security;
 
-import students.student.JWT.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
+import yarkaMarket.market.JWT.*;
 
 @Configuration
 @EnableWebSecurity
@@ -26,9 +26,9 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/students/login", "/students/signup")
+                .requestMatchers("/yarkaMarket/login", "/yarkaMarket/signup")
                 .permitAll()
-                .requestMatchers("/students/**")
+                .requestMatchers("/yarkaMarket/**")
                 .authenticated()
             )
             .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

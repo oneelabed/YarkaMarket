@@ -1,16 +1,16 @@
-package students.student.student;
+package yarkaMarket.market.User;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class StudentConfig {
+public class UserConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(StudentRepository repository) {
+    CommandLineRunner commandLineRunner(UserRepository repository) {
         return args -> {  // Added 'return' here
-            repository.save(new Student("oneel", "1596321"));
+            repository.save(new User("oneelabed123@gmail.com", "1596321"));
         };  // Closing the lambda
     }
 }

@@ -1,4 +1,4 @@
-package students.student.JWT;
+package yarkaMarket.market.JWT;
 
 import java.util.Date;
 
@@ -17,10 +17,10 @@ public class JwtTokenProvider {
     @Value("${app.jwt.expiration-ms}")
     private int jwtExpirationMs;
 
-    public String generateToken(String username) {
+    public String generateToken(String email) {
         return Jwts
                 .builder()
-                .setSubject(username)
+                .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS256, jwtSecret)
