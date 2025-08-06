@@ -23,7 +23,7 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("/students/login", {
+      const response = await fetch("/yarkaMarket/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
