@@ -16,15 +16,15 @@ public class Student {
             generator = "student_sequence"
     )
     private Long id;
-    private String username, password;
+    private String email, password;
 
     public Student() {
 
     }
 
-    public Student(String username,
+    public Student(String email,
                    String password) {
-        this.username = username;
+        this.email = email;
         this.password = password;
     }
 
@@ -32,16 +32,16 @@ public class Student {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String email) {
+        this.email = email;
     }
 
     public void setPassword(String password) {
@@ -52,7 +52,7 @@ public class Student {
     public String toString() {
         return "Student{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

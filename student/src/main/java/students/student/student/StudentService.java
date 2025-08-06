@@ -20,7 +20,7 @@ public class StudentService {
     }
 
     public void addNewStudent(Student student) {
-        Optional<Student> studentByUsername = studentRepository.findStudentByUsername(student.getUsername());
+        Optional<Student> studentByUsername = studentRepository.findStudentByUsername(student.getEmail());
 
         if (studentByUsername.isPresent())
             throw new IllegalStateException("username taken");
@@ -44,8 +44,8 @@ public class StudentService {
             student.setPassword(password);
         }
 
-        if (username != null && username.length() > 0 && !Objects.equals(student.getUsername(), username)) {
-            Optional<Student> studentByUsername = studentRepository.findStudentByUsername(student.getUsername());
+        if (username != null && username.length() > 0 && !Objects.equals(student.getEmail(), username)) {
+            Optional<Student> studentByUsername = studentRepository.findStudentByUsername(student.getEmail());
 
             if (studentByUsername.isPresent())
                 throw new IllegalStateException("username taken");

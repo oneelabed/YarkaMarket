@@ -27,15 +27,15 @@ public class StudentController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
-        String username = credentials.get("username");
+        String email = credentials.get("email");
         String password = credentials.get("password");
-        Optional<Student> studentByUsername = studentRepository.findStudentByUsername(username);
+        Optional<Student> studentByUsername = studentRepository.findStudentByUsername(email);
 
-        System.out.println(username + "  " + password);
+        System.out.println(email + "  " + password);
 
         if (studentByUsername.isPresent()) {
             if (studentByUsername.get().getPassword().equals(password))
-                return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(username)));
+                return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(email)));
             else
                 return ResponseEntity.ok(Map.of("error", "Invalid credentials"));
         }

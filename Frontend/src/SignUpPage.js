@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./SignUpPage.css";
 
 const SignUpPage = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -14,7 +14,7 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.username || !formData.password) {
+    if (!formData.email || !formData.password) {
       setError("Please fill in both fields.");
       return;
     }
@@ -59,14 +59,14 @@ const SignUpPage = () => {
         <h2 className="signup-title">Sign Up</h2>
 
         <div className="form-group">
-          <label>Username</label>
+          <label>Email</label>
           <input
             type="text"
-            name="username"
-            value={formData.username}
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             className="form-input"
-            autoComplete="username"
+            autoComplete="email"
           />
         </div>
 
