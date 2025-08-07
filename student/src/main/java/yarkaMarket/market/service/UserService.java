@@ -2,7 +2,7 @@ package yarkaMarket.market.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import yarkaMarket.market.entity.User.User;
+import yarkaMarket.market.entity.User;
 import yarkaMarket.market.repository.UserRepository;
 
 import org.springframework.stereotype.Service;

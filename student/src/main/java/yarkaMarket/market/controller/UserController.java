@@ -4,8 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
-import yarkaMarket.market.JWT.JwtTokenProvider;
-import yarkaMarket.market.entity.User.User;
+import yarkaMarket.market.Security.JwtTokenProvider;
+import yarkaMarket.market.entity.User;
 import yarkaMarket.market.repository.UserRepository;
 import yarkaMarket.market.service.UserService;
 

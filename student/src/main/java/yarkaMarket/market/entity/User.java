@@ -1,4 +1,4 @@
-package yarkaMarket.market.entity.User;
+package yarkaMarket.market.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,13 +8,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.RequiredArgsConstructor;
-import lombok.val;
 
 @Entity
 @Table(name = "users")
-@RequiredArgsConstructor
-
 public class User {
     @Id
     @SequenceGenerator(
@@ -30,6 +26,7 @@ public class User {
     private String firstName, lastName, phone, email, password;
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
+    private boolean isApproved = false;
 
     public User(String firstName, String lastName, String phone, String email,
                    String password) {
@@ -64,6 +61,10 @@ public class User {
         return password;
     }
 
+    public boolean isApproved() {
+        return isApproved;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -87,6 +88,10 @@ public class User {
     public void setAdminRole() {
         this.role = Role.ADMIN;
     }
+
+    public void setApproved() {
+        this.isApproved = true;
+    }   
 
     @Override
     public String toString() {

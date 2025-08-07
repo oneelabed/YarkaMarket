@@ -1,4 +1,4 @@
-package yarkaMarket.market.JWT;
+package yarkaMarket.market.Security;
 
 import java.io.IOException;
 import java.util.Collections;

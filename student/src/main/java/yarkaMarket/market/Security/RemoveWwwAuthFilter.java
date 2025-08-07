@@ -1,4 +1,4 @@
-package yarkaMarket.market.entity.User;
+package yarkaMarket.market.Security;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletResponse;

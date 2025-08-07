@@ -1,4 +1,4 @@
-package yarkaMarket.market.JWT;
+package yarkaMarket.market.Security;
 
 import java.util.Date;
 
