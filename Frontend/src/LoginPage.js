@@ -30,15 +30,16 @@ const LoginPage = () => {
         credentials: "include"
       });
 
-      const responseData = await response.json();
-      // console.log(responseData);
+      //console.log(response);
 
+      const responseData = await response.json();
       const key = Object.keys(responseData)[0];
       
       if (key === 'error') {
         setError(responseData.error);
         return;
       }
+
 
       const token = responseData.token;
 

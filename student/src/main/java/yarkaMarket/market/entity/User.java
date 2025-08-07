@@ -28,6 +28,10 @@ public class User {
     private Role role = Role.USER;
     private boolean isApproved = false;
 
+    public User() {
+        
+    }
+
     public User(String firstName, String lastName, String phone, String email,
                    String password) {
         this.firstName = firstName;

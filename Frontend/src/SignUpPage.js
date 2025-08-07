@@ -44,7 +44,7 @@ const SignUpPage = () => {
       localStorage.setItem("token", token);
 
       // Redirect (replace with your dashboard path)
-      window.location.href = "/yarkaMarket/dashboard";
+      window.location.href = "/yarkaMarket/login";
     } catch (err) {
       console.error("Login error:", err);
       setError("Network error. Please try again.");

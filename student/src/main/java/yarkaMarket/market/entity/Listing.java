@@ -20,7 +20,7 @@ public class Listing {
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
+            generator = "listing_sequence"
     )
     private Long id;
     private String title, description;

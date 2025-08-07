@@ -1,6 +1,9 @@
-import React, { useState } from "react";
-import "./dashboardPage.css";
+const DashboardPage = () => {
+    return (
+        <div>
+            <h1>hello</h1>
+        </div>
+    );
+};
 
-const dashboardPage = () => {
-    return <h1>hello</h1>
-}
+export default DashboardPage;
