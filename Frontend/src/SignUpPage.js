@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./SignUpPage.css";
 
 const SignUpPage = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", phone: "", email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -14,8 +14,8 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.email || !formData.password) {
-      setError("Please fill in both fields.");
+    if (!formData.firstName || !formData.lastName || !formData.phone || !formData.email || !formData.password) {
+      setError("Please fill in missing fields.");
       return;
     }
 
@@ -57,6 +57,42 @@ const SignUpPage = () => {
     <div className="signup-container">
       <form className="signup-form">
         <h2 className="signup-title">Sign Up</h2>
+
+        <div className="form-group">
+          <label>First Name</label>
+          <input
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+            className="form-input"
+            autoComplete="firstName"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            className="form-input"
+            autoComplete="lastName"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Phone Number</label>
+          <input
+            type="text"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className="form-input"
+            autoComplete="phone"
+          />
+        </div>
 
         <div className="form-group">
           <label>Email</label>

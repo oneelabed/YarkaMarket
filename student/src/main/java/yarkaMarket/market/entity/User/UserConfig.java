@@ -12,7 +12,10 @@ public class UserConfig {
     @Bean
     CommandLineRunner commandLineRunner(UserRepository repository) {
         return args -> {  // Added 'return' here
-            repository.save(new User("oneelabed123@gmail.com", "1596321"));
+            User admin = new User("Oneel", "Abed", "0523063677", "oneelabed123@gmail.com", "1596321");
+            admin.setAdminRole();
+            
+            repository.save(admin);
         };  // Closing the lambda
     }
 }

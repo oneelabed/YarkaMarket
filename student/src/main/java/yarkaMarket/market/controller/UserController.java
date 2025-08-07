@@ -48,17 +48,18 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody Map<String, String> credentials) {
+        String firstName = credentials.get("firstName");
+        String lastName = credentials.get("lastName");
+        String phone = credentials.get("phone");
         String email = credentials.get("email");
         String password = credentials.get("password");
         Optional<User> userByEmail = userRepository.findUserByEmail(email);
 
-        System.out.println(email + "  " + password);
-        
-        if (userByEmail.isPresent())
-            return ResponseEntity.ok(Map.of("error", "Email already exists"));
+        if (!isValidEmail(email))
+            return ResponseEntity.ok(Map.of("error", "Invalid email"));
 
-        if (email.length() < 4)
-            return ResponseEntity.ok(Map.of("error", "Email needs to be at least 4 characters"));
+        if (userByEmail.isPresent())
+            return ResponseEntity.ok(Map.of("error", "A user with this email already exists"));
 
         if (password.length() < 8)
             return ResponseEntity.ok(Map.of("error", "Password needs to be at least 8 characters"));
@@ -66,7 +67,7 @@ public class UserController {
         if (password.length() > 30)
             return ResponseEntity.ok(Map.of("error", "Password needs to be least than 30 characters"));
 
-        userRepository.save(new User(email, password));
+        userRepository.save(new User(firstName, lastName, phone, email, password));
 
         return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(email)));
     }
@@ -83,4 +84,36 @@ public class UserController {
         studentService.updateStudent(studentId, username, password);
 
     }*/
+
+    private boolean isValidEmail(String email) {
+        // Basic null or length check
+        if (email == null || email.length() < 6) return false;
+
+        // Must contain exactly one '@'
+        int atIndex = email.indexOf('@');
+        if (atIndex == -1 || email.indexOf('@', atIndex + 1) != -1) return false;
+
+        // Split local and domain parts
+        String localPart = email.substring(0, atIndex);
+        String domainPart = email.substring(atIndex + 1);
+
+        // Local part must not be empty
+        if (localPart.isEmpty()) return false;
+
+        // Domain part must contain at least one '.'
+        int dotIndex = domainPart.lastIndexOf('.');
+        if (dotIndex == -1 || dotIndex == 0 || dotIndex == domainPart.length() - 1) return false;
+
+        // Domain name and extension must not be empty
+        String domainName = domainPart.substring(0, dotIndex);
+        String domainExtension = domainPart.substring(dotIndex + 1);
+
+        if (domainName.isEmpty() || domainExtension.length() < 2) return false;
+
+        // No spaces allowed
+        if (email.contains(" ")) return false;
+
+        return true;
+    }
 }
+
