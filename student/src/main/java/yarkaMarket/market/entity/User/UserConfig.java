@@ -1,8 +1,10 @@
-package yarkaMarket.market.User;
+package yarkaMarket.market.entity.User;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import yarkaMarket.market.repository.UserRepository;
 
 @Configuration
 public class UserConfig {

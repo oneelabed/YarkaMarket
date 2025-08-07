@@ -1,10 +1,13 @@
-package yarkaMarket.market.User;
+package yarkaMarket.market.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 import yarkaMarket.market.JWT.JwtTokenProvider;
+import yarkaMarket.market.entity.User.User;
+import yarkaMarket.market.repository.UserRepository;
+import yarkaMarket.market.service.UserService;
 
 import java.util.List;
 import java.util.Map;
