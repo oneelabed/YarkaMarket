@@ -44,7 +44,7 @@ const SignUpPage = () => {
       localStorage.setItem("token", token);
 
       // Redirect (replace with your dashboard path)
-      window.location.href = "http://localhost:3000/yarkaMarket/login";
+      window.location.href = "/yarkaMarket/dashboard";
     } catch (err) {
       console.error("Login error:", err);
       setError("Network error. Please try again.");
@@ -58,28 +58,31 @@ const SignUpPage = () => {
       <form className="signup-form">
         <h2 className="signup-title">Sign Up</h2>
 
-        <div className="form-group">
-          <label>First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            className="form-input"
-            autoComplete="firstName"
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            className="form-input"
-            autoComplete="lastName"
-          />
+        <div className="form-group name-fields">
+          <div className="name-input">
+            <label>First Name</label>
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              className="form-input"
+              id="first"
+              autoComplete="firstName"
+            />
+          </div>
+          <div className="name-input">
+            <label>Last Name</label>
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              className="form-input"
+              id="last"
+              autoComplete="lastName"
+            />
+          </div>
         </div>
 
         <div className="form-group">
