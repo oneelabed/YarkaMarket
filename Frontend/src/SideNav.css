@@ -1,0 +1,22 @@
+.sideNav {
+    position: fixed;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;    
+    margin-top: 60px;
+    z-index: 1000;
+}
+
+.options {
+    padding-top: 20px;
+}  
+
+.sidenav-item1 {
+    text-decoration: none;
+    color: rgb(105, 105, 105);
+    padding-left: 20px;
+}

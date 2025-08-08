@@ -1,9 +1,12 @@
-const DashboardPage = () => {
+import "./Dashboard.css"
+import SideNav from "./SideNav"
+
+const Dashboard = () => {
     return (
-        <div>
-            <h1>hello</h1>
+        <div className="Dashboard">
+            <SideNav/>
         </div>
     )
 }
 
-export default DashboardPage
+export default Dashboard

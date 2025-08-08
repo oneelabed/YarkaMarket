@@ -11,10 +11,6 @@
     z-index: 1000;    
 }
 
-.logo {
-    
-}
-
 .paths {
     display: flex;
 }  
@@ -26,7 +22,6 @@
 }
 
 .nav-item2 {
-    
     text-decoration: none;
 }
 

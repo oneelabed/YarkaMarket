@@ -1,0 +1,13 @@
+.Homepage {
+    height: 100vh;
+    background-color: #f2f2f2;
+}
+
+.intro {
+    padding-left: 200px;
+}
+
+#welcome {
+    text-align: center;
+    padding-top: 100px;
+}

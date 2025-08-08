@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./LoginPage.css";
+import "./Login.css";
 import { Link } from "react-router-dom"
 
-const LoginPage = () => {
+const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -89,7 +89,7 @@ const LoginPage = () => {
 
         {error && <div className="error-message">{error}</div>}<br/>
         
-        <b id="signUpMsg">don't have an account? <Link to="/signup" id="SignUpLink">sign up</Link></b><br/><br/>
+        <b id="signUpMsg">Don't have an account? <Link to="/signup" id="SignUpLink">Sign Up</Link></b><br/><br/>
         <button type="button" className="login-button" onClick={handleSubmit} disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>
@@ -98,7 +98,7 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default Login
 
 
 

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "./SignUpPage.css";
+import "./SignUp.css";
+import { Link } from "react-router-dom"
 
-const SignUpPage = () => {
+const SignUp = () => {
   const [formData, setFormData] = useState({ firstName: "", lastName: "", phone: "", email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -123,6 +124,7 @@ const SignUpPage = () => {
 
         {error && <div className="error-message">{error}</div>}<br/>
 
+        <b id="LoginMsg">Already have an account? <Link to="/login" id="LoginLink">Log In</Link></b><br/><br/>
         <button type="button" className="signup-button" onClick={handleSubmit} disabled={loading}>
           {loading ? "Signing up..." : "Sign Up"}
         </button>
@@ -131,4 +133,4 @@ const SignUpPage = () => {
   )
 }
 
-export default SignUpPage
+export default SignUp

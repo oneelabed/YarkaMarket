@@ -1,8 +1,8 @@
-import LoginPage from "./LoginPage.js";
+import Login from "./Login.js";
 import { Routes,Route } from "react-router-dom"
-import SignUpPage from "./SignUpPage.js";
-import HomePage from "./Homepage.js";
-import DashboardPage from "./Dashboard.js";
+import SignUp from "./SignUp.js";
+import Home from "./Home.js";
+import Dashboard from "./Dashboard.js";
 import Nav from "./Nav.js";
 
 const App = () => {
@@ -11,10 +11,10 @@ const App = () => {
     <div className="App">
       <Nav/>
       <Routes>
-        <Route path="/" element={<HomePage/>}></Route>
-        <Route path="/login" element={<LoginPage/>}></Route>
-        <Route path="/signup" element={<SignUpPage/>}></Route>
-        <Route path="/dashboard" element={<DashboardPage/>}></Route>
+        <Route path="/" element={<Home/>}></Route>
+        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/signup" element={<SignUp/>}></Route>
+        <Route path="/dashboard" element={<Dashboard/>}></Route>
       </Routes>
     </div>
   )
