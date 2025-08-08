@@ -1,23 +1,23 @@
-import React, { useState } from "react";
 import LoginPage from "./LoginPage.js";
 import { Routes,Route } from "react-router-dom"
 import SignUpPage from "./SignUpPage.js";
 import HomePage from "./Homepage.js";
-import DashboardPage from "./DashboardPage.js";
+import DashboardPage from "./Dashboard.js";
+import Nav from "./Nav.js";
 
 const App = () => {
+
   return (
     <div className="App">
-      <LoginPage/>
+      <Nav/>
       <Routes>
-        <Route path="/yarkaMarket/" element={<HomePage/>}></Route>
-        <Route path="/yarkaMarket/login" element={<LoginPage/>}></Route>
-        <Route path="/yarkaMarket/signup" element={<SignUpPage/>}></Route>
-        <Route path="/yarkaMarket/dashboard" element={<DashboardPage/>}></Route>
+        <Route path="/" element={<HomePage/>}></Route>
+        <Route path="/login" element={<LoginPage/>}></Route>
+        <Route path="/signup" element={<SignUpPage/>}></Route>
+        <Route path="/dashboard" element={<DashboardPage/>}></Route>
       </Routes>
-      
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

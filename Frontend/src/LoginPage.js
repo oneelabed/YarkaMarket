@@ -23,7 +23,7 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("/yarkaMarket/login", {
+      const response = await fetch("/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -47,7 +47,7 @@ const LoginPage = () => {
       localStorage.setItem("token", token);
 
       // Redirect (replace with your dashboard path)
-      window.location.href = "/yarkaMarket/dashboard";
+      window.location.href = "/dashboard";
     } catch (err) {
       console.error("Login error:", err);
       setError("Network error. Please try again.");
@@ -95,10 +95,10 @@ const LoginPage = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage
 
 
 

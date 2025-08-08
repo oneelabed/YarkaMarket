@@ -22,7 +22,7 @@ const SignUpPage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("/yarkaMarket/signup", {
+      const response = await fetch("/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -44,7 +44,7 @@ const SignUpPage = () => {
       localStorage.setItem("token", token);
 
       // Redirect (replace with your dashboard path)
-      window.location.href = "/yarkaMarket/login";
+      window.location.href = "/dashboard";
     } catch (err) {
       console.error("Login error:", err);
       setError("Network error. Please try again.");
@@ -128,7 +128,7 @@ const SignUpPage = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default SignUpPage;
+export default SignUpPage

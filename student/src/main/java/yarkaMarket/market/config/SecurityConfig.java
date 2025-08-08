@@ -26,9 +26,9 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/yarkaMarket/login", "/yarkaMarket/signup")
+                .requestMatchers("/login", "/signup")
                 .permitAll()
-                .requestMatchers("/yarkaMarket/**")
+                .requestMatchers("/**")
                 .authenticated()
             )
             .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
