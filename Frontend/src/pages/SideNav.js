@@ -1,7 +1,7 @@
 import "./SideNav.css"
 import { useState } from "react"
 import {Link} from "react-router-dom";
-const SideNav = () => {
+function SideNav() {
 
   /*const handleChange = () => {
     setDark(!isDark)

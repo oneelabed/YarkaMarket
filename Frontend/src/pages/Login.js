@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./SignUp.css";
+import "./Login.css";
 import { Link } from "react-router-dom"
 
-const SignUp = () => {
-  const [formData, setFormData] = useState({ firstName: "", lastName: "", phone: "", email: "", password: "" });
+function Login () {
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -15,22 +15,23 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.firstName || !formData.lastName || !formData.phone || !formData.email || !formData.password) {
-      setError("Please fill in missing fields.");
+    if (!formData.email || !formData.password) {
+      setError("Please fill in both fields.");
       return;
     }
 
     setLoading(true);
 
     try {
-      const response = await fetch("/signup", {
+      const response = await fetch("/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
         credentials: "include"
       });
 
-      
+      //console.log(response);
+
       const responseData = await response.json();
       const key = Object.keys(responseData)[0];
       
@@ -38,6 +39,7 @@ const SignUp = () => {
         setError(responseData.error);
         return;
       }
+
 
       const token = responseData.token;
 
@@ -55,48 +57,11 @@ const SignUp = () => {
   };
 
   return (
-    <div className="signup-container">
-      <form className="signup-form">
-        <h2 className="signup-title">Sign Up</h2>
+    <div className="login-container">
+      <form className="login-form">
+        <h2 className="login-title">Login</h2>
 
-        <div className="form-group name-fields">
-          <div className="name-input">
-            <label>First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              className="form-input"
-              id="first"
-              autoComplete="firstName"
-            />
-          </div>
-          <div className="name-input">
-            <label>Last Name</label>
-            <input
-              type="text"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              className="form-input"
-              id="last"
-              autoComplete="lastName"
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label>Phone Number</label>
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="form-input"
-            autoComplete="phone"
-          />
-        </div>
+        
 
         <div className="form-group">
           <label>Email</label>
@@ -123,14 +88,17 @@ const SignUp = () => {
         </div>
 
         {error && <div className="error-message">{error}</div>}<br/>
-
-        <b id="LoginMsg">Already have an account? <Link to="/login" id="LoginLink">Log In</Link></b><br/><br/>
-        <button type="button" className="signup-button" onClick={handleSubmit} disabled={loading}>
-          {loading ? "Signing up..." : "Sign Up"}
+        
+        <b id="signUpMsg">Don't have an account? <Link to="/signup" id="SignUpLink">Sign Up</Link></b><br/><br/>
+        <button type="button" className="login-button" onClick={handleSubmit} disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
   )
 }
 
-export default SignUp
+export default Login
+
+
+

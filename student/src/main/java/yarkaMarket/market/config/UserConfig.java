@@ -12,7 +12,7 @@ public class UserConfig {
 
     @Bean
     CommandLineRunner commandLineRunner(UserRepository repository) {
-        return args -> {  // Added 'return' here
+        return args -> {
             User admin = new User("Oneel", "Abed", "0523063677", "oneelabed123@gmail.com", "1596321");
             admin.setAdminRole();
             admin.setApproved();

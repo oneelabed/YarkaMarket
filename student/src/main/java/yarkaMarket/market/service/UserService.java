@@ -25,13 +25,13 @@ public class UserService {
         Optional<User> userByEmail = userRepository.findUserByEmail(user.getEmail());
 
         if (userByEmail.isPresent())
-            throw new IllegalStateException("email taken");
+            throw new IllegalStateException("Email taken");
         userRepository.save(user);
     }
 
     public void deleteUser(long id) {
         if (!userRepository.existsById(id)) {
-            throw new IllegalStateException("user with id " + id + "does not exist");
+            throw new IllegalStateException("User with id " + id + "does not exist");
         }
 
         userRepository.deleteById(id);

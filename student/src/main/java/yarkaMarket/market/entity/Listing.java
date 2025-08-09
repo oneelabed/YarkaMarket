@@ -24,8 +24,11 @@ public class Listing {
     )
     private Long id;
     private String title, description;
+    private double price;
     @Enumerated(EnumType.STRING)
     private Category category;
+    private String image;
+    private User createdBy;
     private boolean isApproved = true;
 
     public Listing(String title, String description, Category category) {
@@ -46,8 +49,20 @@ public class Listing {
         return description;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public Category getCategory() {
         return category;
+    }
+
+    public String getImages() {
+        return image;
+    }
+
+    public User getUserCreatedBy() {
+        return createdBy;
     }
 
     public boolean isApproved() {
@@ -62,8 +77,20 @@ public class Listing {
         this.description = description;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setUserCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 
     public void setApproved() {

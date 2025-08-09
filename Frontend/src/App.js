@@ -5,7 +5,7 @@ import Home from "./Home.js";
 import Dashboard from "./Dashboard.js";
 import Nav from "./Nav.js";
 
-const App = () => {
+function App() {
 
   return (
     <div className="App">

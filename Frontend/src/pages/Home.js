@@ -1,6 +1,6 @@
 import "./Home.css";
 
-const Home = () => {
+function Home() {
     return (
         <div className="Homepage">
             <h1 id="welcome">Welcome to Yarka Market</h1>
