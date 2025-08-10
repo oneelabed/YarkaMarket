@@ -1,0 +1,122 @@
+import React, { useState } from "react";
+import "./CreateListing.css"
+
+function CreateListing() {
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    category: "",
+    price: ""
+  });
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const categories = ["Electronics", "Clothing", "Sports", "Books", "Home", "Other"];
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImage(e.target.files[0]); // ONLY the first file
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const token = localStorage.getItem("token"); // from login
+
+      const form = new FormData();
+      form.append("title", formData.title);
+      form.append("description", formData.description);
+      form.append("category", formData.category);
+      form.append("price", formData.price);
+      form.append("image", image);
+
+      const response = await fetch("http://localhost:8080/dashboard/create-listing", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: form,
+      });
+
+      console.log(response);
+      
+      if (!response.ok) {
+        throw new Error("Failed to create listing");
+      }
+
+      setMessage("Listing created successfully!");
+      setFormData({ title: "", description: "", category: "", price: ""});
+      setImage();
+    } catch (error) {
+      console.error(error);
+      setMessage("Error creating listing. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="create-listing-container">
+      <h2>Create Listing</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="title"
+          placeholder="Title"
+          value={formData.title}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="description"
+          placeholder="Description"
+          value={formData.description}
+          onChange={handleChange}
+          required
+        ></textarea>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select category</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
+        <input
+          type="number"
+          name="price"
+          placeholder="Price"
+          value={formData.price}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="file"
+          name="image"
+          onChange={handleImageChange}
+          accept="image/*"
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? "Creating..." : "Create Listing"}
+        </button>
+      </form>
+      {message && <p>{message}</p>}
+    </div>
+  )
+}
+
+export default CreateListing

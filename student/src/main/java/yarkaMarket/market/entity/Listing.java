@@ -6,6 +6,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -25,17 +27,33 @@ public class Listing {
     private Long id;
     private String title, description;
     private double price;
+    private String image;
     @Enumerated(EnumType.STRING)
     private Category category;
-    private String image;
-    private User createdBy;
+    private String createdBy;
     private boolean isApproved = true;
 
-    public Listing(String title, String description, Category category) {
+    public Listing() {
+
+    }
+
+    public Listing(String title, String description, double price, Category category, String image, String createdBy) {
         this.title = title;
         this.description = description;
         this.category = category;
+        this.price = price;
+        this.image = image;
+        this.createdBy = createdBy;
     }
+
+    /*public Listing(String title, String description, double price, Category category, String image) {
+        this.title = title;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.image = image;
+        this.createdBy = null;
+    }*/
 
     public Long getId() {
         return id;
@@ -57,11 +75,11 @@ public class Listing {
         return category;
     }
 
-    public String getImages() {
+    public String getImage() {
         return image;
     }
 
-    public User getUserCreatedBy() {
+    public String getUserCreatedBy() {
         return createdBy;
     }
 
@@ -89,7 +107,7 @@ public class Listing {
         this.image = image;
     }
 
-    public void setUserCreatedBy(User createdBy) {
+    public void setUserCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -108,6 +126,6 @@ public class Listing {
     }
 
     public enum Category {
-        ELECTRONICS, FASHION, HOME, VEHICLES, SERVICES, OTHER
+        Electronics, Clothing, Sports, Books, Home, Other
     }
 }

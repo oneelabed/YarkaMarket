@@ -25,11 +25,10 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/signup")
-                .permitAll()
-                .requestMatchers("/**")
-                .authenticated()
+            .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()
+                //.requestMatchers("/login", "/signup","/dashboard/create-listing")
+               // .permitAll()
+                
             )
             .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 

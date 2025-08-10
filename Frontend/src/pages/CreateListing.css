@@ -1,0 +1,86 @@
+/* Container */
+.create-listing-container {
+  max-width: 500px;
+  margin: 30px auto;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Heading */
+.create-listing-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Inputs & Selects */
+.create-listing-container input,
+.create-listing-container textarea,
+.create-listing-container select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 16px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.create-listing-container input:focus,
+.create-listing-container textarea:focus,
+.create-listing-container select:focus {
+  border-color: #0077ff;
+  box-shadow: 0 0 5px rgba(0, 119, 255, 0.3);
+  outline: none;
+}
+
+/* Textarea */
+.create-listing-container textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* File Input */
+.create-listing-container input[type="file"] {
+  padding: 5px;
+  background: #f7f7f7;
+  border: none;
+}
+
+/* Button */
+.create-listing-container button {
+  width: 100%;
+  padding: 12px;
+  background: #0077ff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.create-listing-container button:hover {
+  background: #005ecc;
+}
+
+/* Message */
+.create-listing-container p {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* Success Message */
+.create-listing-container p.success {
+  color: green;
+}
+
+/* Error Message */
+.create-listing-container p.error {
+  color: red;
+}
