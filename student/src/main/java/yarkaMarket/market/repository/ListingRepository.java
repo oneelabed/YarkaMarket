@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface ListingRepository extends JpaRepository<Listing, Long> {
     // SELECT * FROM listings WHERE id = ?
-    @Query("SELECT l FROM Listing l WHERE l.image = ?1")
-    Optional<Listing> findListingById(String image);
+    @Query("SELECT l FROM Listing l WHERE l.createdBy = ?1")
+    Optional<Listing> findByUserId(Long id);
 }

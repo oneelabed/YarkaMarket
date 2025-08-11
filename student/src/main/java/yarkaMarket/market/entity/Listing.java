@@ -30,30 +30,24 @@ public class Listing {
     private String image;
     @Enumerated(EnumType.STRING)
     private Category category;
-    private String createdBy;
+    @ManyToOne
+    private User createdBy;
+    private String username; 
     private boolean isApproved = true;
 
     public Listing() {
 
     }
 
-    public Listing(String title, String description, double price, Category category, String image, String createdBy) {
+    public Listing(String title, String description, double price, Category category, String image, User createdBy) {
         this.title = title;
         this.description = description;
         this.category = category;
         this.price = price;
         this.image = image;
         this.createdBy = createdBy;
+        this.username = createdBy.getFirstName() + " " + createdBy.getLastName();
     }
-
-    /*public Listing(String title, String description, double price, Category category, String image) {
-        this.title = title;
-        this.description = description;
-        this.category = category;
-        this.price = price;
-        this.image = image;
-        this.createdBy = null;
-    }*/
 
     public Long getId() {
         return id;
@@ -79,8 +73,12 @@ public class Listing {
         return image;
     }
 
-    public String getUserCreatedBy() {
+    public User getUserCreatedBy() {
         return createdBy;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public boolean isApproved() {
@@ -107,8 +105,12 @@ public class Listing {
         this.image = image;
     }
 
-    public void setUserCreatedBy(String createdBy) {
+    public void setUserCreatedBy(User createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setApproved() {

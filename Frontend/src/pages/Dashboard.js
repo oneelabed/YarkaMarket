@@ -1,17 +1,12 @@
 import "./Dashboard.css"
 import SideNav from "./SideNav"
-import { Routes, Route } from "react-router-dom"
-import Market from "./Marketplace.js"
-import CreateListing from "./CreateListing.js"
+import { Outlet } from "react-router-dom"
 
 function Dashboard() {
     return (
         <div className="Dashboard">
             <SideNav/>
-            <Routes>
-                <Route path="market" element={<Market/>}></Route>
-                <Route path="create-listing" element={<CreateListing/>}></Route>
-            </Routes>
+            <Outlet/>
         </div>
     )
 }

@@ -45,6 +45,19 @@ public class ListingController {
         return repository.findAll();
     }
 
+    @GetMapping("/my-listings")
+    public List<Listing> getMyListings(Principal principal) {
+        // Get the username from the token
+        String email = principal.getName();
+
+        // Find the user in DB
+        User user = userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return repository.findAll().stream().filter(listing -> listing.getUserCreatedBy() != null && listing.getUserCreatedBy().getId().equals(user.getId())).toList();
+    }
+    
+
     @PostMapping("/create-listing")
     public ResponseEntity<String> createListing(@RequestParam("title") String title,
         @RequestParam("description") String description,
@@ -76,7 +89,7 @@ public class ListingController {
         String filename = System.currentTimeMillis() + "_" + image.getOriginalFilename();
         Path filePath = uploadPath.resolve(filename);
         Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-        Listing listing = new Listing(title, description, price, category, filename, user.getFirstName() + " " + user.getLastName());
+        Listing listing = new Listing(title, description, price, category, filename, user);
 
         repository.save(listing);
         return ResponseEntity.ok("Listing created successfully");

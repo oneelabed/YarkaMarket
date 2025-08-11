@@ -7,6 +7,7 @@ import Nav from "./pages/Nav.js"
 import Market from "./pages/Marketplace.js"
 import CreateListing from "./pages/CreateListing.js"
 import MyListings from "./pages/MyListings.js"
+import Notifications from "./pages/Notifications.js"
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}>
           <Route path="market" element={<Market/>}></Route>
           <Route path="create-listing" element={<CreateListing/>}></Route>
-          <Route path="mylistings" element={<MyListings/>}></Route>
+          <Route path="my-listings" element={<MyListings/>}></Route>
+          <Route path="notifications" element={<Notifications/>}></Route>
         </Route>
       </Routes>
     </div>

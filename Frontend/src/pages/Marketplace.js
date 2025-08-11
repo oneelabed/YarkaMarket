@@ -60,7 +60,7 @@ function Marketplace() {
                 <span>Category: {listing.category}</span>
                 <span className="listing-price">${listing.price}</span>
               </div>
-              <p className="listing-person">{listing.userCreatedBy}</p>
+              <p className="listing-person">{listing.username}</p>
             </div>
           </li>
         ))}
