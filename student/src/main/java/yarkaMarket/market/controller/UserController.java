@@ -39,8 +39,6 @@ public class UserController {
         String password = credentials.get("password");
         Optional<User> userByEmail = userRepository.findUserByEmail(email);
 
-        System.out.println(email + "  " + password);
-
         if (userByEmail.isPresent()) {
             if (userByEmail.get().getPassword().equals(password))
                 return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(email)));

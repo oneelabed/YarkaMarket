@@ -105,7 +105,6 @@ function EditListing() {
           placeholder="Price"
           value={formData.price}
           onChange={handleChange}
-          required
         />
         <input
           type="file"

@@ -25,7 +25,7 @@ public class Listing {
     )
     private Long id;
     private String title, description;
-    private double price;
+    private Double price;
     private String image;
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -38,7 +38,7 @@ public class Listing {
 
     }
 
-    public Listing(String title, String description, double price, Category category, String image, User createdBy) {
+    public Listing(String title, String description, Double price, Category category, String image, User createdBy) {
         this.title = title;
         this.description = description;
         this.category = category;
@@ -60,7 +60,7 @@ public class Listing {
         return description;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -92,7 +92,7 @@ public class Listing {
         this.description = description;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

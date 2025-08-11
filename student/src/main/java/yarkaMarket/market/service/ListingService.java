@@ -3,6 +3,8 @@ package yarkaMarket.market.service;
 import org.springframework.stereotype.Service;
 
 import yarkaMarket.market.entity.Listing;
+import yarkaMarket.market.entity.Listing.Category;
+import yarkaMarket.market.entity.User;
 import yarkaMarket.market.repository.ListingRepository;
 
 import java.util.List;
@@ -28,13 +30,30 @@ public class ListingService {
     }
 
     // Save a new listing
-    public Listing saveListing(Listing listing) {
-        return listingRepository.save(listing);
+    public void saveListing(Listing listing) {
+        listingRepository.save(listing);
     }
 
     // Update an existing listing
-    public Listing updateListing(Listing listing) {
-        return listingRepository.save(listing);
+    public void updateListing(Listing listing,
+        String title,
+        String description,
+        Double price,
+        Category category, 
+        String filename, 
+        User user) {
+
+        listing.setTitle(listing.getTitle());
+        listing.setDescription(description);
+
+        if (price != null)
+            listing.setPrice(price);
+
+        listing.setCategory(category);
+        listing.setImage(filename);
+        listing.setUserCreatedBy(user);
+        listing.setUsername();
+        listingRepository.save(listing);
     }
 
     // Delete a listing by id

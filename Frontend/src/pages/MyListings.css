@@ -101,4 +101,19 @@
 
 #edit {
     margin-top: 120px;
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+}
+
+#delete {
+    margin-top: 0px;
+    margin-right: -70px;
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+    background-color: transparent;
+    border: none;
+    font-size: inherit; 
+    cursor: pointer;
 }

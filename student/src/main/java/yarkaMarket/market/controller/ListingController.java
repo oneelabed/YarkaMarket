@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +27,7 @@ import yarkaMarket.market.entity.Listing.Category;
 import yarkaMarket.market.entity.User;
 import yarkaMarket.market.repository.ListingRepository;
 import yarkaMarket.market.repository.UserRepository;
+import yarkaMarket.market.service.ListingService;
 
 @CrossOrigin(origins = "http://localhost:3000") 
 @RestController
@@ -36,6 +37,7 @@ public class ListingController {
     @Value("${upload.path:uploads}")
     private String uploadDir;
     @Autowired
+    private final ListingService listingService;
     private final ListingRepository repository;
     private final UserRepository userRepository;
 
@@ -55,13 +57,12 @@ public class ListingController {
 
         return repository.findAll().stream().filter(listing -> listing.getUserCreatedBy() != null && listing.getUserCreatedBy().getId().equals(user.getId())).toList();
     }
-    
 
     @PostMapping("/create-listing")
     public ResponseEntity<String> createListing(@RequestParam("title") String title,
         @RequestParam("description") String description,
         @RequestParam("category") String categoryStr,
-        @RequestParam("price") double price,
+        @RequestParam("price") Double price,
         @RequestParam("image") MultipartFile image,
         Principal principal) throws IOException {
 
@@ -90,7 +91,7 @@ public class ListingController {
         Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         Listing listing = new Listing(title, description, price, category, filename, user);
 
-        repository.save(listing);
+        listingService.saveListing(listing);
         return ResponseEntity.ok("Listing created successfully");
     }
 
@@ -99,7 +100,7 @@ public class ListingController {
         @RequestParam("title") String title,
         @RequestParam("description") String description,
         @RequestParam("category") String categoryStr,
-        @RequestParam("price") double price,
+        @RequestParam("price") Double price,
         @RequestParam("image") MultipartFile image,
         Principal principal) throws IOException {
 
@@ -129,15 +130,17 @@ public class ListingController {
 
         Listing listing = repository.findById(id).get();
 
-        listing.setTitle(title);
-        listing.setDescription(description);
-        listing.setPrice(price);
-        listing.setCategory(category);
-        listing.setImage(filename);
-        listing.setUserCreatedBy(user);
-        listing.setUsername();
-        repository.save(listing);
-
+        listingService.updateListing(listing, title, description, price, category, filename, user);
         return ResponseEntity.ok("Listing updated successfully");
+    }
+
+    @DeleteMapping("/my-listings/{id}")
+    public ResponseEntity<?> deleteListing(@PathVariable Long id) {
+        if (!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        repository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }

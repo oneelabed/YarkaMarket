@@ -37,6 +37,36 @@ function MyListings() {
     fetchListings();
   }, []);
 
+  const handleDelete = async (id, e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+
+      const token = localStorage.getItem("token"); // or however you store it
+
+      const response = await fetch(`http://localhost:8080/dashboard/my-listings/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log(response);
+
+      if (!response.ok) {
+        throw new Error("Failed to delete listing");
+      }
+
+      // Remove listing from state instantly
+      setListings((prevListings) => prevListings.filter((listing) => listing.id !== id));
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   if (loading) return <p>Loading listings...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -63,6 +93,7 @@ function MyListings() {
               </div>
               <p className="listing-person">{listing.username}</p>
             </div>
+            <button type="button" id="delete" onClick={(e) => handleDelete(listing.id, e)}>Delete</button>
             <Link to={`/dashboard/edit-listing/${listing.id}`} id="edit">Edit</Link><br/><br/>
           </li>
         ))}
