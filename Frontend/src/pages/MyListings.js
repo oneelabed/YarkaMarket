@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./MyListings.css";
 
 function MyListings() {
@@ -13,7 +14,6 @@ function MyListings() {
 
       try {
         const token = localStorage.getItem("token");
-        console.log(token);
         const response = await fetch("http://localhost:8080/dashboard/my-listings", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -63,6 +63,7 @@ function MyListings() {
               </div>
               <p className="listing-person">{listing.username}</p>
             </div>
+            <Link to={`/dashboard/edit-listing/${listing.id}`} id="edit">Edit</Link><br/><br/>
           </li>
         ))}
       </ul>

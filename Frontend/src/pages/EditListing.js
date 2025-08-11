@@ -1,7 +1,8 @@
 import { useState } from "react";
-import "./CreateListing.css"
+import "./EditListing.css"
+import { useParams } from "react-router-dom";
 
-function CreateListing() {
+function EditListing() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -24,6 +25,8 @@ function CreateListing() {
     }
   };
 
+  const { id } = useParams(); 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -39,7 +42,7 @@ function CreateListing() {
       form.append("price", formData.price);
       form.append("image", image);
 
-      const response = await fetch("http://localhost:8080/dashboard/create-listing", {
+      const response = await fetch(`http://localhost:8080/dashboard/edit-listing/${id}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -53,7 +56,7 @@ function CreateListing() {
         throw new Error("Failed to create listing");
       }
 
-      setMessage("Listing created successfully!");
+      setMessage("Listing updated successfully!");
       setFormData({ title: "", description: "", category: "", price: ""});
       setImage();
     } catch (error) {
@@ -66,7 +69,7 @@ function CreateListing() {
 
   return (
     <div className="create-listing-container">
-      <h2>Create Listing</h2>
+      <h2>Edit Listing</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -111,7 +114,7 @@ function CreateListing() {
           accept="image/*"
         />
         <button type="submit" disabled={loading}>
-          {loading ? "Creating..." : "Create Listing"}
+          {loading ? "Updating..." : "Edit Listing"}
         </button>
       </form>
       {message && <p>{message}</p>}
@@ -119,4 +122,4 @@ function CreateListing() {
   )
 }
 
-export default CreateListing
+export default EditListing

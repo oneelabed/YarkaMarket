@@ -13,4 +13,7 @@ public interface ListingRepository extends JpaRepository<Listing, Long> {
     // SELECT * FROM listings WHERE id = ?
     @Query("SELECT l FROM Listing l WHERE l.createdBy = ?1")
     Optional<Listing> findByUserId(Long id);
+
+    @Query("SELECT l FROM Listing l WHERE l.id = ?1")
+    Optional<Listing> findById(Long id);
 }

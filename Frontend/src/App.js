@@ -8,6 +8,7 @@ import Market from "./pages/Marketplace.js"
 import CreateListing from "./pages/CreateListing.js"
 import MyListings from "./pages/MyListings.js"
 import Notifications from "./pages/Notifications.js"
+import EditListing from "./pages/EditListing.js"
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="create-listing" element={<CreateListing/>}></Route>
           <Route path="my-listings" element={<MyListings/>}></Route>
           <Route path="notifications" element={<Notifications/>}></Route>
+          <Route path="edit-listing/:id" element={<EditListing/>}></Route>
         </Route>
       </Routes>
     </div>

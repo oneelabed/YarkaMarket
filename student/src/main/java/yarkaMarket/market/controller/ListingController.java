@@ -8,15 +8,14 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
 
-import javax.print.DocFlavor.STRING;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -93,5 +92,52 @@ public class ListingController {
 
         repository.save(listing);
         return ResponseEntity.ok("Listing created successfully");
+    }
+
+    @PostMapping("/edit-listing/{id}")
+    public ResponseEntity<String> editListing(@PathVariable Long id,
+        @RequestParam("title") String title,
+        @RequestParam("description") String description,
+        @RequestParam("category") String categoryStr,
+        @RequestParam("price") double price,
+        @RequestParam("image") MultipartFile image,
+        Principal principal) throws IOException {
+
+        // Get the username from the token
+        String email = principal.getName();
+        
+        // Find the user in DB
+        User user = userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Category category;
+        try {
+            category = Category.valueOf(categoryStr);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid category");
+        }
+
+        Path uploadPath = Paths.get(uploadDir);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        // Save the file locally
+        String filename = System.currentTimeMillis() + "_" + image.getOriginalFilename();
+        Path filePath = uploadPath.resolve(filename);
+        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        Listing listing = repository.findById(id).get();
+
+        listing.setTitle(title);
+        listing.setDescription(description);
+        listing.setPrice(price);
+        listing.setCategory(category);
+        listing.setImage(filename);
+        listing.setUserCreatedBy(user);
+        listing.setUsername();
+        repository.save(listing);
+
+        return ResponseEntity.ok("Listing updated successfully");
     }
 }
