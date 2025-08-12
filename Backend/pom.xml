@@ -11,7 +11,7 @@
 	<groupId>yarkaMarket</groupId>
 	<artifactId>market</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>student</name>
+	<name>Backend</name>
 	<description>login project for Spring Boot</description>
 	<url/>
 	<licenses>

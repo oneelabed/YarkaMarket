@@ -2,11 +2,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-StudentApplication<student>",
+            "name": "Spring Boot-YarkaMarketApplication<student>",
             "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "students.student.StudentApplication",
-            "projectName": "student",
+            "cwd": "${workspaceFolder}/Backend",
+            "mainClass": "yarkaMarket.market.yarkaMarketApplication",
+            "projectName": "Backend",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         },
