@@ -22,7 +22,7 @@ function App() {
           <Route path="market" element={<Market/>}></Route>
           <Route path="create-listing" element={<CreateListing/>}></Route>
           <Route path="my-listings" element={<MyListings/>}></Route>
-          <Route path="notifications" element={<Notifications/>}></Route>
+          <Route path="conversations" element={<Notifications/>}></Route>
           <Route path="edit-listing/:id" element={<EditListing/>}></Route>
         </Route>
       </Routes>

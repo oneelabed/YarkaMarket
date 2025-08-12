@@ -9,8 +9,8 @@ import yarkaMarket.market.entity.Listing;
 import java.util.Optional;
 
 @Repository
+@SuppressWarnings("null")
 public interface ListingRepository extends JpaRepository<Listing, Long> {
-    // SELECT * FROM listings WHERE id = ?
     @Query("SELECT l FROM Listing l WHERE l.createdBy = ?1")
     Optional<Listing> findByUserId(Long id);
 

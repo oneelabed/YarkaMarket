@@ -9,6 +9,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
+@SuppressWarnings("deprecation")
 public class JwtTokenProvider {
 
     @Value("${app.jwt.secret}")

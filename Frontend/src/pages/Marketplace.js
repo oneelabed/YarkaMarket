@@ -41,7 +41,8 @@ function Marketplace() {
 
   return (
     <div className="marketplace-container">
-      <h2>Marketplace</h2>
+      <br></br><br></br>
+      <h2 style={{paddingLeft: "120px"}}>Marketplace</h2>
       {listings.length === 0 && <p>No listings found.</p>}
       <ul className="listings-list">
         {listings.map((listing) => (

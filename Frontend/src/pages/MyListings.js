@@ -72,8 +72,9 @@ function MyListings() {
 
   return (
     <div className="mylistings-container">
-      <h2>My Listings</h2>
-      {listings.length === 0 && <p>You don't have listings.</p>}
+      <br></br><br></br>
+      <h2 style={{paddingLeft: "120px"}}>My Listings</h2>
+      {listings.length === 0 && <p>You don't have any listings.</p>}
       <ul className="listings-list">
         {listings.map((listing) => (
           <li key={listing.id} className="listing-item">
@@ -94,7 +95,7 @@ function MyListings() {
               <p className="listing-person">{listing.username}</p>
             </div>
             <button type="button" id="delete" onClick={(e) => handleDelete(listing.id, e)}>Delete</button>
-            <Link to={`/dashboard/edit-listing/${listing.id}`} id="edit">Edit</Link><br/><br/>
+            <Link to={`/dashboard/edit-listing/${listing.id}`} id="edit">Edit</Link>
           </li>
         ))}
       </ul>
