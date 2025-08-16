@@ -6,6 +6,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -30,7 +31,8 @@ public class Listing {
     @Enumerated(EnumType.STRING)
     private Category category;
     @ManyToOne
-    private User createdBy;
+    @JoinColumn(name = "creator")
+    private User creator;
     private String username; 
     private boolean isApproved = true;
 
@@ -38,14 +40,14 @@ public class Listing {
 
     }
 
-    public Listing(String title, String description, Double price, Category category, String image, User createdBy) {
+    public Listing(String title, String description, Double price, Category category, String image, User creator) {
         this.title = title;
         this.description = description;
         this.category = category;
         this.price = price;
         this.image = image;
-        this.createdBy = createdBy;
-        this.username = createdBy.getFirstName() + " " + createdBy.getLastName();
+        this.creator = creator;
+        this.username = creator.getUsername();
     }
 
     public Long getId() {
@@ -72,8 +74,8 @@ public class Listing {
         return image;
     }
 
-    public User getUserCreatedBy() {
-        return createdBy;
+    public User getCreator() {
+        return creator;
     }
 
     public String getUsername() {
@@ -104,12 +106,12 @@ public class Listing {
         this.image = image;
     }
 
-    public void setUserCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
     public void setUsername() {
-        this.username = createdBy.getFirstName() + " " + createdBy.getLastName();
+        this.username = creator.getUsername();
     }
 
     public void setApproved() {

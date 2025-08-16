@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Marketplace.css";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../components/UserContext";
 
 function Marketplace() {
+  const { currentUser } = useContext(UserContext);
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -36,6 +40,35 @@ function Marketplace() {
     fetchListings();
   }, []);
 
+  const navigate = useNavigate();
+  
+  const handleStartConversation = async (otherUserId) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(
+        `http://localhost:8080/dashboard/conversations/start/${otherUserId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to start conversation");
+
+      const conversation = await res.json();
+
+      // Navigate to notifications page and select the new conversation
+      navigate(`/dashboard/conversations?convId=${conversation.id}`);
+    } catch (err) {
+      console.error(err);
+      alert("Could not start conversation. Please try again.");
+    }
+  };
+
   if (loading) return <p>Loading listings...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -59,9 +92,13 @@ function Marketplace() {
               <p className="listing-description">{listing.description}</p>
               <div className="listing-meta">
                 <span>Category: {listing.category}</span>
-                <span className="listing-price">${listing.price}</span>
+                <span className="listing-price">₪{listing.price}</span>
               </div>
               <p className="listing-person">{listing.username}</p>
+              {currentUser && currentUser.id !== listing.creator.id && 
+              (<button onClick={() => handleStartConversation(listing.creator.id)}>
+                Message
+              </button>)}
             </div>
           </li>
         ))}

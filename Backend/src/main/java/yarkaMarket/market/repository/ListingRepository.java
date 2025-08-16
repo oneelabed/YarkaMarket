@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 @SuppressWarnings("null")
 public interface ListingRepository extends JpaRepository<Listing, Long> {
-    @Query("SELECT l FROM Listing l WHERE l.createdBy = ?1")
+    @Query("SELECT l FROM Listing l WHERE l.creator = ?1")
     Optional<Listing> findByUserId(Long id);
 
     @Query("SELECT l FROM Listing l WHERE l.id = ?1")

@@ -55,7 +55,7 @@ public class ListingController {
         User user = userRepository.findUserByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return repository.findAll().stream().filter(listing -> listing.getUserCreatedBy() != null && listing.getUserCreatedBy().getId().equals(user.getId())).toList();
+        return repository.findAll().stream().filter(listing -> listing.getCreator() != null && listing.getCreator().getId().equals(user.getId())).toList();
     }
 
     @PostMapping("/create-listing")

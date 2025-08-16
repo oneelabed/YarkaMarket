@@ -51,7 +51,7 @@ public class ListingService {
 
         listing.setCategory(category);
         listing.setImage(filename);
-        listing.setUserCreatedBy(user);
+        listing.setCreator(user);
         listing.setUsername();
         listingRepository.save(listing);
     }

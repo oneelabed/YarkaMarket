@@ -3,6 +3,7 @@ package yarkaMarket.market.controller;
 import yarkaMarket.market.entity.Conversation;
 import yarkaMarket.market.entity.Message;
 import yarkaMarket.market.entity.User;
+import yarkaMarket.market.service.ConversationService;
 import yarkaMarket.market.service.MessagingService;
 import yarkaMarket.market.repository.UserRepository;
 
@@ -18,10 +19,14 @@ public class MessagingController {
 
     private final MessagingService messagingService;
     private final UserRepository userRepository;
+    private final ConversationService conversationService;
 
-    public MessagingController(MessagingService messagingService, UserRepository userRepository) {
+    public MessagingController(MessagingService messagingService, 
+        UserRepository userRepository, 
+        ConversationService conversationService) {
         this.messagingService = messagingService;
         this.userRepository = userRepository;
+        this.conversationService = conversationService;
     }
 
     // Get all conversations for logged in user
@@ -38,7 +43,7 @@ public class MessagingController {
         throws Exception{
         User user = userRepository.findUserByEmail(userDetails.getName())
             .orElseThrow(() -> new RuntimeException("User not found"));
-
+                
         return messagingService.getMessagesInConversation(id, user);
     }
 
@@ -78,6 +83,21 @@ public class MessagingController {
         private Long userId;
         public Long getUserId() { return userId; }
         public void setUserId(Long userId) { this.userId = userId; }
+    }
+
+    @PostMapping("conversations/start/{otherUserId}")
+    public ResponseEntity<Conversation> startConversation(
+            Principal current,
+            @PathVariable Long otherUserId) {
+
+        User currentUser = userRepository.findUserByEmail(current.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        User otherUser = userRepository.findById(otherUserId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Conversation conversation = conversationService.startConversationWithUser(currentUser, otherUser);
+
+        return ResponseEntity.ok(conversation);
     }
 }
 

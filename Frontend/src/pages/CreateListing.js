@@ -109,6 +109,7 @@ function CreateListing() {
           name="image"
           onChange={handleImageChange}
           accept="image/*"
+          required
         />
         <button type="submit" disabled={loading}>
           {loading ? "Creating..." : "Create Listing"}

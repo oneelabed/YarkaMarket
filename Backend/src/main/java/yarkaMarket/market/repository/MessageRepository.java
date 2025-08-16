@@ -9,6 +9,6 @@ import yarkaMarket.market.entity.Conversation;
 import yarkaMarket.market.entity.Message;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
-    @Query("SELECT m FROM Message m WHERE m.conversation = ?1ORDER BY m.timestamp ASC")
+    @Query("SELECT m FROM Message m WHERE m.conversation = ?1 ORDER BY m.timestamp ASC")
     List<Message> findByConversation(Conversation conversation);
 }

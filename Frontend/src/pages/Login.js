@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom"
+import { useContext } from "react";
+import { UserContext } from "../components/UserContext";
 
 function Login () {
+  const { setCurrentUser } = useContext(UserContext);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -46,8 +49,14 @@ function Login () {
       // Store token (in localStorage)
       localStorage.setItem("token", token);
 
-      // Redirect (replace with your dashboard path)
-      window.location.href = "/dashboard";
+      const res = await fetch("http://localhost:8080/me", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      setCurrentUser(data);
+
+      // Redirect
+      window.location.href = "/dashboard/market";
     } catch (err) {
       console.error("Login error:", err);
       setError("Network error. Please try again.");

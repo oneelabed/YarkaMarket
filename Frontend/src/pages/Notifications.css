@@ -4,7 +4,7 @@
   /* Move down by the height of the top navbar */
   margin-top: 60px; 
   display: flex;
-  height: 80vh; /* adjust as needed */
+  height: 100%; /* adjust as needed */
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;

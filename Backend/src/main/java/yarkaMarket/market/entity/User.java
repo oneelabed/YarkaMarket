@@ -23,7 +23,7 @@ public class User {
             generator = "user_sequence"
     )
     private Long id;
-    private String firstName, lastName, phone, email, password;
+    private String firstName, lastName, phone, email, password, username;
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
     private boolean isApproved = false;
@@ -39,6 +39,7 @@ public class User {
         this.phone = phone;
         this.email = email;
         this.password = password;
+        this.username = firstName + " " + lastName;
     }
 
     public Long getId() {
@@ -69,6 +70,10 @@ public class User {
         return isApproved;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -96,6 +101,10 @@ public class User {
     public void setApproved() {
         this.isApproved = true;
     }   
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     @Override
     public String toString() {

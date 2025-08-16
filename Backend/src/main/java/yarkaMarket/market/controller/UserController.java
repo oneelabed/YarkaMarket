@@ -14,11 +14,12 @@ import yarkaMarket.market.entity.User;
 import yarkaMarket.market.repository.UserRepository;
 import yarkaMarket.market.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000") 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping
 @RequiredArgsConstructor
@@ -31,6 +32,13 @@ public class UserController {
     @GetMapping
     public List<User> getUsers() {
         return userService.getUsers();
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<User> getCurrentUser(Principal principal) {
+        User user = userRepository.findUserByEmail(principal.getName())
+            .orElseThrow(() -> new RuntimeException("User not found"));
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")

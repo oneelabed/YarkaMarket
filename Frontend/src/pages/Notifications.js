@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
 import "./Notifications.css"
+import { useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../components/UserContext";
 
 function Notifications() {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const initialConvId = params.get("convId"); // auto-select this conversation
+  
+  const { currentUser } = useContext(UserContext);
   const [conversations, setConversations] = useState([]);
-  const [selectedConvId, setSelectedConvId] = useState(null);
+  const [selectedConvId, setSelectedConvId] = useState(initialConvId);
   const [messages, setMessages] = useState([]);
   const [newMsg, setNewMsg] = useState("");
   const [loading, setLoading] = useState(false);
+
   const token = localStorage.getItem("token");
 
   const sendMessage = async () => {
@@ -77,6 +86,7 @@ function Notifications() {
     };
     fetchMessages();
   }, [selectedConvId, token]);
+
   if (loading) return <p>Loading conversations...</p>;
 
   return (
@@ -93,52 +103,61 @@ function Notifications() {
             }
             onClick={() => setSelectedConvId(conv.id)}
           >
-            {conv.title || `Conversation ${conv.id}`}
+            {`${conv.user1.id === currentUser.id ? conv.user2.username : conv.user1.username}`}
           </div>
         ))}
       </div>
 
       {/* Messages pane */}
       <div className="messages-pane">
-        {messages.length === 0 && <p>No messages in this conversation.</p>}
-        {messages.map((msg) => (
-          <div
-            key={msg.id}
-            className={`message ${
-              msg.senderUsername === "YOUR_LOGGED_IN_USERNAME"
-                ? "sent"
-                : "received"
-            }`}
-          >
-            <strong>{msg.senderUsername}: </strong>
-            {msg.content}
-          </div>
-        ))}
+        {selectedConvId ? (
+          <>
+            {messages.length === 0 && <p>No messages in this conversation.</p>}
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`message ${
+                  msg.sender.username === currentUser.username
+                    ? "sent"
+                    : "received"
+                }`}
+              >
+                
+                {msg.content}
+              </div>
+            ))}
 
-        {/* Message input */}
-        <div className="message-input-container">
-          <input
-            className="message-input"
-            type="text"
-            placeholder="Type your message..."
-            value={newMsg}
-            onChange={(e) => setNewMsg(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") sendMessage();
-            }}
-            disabled={loading}
-          />
-          <button
-            className="send-button"
-            onClick={sendMessage}
-            disabled={loading || !newMsg.trim()}
-          >
-            Send
-          </button>
-        </div>
+            {/* Message input */}
+            <div className="message-input-container">
+              <input
+                className="message-input"
+                type="text"
+                placeholder="Type your message..."
+                value={newMsg}
+                onChange={(e) => setNewMsg(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") sendMessage();
+                }}
+                disabled={loading}
+              />
+              <button
+                className="send-button"
+                onClick={sendMessage}
+                disabled={loading || !newMsg.trim()}
+              >
+                Send
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="no-conversation">
+            <p>Select a conversation to start messaging.</p>
+          </div>
+        )}
       </div>
     </div>
   );
+
 }
 
 export default Notifications;
