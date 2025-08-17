@@ -9,6 +9,7 @@ import CreateListing from "./pages/CreateListing.js"
 import MyListings from "./pages/MyListings.js"
 import Notifications from "./pages/Notifications.js"
 import EditListing from "./pages/EditListing.js"
+import Admin from "./pages/Admin.js"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="conversations" element={<Notifications/>}></Route>
           <Route path="edit-listing/:id" element={<EditListing/>}></Route>
         </Route>
+        <Route path="/admin" element={<Admin/>}></Route>
       </Routes>
     </div>
   )

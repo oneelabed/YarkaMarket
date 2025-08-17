@@ -95,11 +95,11 @@ function Marketplace() {
                 <span className="listing-price">₪{listing.price}</span>
               </div>
               <p className="listing-person">{listing.username}</p>
-              {currentUser && currentUser.id !== listing.creator.id && 
-              (<button onClick={() => handleStartConversation(listing.creator.id)}>
+            </div>
+            {currentUser && currentUser.id !== listing.creator.id && 
+              (<button onClick={() => handleStartConversation(listing.creator.id)} id="message">
                 Message
               </button>)}
-            </div>
           </li>
         ))}
       </ul>

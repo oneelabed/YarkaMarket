@@ -24,7 +24,6 @@ import java.util.Optional;
 @RequestMapping
 @RequiredArgsConstructor
 public class UserController {
-
     private final UserService userService;
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;

@@ -16,7 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/dashboard")
 public class MessagingController {
-
     private final MessagingService messagingService;
     private final UserRepository userRepository;
     private final ConversationService conversationService;

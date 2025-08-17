@@ -1,5 +1,7 @@
 package yarkaMarket.market.entity;
 
+import com.fasterxml.jackson.annotation.JacksonInject;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -66,7 +68,11 @@ public class User {
         return password;
     }
 
-    public boolean isApproved() {
+    public Role getRole() {
+        return role;
+    }
+
+    public boolean getIsApproved() {
         return isApproved;
     }
 
@@ -100,7 +106,7 @@ public class User {
 
     public void setApproved() {
         this.isApproved = true;
-    }   
+    }
 
     public void setUsername(String username) {
         this.username = username;
