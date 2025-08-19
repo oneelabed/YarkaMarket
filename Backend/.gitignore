@@ -16,7 +16,7 @@ target/
 # Spring specific
 application-*.yml
 application-*.yaml
-application-*.properties
+*.properties
 !application-example.properties
 !application-example.yml
 
