@@ -13,6 +13,13 @@ target/
 .springBeans
 .sts4-cache
 
+# Spring specific
+application-*.yml
+application-*.yaml
+application-*.properties
+!application-example.properties
+!application-example.yml
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
