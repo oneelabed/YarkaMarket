@@ -1,7 +1,5 @@
 package yarkaMarket.market.entity;
 
-import com.fasterxml.jackson.annotation.JacksonInject;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
