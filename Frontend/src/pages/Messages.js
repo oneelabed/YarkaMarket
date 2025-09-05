@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import "./Notifications.css"
+import "./Messages.css"
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../components/UserContext";
 
-function Notifications() {
+function Messages() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const initialConvId = params.get("convId"); // auto-select this conversation
@@ -90,7 +90,7 @@ function Notifications() {
   if (loading) return <p>Loading conversations...</p>;
 
   return (
-    <div className="notifications-container">
+    <div className="messages-container">
       {/* Conversations sidebar */}
       <div className="conversations-list">
         {conversations.length === 0 && <p>No conversations</p>}
@@ -160,4 +160,4 @@ function Notifications() {
 
 }
 
-export default Notifications;
+export default Messages;

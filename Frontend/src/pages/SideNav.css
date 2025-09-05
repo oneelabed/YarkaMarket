@@ -17,10 +17,15 @@
 
 .sidenav-item1 {
     text-decoration: none;
-    color: rgb(105, 105, 105);
-    padding-left: 20px;
+    color: black;
+    padding-left: 10px;
 }
 
 #admin {
     margin-bottom: 50px;
+}
+
+#icon {
+    margin-left: 15px;
+    margin-top: 0px;
 }
