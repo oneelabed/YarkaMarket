@@ -13,7 +13,7 @@ function EditListing() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const categories = ["Electronics", "Clothing", "Sports", "Books", "Home", "Other"];
+  const categories = ["Electronics", "Furniture", "Clothing", "Tools", "Home", "Sports", "Books", "Other"];
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,6 +31,12 @@ function EditListing() {
     e.preventDefault();
     setLoading(true);
     setMessage("");
+
+    if (!image) {
+      setMessage("You have to upload an image")
+      setLoading(false);
+      return;
+    }
 
     try {
       const token = localStorage.getItem("token"); // from login
@@ -106,12 +112,21 @@ function EditListing() {
           value={formData.price}
           onChange={handleChange}
         />
-        <input
-          type="file"
-          name="image"
-          onChange={handleImageChange}
-          accept="image/*"
-        />
+        <div className="uploader-container">
+          {/* Styled upload button */}
+          <label htmlFor="image-upload" className="upload-btn">
+            Upload Image
+          </label>
+          <input
+            id="image-upload"
+            type="file"
+            name="image"
+            onChange={handleImageChange}
+            accept="image/*"
+            className="hidden-input"
+          />
+        </div>
+        <br></br><br></br>
         <button type="submit" disabled={loading}>
           {loading ? "Updating..." : "Edit Listing"}
         </button>

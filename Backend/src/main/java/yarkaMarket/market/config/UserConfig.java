@@ -9,7 +9,6 @@ import yarkaMarket.market.repository.UserRepository;
 
 @Configuration
 public class UserConfig {
-
     @Bean
     CommandLineRunner commandLineRunner(UserRepository repository) {
         return args -> {

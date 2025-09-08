@@ -1,4 +1,4 @@
-.Homepage {
+/*.Homepage {
     height: 100vh;
     background-color: aliceblue;
 }
@@ -10,4 +10,133 @@
 #welcome {
     text-align: center;
     padding-top: 100px;
+}*/
+
+/* General layout */
+.homepage {
+  font-family: Arial, sans-serif;
+  color: #1f2937; /* gray-800 */
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Hero Buttons */
+.primary-btn {
+  background-color: #facc15; /* yellow-400 */
+  color: #1f2937; /* gray-800 */
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+
+.primary-btn:hover {
+  background-color: #eab308; /* darker yellow */
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  background-color: white;
+  color: #2563eb;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+
+.secondary-btn:hover {
+  background-color: #f3f4f6; /* gray-100 */
+  transform: translateY(-2px);
+}
+
+/* Why Use Section */
+.why-use {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f9fafb; /* gray-50 */
+}
+
+.why-use h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.reasons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.reason-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  font-size: 1rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.reason-card:hover {
+  transform: translateY(-4px);
+}
+
+.reason-card span {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* Footer */
+.footer {
+  background: #1f2937; /* gray-800 */
+  color: #d1d5db; /* gray-300 */
+  text-align: center;
+  padding: 20px;
+}
+
+.footer-links {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.footer-links a {
+  color: #93c5fd; /* blue-300 */
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-links a:hover {
+  color: #60a5fa; /* blue-400 */
+  text-decoration: underline;
 }

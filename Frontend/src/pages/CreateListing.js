@@ -12,7 +12,7 @@ function CreateListing() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const categories = ["Electronics", "Clothing", "Sports", "Books", "Home", "Other"];
+  const categories = ["Electronics", "Furniture", "Clothing", "Tools", "Home", "Sports", "Books", "Other"];
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,6 +28,12 @@ function CreateListing() {
     e.preventDefault();
     setLoading(true);
     setMessage("");
+
+    if (!image) {
+      setMessage("You have to upload an image");  
+      setLoading(false);
+      return;
+    }
 
     try {
       const token = localStorage.getItem("token"); // from login
@@ -104,17 +110,26 @@ function CreateListing() {
           onChange={handleChange}
           required
         />
-        <input
-          type="file"
-          name="image"
-          onChange={handleImageChange}
-          accept="image/*"
-          required
-        />
+        <div className="uploader-container">
+          {/* Styled upload button */}
+          <label htmlFor="image-upload" className="upload-btn">
+            Upload Image
+          </label>
+          <input
+            id="image-upload"
+            type="file"
+            name="image"
+            onChange={handleImageChange}
+            accept="image/*"
+            className="hidden-input"
+          />
+        </div>
+        <br></br><br></br>
         <button type="submit" disabled={loading}>
           {loading ? "Creating..." : "Create Listing"}
         </button>
       </form>
+      <br></br>
       {message && <p>{message}</p>}
     </div>
   )

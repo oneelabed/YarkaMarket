@@ -1,6 +1,7 @@
 package yarkaMarket.market.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping
     public List<User> getUsers() {
@@ -37,6 +39,7 @@ public class UserController {
     public ResponseEntity<User> getCurrentUser(Principal principal) {
         User user = userRepository.findUserByEmail(principal.getName())
             .orElseThrow(() -> new RuntimeException("User not found"));
+
         return ResponseEntity.ok(user);
     }
 
@@ -46,8 +49,10 @@ public class UserController {
         String password = credentials.get("password");
         Optional<User> userByEmail = userRepository.findUserByEmail(email);
 
+        System.out.println(userByEmail.get().getPassword());
+
         if (userByEmail.isPresent()) {
-            if (userByEmail.get().getPassword().equals(password))
+            if (passwordEncoder.matches(password, userByEmail.get().getPassword()))
                 return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(email)));
             else
                 return ResponseEntity.ok(Map.of("error", "Invalid credentials"));
@@ -77,7 +82,7 @@ public class UserController {
         if (password.length() > 30)
             return ResponseEntity.ok(Map.of("error", "Password needs to be least than 30 characters"));
 
-        userRepository.save(new User(firstName, lastName, phone, email, password));
+        userRepository.save(new User(firstName, lastName, phone, email, passwordEncoder.encode(password)));
 
         return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(email)));
     }
@@ -86,14 +91,7 @@ public class UserController {
     public void deleteStudent(@PathVariable("studentId") long id) {
         studentService.deleteStudent(id);
     }
-
-    @PutMapping(path = "{studentId}")
-    public void updateStudent(@PathVariable long studentId,
-                              @RequestParam(required = false) String username,
-                              @RequestParam(required = false) String password) {
-        studentService.updateStudent(studentId, username, password);
-
-    }*/
+    */
 
     private boolean isValidEmail(String email) {
         // Basic null or length check

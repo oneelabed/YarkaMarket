@@ -3,6 +3,8 @@ import "./Messages.css"
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../components/UserContext";
+import { Send } from "lucide-react";
+
 
 function Messages() {
   const location = useLocation();
@@ -90,70 +92,73 @@ function Messages() {
   if (loading) return <p>Loading conversations...</p>;
 
   return (
-    <div className="messages-container">
-      {/* Conversations sidebar */}
-      <div className="conversations-list">
-        {conversations.length === 0 && <p>No conversations</p>}
-        {conversations.map((conv) => (
-          <div
-            key={conv.id}
-            className={
-              "conversation-item " +
-              (conv.id === selectedConvId ? "selected" : "")
-            }
-            onClick={() => setSelectedConvId(conv.id)}
-          >
-            {`${conv.user1.id === currentUser.id ? conv.user2.username : conv.user1.username}`}
-          </div>
-        ))}
-      </div>
-
-      {/* Messages pane */}
-      <div className="messages-pane">
-        {selectedConvId ? (
-          <>
-            {messages.length === 0 && <p>No messages in this conversation.</p>}
-            {messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={`message ${
-                  msg.sender.username === currentUser.username
-                    ? "sent"
-                    : "received"
-                }`}
-              >
-                
-                {msg.content}
-              </div>
-            ))}
-
-            {/* Message input */}
-            <div className="message-input-container">
-              <input
-                className="message-input"
-                type="text"
-                placeholder="Type your message..."
-                value={newMsg}
-                onChange={(e) => setNewMsg(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") sendMessage();
-                }}
-                disabled={loading}
-              />
-              <button
-                className="send-button"
-                onClick={sendMessage}
-                disabled={loading || !newMsg.trim()}
-              >
-                Send
-              </button>
+    <div>
+      <h1 style={{marginLeft:"250px" , marginTop:"50px"}}>Messages</h1> 
+      <div className="messages-container">
+        {/* Conversations sidebar */}
+        <div className="conversations-list">
+          {conversations.length === 0 && <p>No conversations</p>}
+          {conversations.map((conv) => (
+            <div
+              key={conv.id}
+              className={
+                "conversation-item " +
+                (conv.id === selectedConvId ? "selected" : "")
+              }
+              onClick={() => setSelectedConvId(conv.id)}
+            >
+              {`${conv.user1.id === currentUser.id ? conv.user2.username : conv.user1.username}`}
             </div>
-          </>
-        ) : (
-          <div className="no-conversation">
-            <p>Select a conversation to start messaging.</p>
-          </div>
-        )}
+          ))}
+        </div>
+
+        {/* Messages pane */}
+        <div className="messages-pane">
+          {selectedConvId ? (
+            <>
+              {messages.length === 0 && <p>No messages in this conversation.</p>}
+              {messages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`message ${
+                    msg.sender.username === currentUser.username
+                      ? "sent"
+                      : "received"
+                  }`}
+                >
+                  
+                  {msg.content}
+                </div>
+              ))}
+
+              {/* Message input */}
+              <div className="message-input-container">
+                <input
+                  className="message-input"
+                  type="text"
+                  placeholder="Type your message..."
+                  value={newMsg}
+                  onChange={(e) => setNewMsg(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") sendMessage();
+                  }}
+                  disabled={loading}
+                />
+                <button
+                  className="send-button"
+                  onClick={sendMessage}
+                  disabled={loading || !newMsg.trim()}
+                >
+                  <Send size={20}></Send>
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="no-conversation">
+              <p>Select a conversation to start messaging.</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

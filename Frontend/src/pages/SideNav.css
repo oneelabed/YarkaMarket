@@ -7,7 +7,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: white;    
-    margin-top: 60px;
+    margin-top: 0px;
     z-index: 1000;
 }
 
@@ -26,6 +26,20 @@
 }
 
 #icon {
+    position: relative;
     margin-left: 15px;
-    margin-top: 0px;
+    margin-bottom: -3px;
+}
+
+#blackLogo {
+    height: 120px;
+    width: 250px;
+    position: relative;
+    right: 30px;
+}
+
+#name {
+    position: fixed;
+    margin-top: 10px;
+    font-size: 20px;
 }

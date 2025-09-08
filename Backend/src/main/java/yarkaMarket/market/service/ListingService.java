@@ -43,7 +43,7 @@ public class ListingService {
         String filename, 
         User user) {
 
-        listing.setTitle(listing.getTitle());
+        listing.setTitle(title);
         listing.setDescription(description);
 
         if (price != null)

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SignUp.css";
+import Nav from "./Nav";
 import { Link } from "react-router-dom"
 
 function SignUp() {
@@ -55,80 +56,84 @@ function SignUp() {
   };
 
   return (
-    <div className="signup-container">
-      <form className="signup-form">
-        <h2 className="signup-title">Sign Up</h2>
+    <div>
+      <Nav/>
+      <div className="signup-container">
+        
+        <form className="signup-form">
+          <h2 className="signup-title">Sign Up</h2>
 
-        <div className="form-group name-fields">
-          <div className="name-input">
-            <label>First Name</label>
+          <div className="form-group name-fields">
+            <div className="name-input">
+              <label>First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                className="form-input"
+                id="first"
+                autoComplete="firstName"
+              />
+            </div>
+            <div className="name-input">
+              <label>Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                className="form-input"
+                id="last"
+                autoComplete="lastName"
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Phone Number</label>
             <input
               type="text"
-              name="firstName"
-              value={formData.firstName}
+              name="phone"
+              value={formData.phone}
               onChange={handleChange}
               className="form-input"
-              id="first"
-              autoComplete="firstName"
+              autoComplete="phone"
             />
           </div>
-          <div className="name-input">
-            <label>Last Name</label>
+
+          <div className="form-group">
+            <label>Email</label>
             <input
               type="text"
-              name="lastName"
-              value={formData.lastName}
+              name="email"
+              value={formData.email}
               onChange={handleChange}
               className="form-input"
-              id="last"
-              autoComplete="lastName"
+              autoComplete="email"
             />
           </div>
-        </div>
 
-        <div className="form-group">
-          <label>Phone Number</label>
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="form-input"
-            autoComplete="phone"
-          />
-        </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="form-input"
+              autoComplete="current-password"
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="form-input"
-            autoComplete="email"
-          />
-        </div>
+          {error && <div className="error-message">{error}</div>}<br/>
 
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="form-input"
-            autoComplete="current-password"
-          />
-        </div>
-
-        {error && <div className="error-message">{error}</div>}<br/>
-
-        <b id="LoginMsg">Already have an account? <Link to="/login" id="LoginLink">Log In</Link></b><br/><br/>
-        <button type="button" className="signup-button" onClick={handleSubmit} disabled={loading}>
-          {loading ? "Signing up..." : "Sign Up"}
-        </button>
-      </form>
+          <b id="LoginMsg">Already have an account? <Link to="/login" id="LoginLink">Log In</Link></b><br/><br/>
+          <button type="button" className="signup-button" onClick={handleSubmit} disabled={loading}>
+            {loading ? "Signing up..." : "Sign Up"}
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

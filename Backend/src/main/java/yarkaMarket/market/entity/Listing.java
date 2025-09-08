@@ -129,6 +129,6 @@ public class Listing {
     }
 
     public enum Category {
-        Electronics, Clothing, Sports, Books, Home, Other
+        Electronics, Furniture, Clothing, Tools, Home, Sports, Books, Other
     }
 }

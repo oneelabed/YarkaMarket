@@ -73,7 +73,7 @@ function MyListings() {
   return (
     <div className="mylistings-container">
       <br></br><br></br>
-      <h2 style={{paddingLeft: "120px"}}>My Listings</h2>
+      <h1>My Listings</h1><br/>
       {listings.length === 0 && <p>You don't have any listings.</p>}
       <ul className="listings-list">
         {listings.map((listing) => (

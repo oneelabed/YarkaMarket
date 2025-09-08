@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
+import Nav from "./Nav";
 import { Link } from "react-router-dom"
 import { useContext } from "react";
 import { UserContext } from "../components/UserContext";
@@ -66,43 +67,46 @@ function Login () {
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form">
-        <h2 className="login-title">Login</h2>
+    <div>
+      <Nav/>
+      <div className="login-container">
+        <form className="login-form">
+          <h2 className="login-title">Login</h2>
 
-        
+          
 
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="form-input"
-            autoComplete="email"
-          />
-        </div>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="text"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="form-input"
+              autoComplete="email"
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="form-input"
-            autoComplete="current-password"
-          />
-        </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="form-input"
+              autoComplete="current-password"
+            />
+          </div>
 
-        {error && <div className="error-message">{error}</div>}<br/>
-        
-        <b id="signUpMsg">Don't have an account? <Link to="/signup" id="SignUpLink">Sign Up</Link></b><br/><br/>
-        <button type="button" className="login-button" onClick={handleSubmit} disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
+          {error && <div className="error-message">{error}</div>}<br/>
+          
+          <b id="signUpMsg">Don't have an account? <Link to="/signup" id="SignUpLink">Sign Up</Link></b><br/><br/>
+          <button type="button" className="login-button" onClick={handleSubmit} disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

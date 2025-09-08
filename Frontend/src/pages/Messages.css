@@ -1,12 +1,17 @@
+body {
+  background-color: aliceblue;
+}
+
 .messages-container {
   /* Move right by the width of the sidebar */
-  margin-left: 200px;  
+  margin-left: 250px;  
   /* Move down by the height of the top navbar */
-  margin-top: 60px; 
+  margin-top: 40px; 
   display: flex;
-  height: 100%; /* adjust as needed */
+  height: 600px;
+  width: 80%;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   font-family: Arial, sans-serif;
 }
