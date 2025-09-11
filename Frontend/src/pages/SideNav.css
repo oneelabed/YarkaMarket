@@ -13,9 +13,39 @@
 
 .options {
     padding-top: 20px;
+    border-color: black;
 }  
 
-.sidenav-item1 {
+.sidenav-item {
+    text-decoration: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.unactive-sidenav{
+    text-decoration: none;
+}   
+
+.unactive-sidenav:hover{
+    text-decoration: none;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    border-radius: 10px;
+    padding-right: 35px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}   
+
+.active-sidenav {
+    text-decoration: none;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    border-radius: 10px;
+    padding-right: 35px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.sidenav-word {
     text-decoration: none;
     color: black;
     padding-left: 10px;
