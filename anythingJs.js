@@ -1,123 +1,301 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import "./Messages.css"
 import { useLocation } from "react-router-dom";
-import { Client } from "@stomp/stompjs";
-import SockJS from "sockjs-client";
+import { useContext } from "react";
+import { UserContext } from "../components/UserContext";
+import { Send } from "lucide-react";
+import webSocketService from "../YarkaMarket/"
 
-function Notifications() {
+function Messages() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const initialConvId = params.get("convId");
-
+  
+  const { currentUser } = useContext(UserContext);
   const [conversations, setConversations] = useState([]);
-  const [messages, setMessages] = useState([]);
   const [selectedConvId, setSelectedConvId] = useState(initialConvId);
-  const [newMessage, setNewMessage] = useState("");
-  const [client, setClient] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [newMsg, setNewMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [wsConnected, setWsConnected] = useState(false);
+  const messagesEndRef = useRef(null);
 
-  // Fetch conversations when component mounts
+  const token = localStorage.getItem("token");
+
+  // Scroll to bottom of messages
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
-    fetch("http://localhost:8080/dashboard/conversations", {
-      credentials: "include"
-    })
-      .then((res) => res.json())
-      .then((data) => setConversations(data))
-      .catch((err) => console.error(err));
+    scrollToBottom();
+  }, [messages]);
+
+  // Handle incoming WebSocket messages
+  const handleWebSocketMessage = useCallback((messageData) => {
+    console.log('Received WebSocket message:', messageData);
+    
+    // Add message if it belongs to the currently selected conversation
+    if (messageData.conversationId === parseInt(selectedConvId)) {
+      setMessages(prev => {
+        // Check if message already exists to avoid duplicates
+        const exists = prev.some(msg => msg.id === messageData.id);
+        if (!exists) {
+          return [...prev, {
+            id: messageData.id,
+            content: messageData.content,
+            timestamp: messageData.timestamp,
+            sender: {
+              id: messageData.senderId,
+              username: messageData.senderUsername
+            },
+            conversation: {
+              id: messageData.conversationId
+            }
+          }];
+        }
+        return prev;
+      });
+    }
+    
+    // Update conversation list to reflect new message (update lastUpdated)
+    setConversations(prev => 
+      prev.map(conv => 
+        conv.id === messageData.conversationId 
+          ? { ...conv, lastUpdated: messageData.timestamp }
+          : conv
+      )
+    );
+  }, [selectedConvId]);
+
+  // Handle WebSocket errors
+  const handleWebSocketError = useCallback((error) => {
+    console.error('WebSocket error in Messages component:', error);
   }, []);
 
-  // Fetch messages for selected conversation
+  // Handle WebSocket connection status
+  const handleWebSocketConnect = useCallback(() => {
+    setWsConnected(true);
+  }, []);
+
+  const handleWebSocketDisconnect = useCallback(() => {
+    setWsConnected(false);
+  }, []);
+
+  // Initialize WebSocket connection
   useEffect(() => {
-    if (selectedConvId) {
-      fetch(`http://localhost:8080/dashboard/conversations/${selectedConvId}/messages`, {
-        credentials: "include"
-      })
-        .then((res) => res.json())
-        .then((data) => setMessages(data))
-        .catch((err) => console.error(err));
-    }
-  }, [selectedConvId]);
-
-  // WebSocket setup
-  useEffect(() => {
-    if (!selectedConvId) return;
-
-    const stompClient = new Client({
-      webSocketFactory: () => new SockJS("http://localhost:8080/ws"),
-      reconnectDelay: 5000,
-      debug: (str) => console.log(str),
-    });
-
-    stompClient.onConnect = () => {
-      console.log("Connected to WebSocket");
-
-      stompClient.subscribe(
-        `/topic/dashboard/conversations/${selectedConvId}/messages`,
-        (message) => {
-          const body = JSON.parse(message.body);
-          setMessages((prev) => [...prev, body]);
+    const initializeWebSocket = async () => {
+      try {
+        if (!webSocketService.isConnected() && token) {
+          await webSocketService.connect(token);
+          
+          // Add callbacks
+          webSocketService.onMessage(handleWebSocketMessage);
+          webSocketService.onError(handleWebSocketError);
+          webSocketService.onConnect(handleWebSocketConnect);
+          webSocketService.onDisconnect(handleWebSocketDisconnect);
+          
+          setWsConnected(true);
         }
-      );
+      } catch (error) {
+        console.error('Failed to connect to WebSocket:', error);
+        setWsConnected(false);
+      }
     };
 
-    stompClient.activate();
-    setClient(stompClient);
+    if (token) {
+      initializeWebSocket();
+    }
 
+    // Cleanup function
     return () => {
-      stompClient.deactivate();
+      if (webSocketService.isConnected()) {
+        webSocketService.removeMessageCallback(handleWebSocketMessage);
+        webSocketService.removeErrorCallback(handleWebSocketError);
+      }
     };
-  }, [selectedConvId]);
+  }, [token, handleWebSocketMessage, handleWebSocketError, handleWebSocketConnect, handleWebSocketDisconnect]);
 
-  const handleSendMessage = () => {
-    if (client && client.connected && newMessage.trim() !== "") {
-      client.publish({
-        destination: `/app/dashboard/conversations/${selectedConvId}/messages`,
-        body: JSON.stringify({
-          senderId: 1, // TODO: replace with actual logged-in user ID
-          content: newMessage,
-        }),
+  // Send message function - uses REST API (your existing endpoint)
+  const sendMessage = async () => {
+    if (!newMsg.trim()) return;
+    
+    setLoading(true);
+    try {
+      // Use your existing REST API endpoint
+      const res = await fetch(`http://localhost:8080/dashboard/conversations/${selectedConvId}/messages`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ content: newMsg }),
       });
-      setNewMessage("");
+      
+      if (!res.ok) throw new Error("Send failed");
+      const sentMsg = await res.json();
+      
+      // Add message to local state immediately
+      setMessages(prev => [...prev, sentMsg]);
+      setNewMsg("");
+      
+      // The WebSocket notification will be sent automatically by MessagingService
+      
+    } catch (err) {
+      console.error('Failed to send message:', err);
+      alert('Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
-  return (
-    <div className="notifications">
-      <h2>Conversations</h2>
-      <ul>
-        {conversations.map((conv) => (
-          <li
-            key={conv.id}
-            onClick={() => setSelectedConvId(conv.id)}
-            style={{
-              cursor: "pointer",
-              fontWeight: conv.id === selectedConvId ? "bold" : "normal",
-            }}
-          >
-            Conversation {conv.id}
-          </li>
-        ))}
-      </ul>
+  // Fetch conversations once when component mounts
+  useEffect(() => {
+    const fetchConversations = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch("http://localhost:8080/dashboard/conversations", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        if (!res.ok) throw new Error("Failed to fetch conversations");
+        const data = await res.json();
+        setConversations(data);
+        if (data.length > 0 && !selectedConvId) {
+          setSelectedConvId(data[0].id.toString());
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    if (token) {
+      fetchConversations();
+    }
+  }, [token, selectedConvId]);
 
-      {selectedConvId && (
-        <div className="chat-box">
-          <h3>Messages in Conversation {selectedConvId}</h3>
-          <div className="messages">
-            {messages.map((msg) => (
-              <div key={msg.id}>
-                <strong>{msg.senderId}</strong>: {msg.content}
-              </div>
-            ))}
-          </div>
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type your message..."
-          />
-          <button onClick={handleSendMessage}>Send</button>
+  // Fetch messages whenever selected conversation changes
+  useEffect(() => {
+    if (!selectedConvId || !token) return;
+    
+    const fetchMessages = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`http://localhost:8080/dashboard/conversations/${selectedConvId}/messages`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        if (!res.ok) throw new Error("Failed to fetch messages");
+        const data = await res.json();
+        setMessages(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchMessages();
+  }, [selectedConvId, token]);
+
+  if (loading && conversations.length === 0) {
+    return <div style={{marginLeft:"250px", marginTop:"50px"}}>Loading conversations...</div>;
+  }
+
+  return (
+    <div>
+      <h1 style={{marginLeft:"250px" , marginTop:"50px"}}>
+        Messages 
+        <span style={{
+          fontSize: '12px', 
+          color: wsConnected ? 'green' : 'red', 
+          marginLeft: '10px',
+          fontWeight: 'normal'
+        }}>
+          {wsConnected ? '● Live' : '● Offline'}
+        </span>
+      </h1> 
+      
+      <div className="messages-container">
+        {/* Conversations sidebar */}
+        <div className="conversations-list">
+          {conversations.length === 0 && <p>No conversations</p>}
+          {conversations.map((conv) => (
+            <div
+              key={conv.id}
+              className={
+                "conversation-item " +
+                (conv.id.toString() === selectedConvId ? "selected" : "")
+              }
+              onClick={() => setSelectedConvId(conv.id.toString())}
+            >
+              {`${conv.user1.id === currentUser.id ? conv.user2.username : conv.user1.username}`}
+            </div>
+          ))}
         </div>
-      )}
+
+        {/* Messages pane */}
+        <div className="messages-pane">
+          {selectedConvId ? (
+            <>
+              <div className="messages-list">
+                {messages.length === 0 && <p>No messages in this conversation.</p>}
+                {messages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={`message ${
+                      msg.sender.username === currentUser.username
+                        ? "sent"
+                        : "received"
+                    }`}
+                  >
+                    {msg.content}
+                    <div className="message-time">
+                      {new Date(msg.timestamp).toLocaleTimeString()}
+                    </div>
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Message input */}
+              <div className="message-input-container">
+                <input
+                  className="message-input"
+                  type="text"
+                  placeholder="Type your message..."
+                  value={newMsg}
+                  onChange={(e) => setNewMsg(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      sendMessage();
+                    }
+                  }}
+                  disabled={loading}
+                />
+                <button
+                  className="send-button"
+                  onClick={sendMessage}
+                  disabled={loading || !newMsg.trim()}
+                >
+                  <Send size={20} />
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="no-conversation">
+              <p>Select a conversation to start messaging.</p>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
 
-export default Notifications;
+export default Messages;

@@ -23,11 +23,11 @@
     padding-left: 10px;
 }
 
-.unactive-sidenav{
+.unactive-sidenav {
     text-decoration: none;
 }   
 
-.unactive-sidenav:hover{
+.unactive-sidenav:hover {
     text-decoration: none;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
     border-radius: 10px;
@@ -49,10 +49,6 @@
     text-decoration: none;
     color: black;
     padding-left: 10px;
-}
-
-#admin {
-    margin-bottom: 50px;
 }
 
 #icon {

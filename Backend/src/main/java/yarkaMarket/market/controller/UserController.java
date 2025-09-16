@@ -37,10 +37,14 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<User> getCurrentUser(Principal principal) {
-        User user = userRepository.findUserByEmail(principal.getName())
-            .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = new User();
 
-        return ResponseEntity.ok(user);
+        if (principal != null) {
+            user = userRepository.findUserByEmail(principal.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        }
+
+         return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")

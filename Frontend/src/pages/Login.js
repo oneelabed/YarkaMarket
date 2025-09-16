@@ -3,7 +3,7 @@ import "./Login.css";
 import Nav from "./Nav";
 import { Link } from "react-router-dom"
 import { useContext } from "react";
-import { UserContext } from "../components/UserContext";
+import { UserContext } from "../context/UserContext";
 
 function Login () {
   const { setCurrentUser } = useContext(UserContext);

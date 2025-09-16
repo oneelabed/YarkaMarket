@@ -1,29 +1,91 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import "./Messages.css"
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../components/UserContext";
+import { UserContext } from "../context/UserContext";
+import { useWebSocket } from "../context/WebSocketContext";
 import { Send } from "lucide-react";
-
 
 function Messages() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const initialConvId = params.get("convId"); // auto-select this conversation
+  const initialConvId = params.get("convId");
   
   const { currentUser } = useContext(UserContext);
+  const { isConnected: wsConnected, subscribeToMessages } = useWebSocket();
   const [conversations, setConversations] = useState([]);
   const [selectedConvId, setSelectedConvId] = useState(initialConvId);
   const [messages, setMessages] = useState([]);
   const [newMsg, setNewMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef(null);
 
   const token = localStorage.getItem("token");
 
+  // Scroll to bottom of messages
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  // Handle incoming WebSocket messages
+  const handleWebSocketMessage = useCallback((messageData) => {
+    console.log('Messages component received WebSocket message:', messageData);
+    console.log("bbbbbb")
+    // Add message if it belongs to the currently selected conversation
+    if (messageData.conversationId === parseInt(selectedConvId)) {
+      console.log("aaaaaa")
+      setMessages(prev => {
+        // Check if message already exists to avoid duplicates
+        const exists = prev.some(msg => msg.id === messageData.id);
+        if (!exists) {
+          return [...prev, {
+            id: messageData.id,
+            content: messageData.content,
+            timestamp: messageData.timestamp,
+            sender: {
+              id: messageData.senderId,
+              username: messageData.senderUsername
+            },
+            conversation: {
+              id: messageData.conversationId
+            }
+          }];
+        }
+        return prev;
+      });
+    }
+    
+    // Update conversation list to reflect new message (update lastUpdated)
+    setConversations(prev => 
+      prev.map(conv => 
+        conv.id === messageData.conversationId 
+          ? { ...conv, lastUpdated: messageData.timestamp }
+          : conv
+      )
+    );
+  }, [selectedConvId]);
+
+  // Subscribe to WebSocket messages when component mounts
+  useEffect(() => {
+    if (subscribeToMessages) {
+      const unsubscribe = subscribeToMessages(handleWebSocketMessage);
+      
+      // Cleanup subscription when component unmounts
+      return unsubscribe;
+    }
+  }, [subscribeToMessages, handleWebSocketMessage]);
+
+  // Send message function - uses REST API (your existing endpoint)
   const sendMessage = async () => {
     if (!newMsg.trim()) return;
-
+    
+    setLoading(true);
     try {
+      // Use your existing REST API endpoint
       const res = await fetch(`http://localhost:8080/dashboard/conversations/${selectedConvId}/messages`, {
         method: "POST",
         headers: {
@@ -32,12 +94,19 @@ function Messages() {
         },
         body: JSON.stringify({ content: newMsg }),
       });
+      
       if (!res.ok) throw new Error("Send failed");
       const sentMsg = await res.json();
+      
+      // Add message to local state immediately
       setMessages(prev => [...prev, sentMsg]);
       setNewMsg("");
+      
+      // The WebSocket notification will be sent automatically by MessagingService
+      
     } catch (err) {
-      console.error(err);
+      console.error('Failed to send message:', err);
+      alert('Failed to send message. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -56,19 +125,25 @@ function Messages() {
         if (!res.ok) throw new Error("Failed to fetch conversations");
         const data = await res.json();
         setConversations(data);
-        if (data.length > 0) setSelectedConvId(data[0].id);  // select first conversation by default
+        if (data.length > 0 && !selectedConvId) {
+          setSelectedConvId(data[0].id.toString());
+        }
       } catch (err) {
         console.error(err);
       } finally {
         setLoading(false);
       }
     };
-    fetchConversations();
-  }, [token]);
+    
+    if (token) {
+      fetchConversations();
+    }
+  }, [token, selectedConvId]);
 
   // Fetch messages whenever selected conversation changes
   useEffect(() => {
-    if (!selectedConvId) return;
+    if (!selectedConvId || !token) return;
+    
     const fetchMessages = async () => {
       try {
         setLoading(true);
@@ -86,14 +161,20 @@ function Messages() {
         setLoading(false);
       }
     };
+    
     fetchMessages();
   }, [selectedConvId, token]);
 
-  if (loading) return <p>Loading conversations...</p>;
+  if (loading && conversations.length === 0) {
+    return <div style={{marginLeft:"250px", marginTop:"50px"}}>Loading conversations...</div>;
+  }
 
   return (
     <div>
-      <h1 style={{marginLeft:"250px" , marginTop:"50px"}}>Messages</h1> 
+      <h1 style={{marginLeft:"250px" , marginTop:"50px"}}>
+        Messages 
+      </h1> 
+      
       <div className="messages-container">
         {/* Conversations sidebar */}
         <div className="conversations-list">
@@ -103,9 +184,9 @@ function Messages() {
               key={conv.id}
               className={
                 "conversation-item " +
-                (conv.id === selectedConvId ? "selected" : "")
+                (conv.id.toString() === selectedConvId ? "selected" : "")
               }
-              onClick={() => setSelectedConvId(conv.id)}
+              onClick={() => setSelectedConvId(conv.id.toString())}
             >
               {`${conv.user1.id === currentUser.id ? conv.user2.username : conv.user1.username}`}
             </div>
@@ -116,20 +197,25 @@ function Messages() {
         <div className="messages-pane">
           {selectedConvId ? (
             <>
-              {messages.length === 0 && <p>No messages in this conversation.</p>}
-              {messages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`message ${
-                    msg.sender.username === currentUser.username
-                      ? "sent"
-                      : "received"
-                  }`}
-                >
-                  
-                  {msg.content}
-                </div>
-              ))}
+              <div className="messages-list">
+                {messages.length === 0 && <p>No messages in this conversation.</p>}
+                {messages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={`message ${
+                      msg.sender.username === currentUser.username
+                        ? "sent"
+                        : "received"
+                    }`}
+                  >
+                    {msg.content}
+                    <div className="message-time">
+                      {new Date(msg.timestamp).toLocaleTimeString().slice(0, -3)}
+                    </div>
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
 
               {/* Message input */}
               <div className="message-input-container">
@@ -140,7 +226,10 @@ function Messages() {
                   value={newMsg}
                   onChange={(e) => setNewMsg(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") sendMessage();
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      sendMessage();
+                    }
                   }}
                   disabled={loading}
                 />
@@ -149,7 +238,7 @@ function Messages() {
                   onClick={sendMessage}
                   disabled={loading || !newMsg.trim()}
                 >
-                  <Send size={20}></Send>
+                  <Send size={20} />
                 </button>
               </div>
             </>
@@ -162,7 +251,6 @@ function Messages() {
       </div>
     </div>
   );
-
 }
 
 export default Messages;

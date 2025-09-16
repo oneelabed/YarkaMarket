@@ -1,7 +1,7 @@
 import "./SideNav.css"
 import { Link, NavLink } from "react-router-dom"
 import { useContext } from "react";
-import { UserContext } from "../components/UserContext";
+import { UserContext } from "../context/UserContext";
 import { Home, MessageCircle, Plus, User, ShoppingBag, UserCog} from "lucide-react";
 import blackLogo from "../images/marketLogoBlack.png"
 
@@ -46,12 +46,14 @@ function SideNav() {
           {currentUser && currentUser.role === "ADMIN" &&
             <>
               <div className="sidenav-item">
+                <NavLink to="/admin" 
+                  className={({ isActive }) => `${ isActive ? "active-sidenav" : "unactive-sidenav"}`}>
                 <UserCog id="icon" color="brown" size={20}></UserCog>
-                <NavLink to="/admin" className="sidenav-word" id="admin">
-                <span className="sidenav-word">Admin Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                </NavLink><br/><br/>
+                <span className="sidenav-word">Admin Page&nbsp;&nbsp;&nbsp;</span>
+                </NavLink>
               </div>
-            </>}
+            </>
+          }
         </div>
       </nav>
     </div>

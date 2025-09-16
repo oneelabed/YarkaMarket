@@ -34,6 +34,7 @@ public class ChatController {
 
     // WebSocket: send message to a conversation
     @MessageMapping("/dashboard/conversations/{conversationId}/messages")
+    @SendTo("/topic/messages")
     public void sendMessage(@DestinationVariable Long conversationId, ChatMessageDTO chatMessageDTO) {
         User sender = userRepository.findById(chatMessageDTO.getSenderId())
                 .orElseThrow(() -> new RuntimeException("User not found"));

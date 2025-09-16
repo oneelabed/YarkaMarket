@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Marketplace.css";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../components/UserContext";
+import { UserContext } from "../context/UserContext";
 
 function Marketplace() {
   const { currentUser } = useContext(UserContext);
