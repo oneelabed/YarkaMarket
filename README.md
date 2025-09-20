@@ -22,3 +22,6 @@ Frontend → Vercel \
 Backend → Render \
 Database → PostgreSQL (Neon) \
 Configured with a custom domain + SSL.
+
+## Link
+[yarkaMarket](https://yarkamarket.org)
