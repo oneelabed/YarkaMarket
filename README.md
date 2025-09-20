@@ -6,7 +6,7 @@ A full-stack marketplace platform where users can sign up, create product listin
 - **Create & Manage Listings**: Post, edit, and delete product listings with images.  
 - **Real-Time Messaging**: WebSocket-based chat between buyers and sellers.  
 - **Responsive UI**: Optimized for desktop and mobile.  
-
+- **Deployment Ready**: Dockerized with separate frontend & backend hosting.
 
 ## 🛠️ Tech Stack
 **Frontend:** React, CSS, Vercel  
