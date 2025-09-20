@@ -18,7 +18,7 @@ A full-stack marketplace platform where users can sign up, create product listin
 JWT tokens are issued on login and required for protected routes.
 
 ## 🌐 Deployment
-Frontend → Vercel
-Backend → Render
-Database → PostgreSQL (Neon)
+Frontend → Vercel \
+Backend → Render \
+Database → PostgreSQL (Neon) \
 Configured with a custom domain + SSL.
