@@ -24,4 +24,4 @@ Database → PostgreSQL (Neon) \
 Configured with a custom domain + SSL.
 
 ## Link
-[yarkaMarket](https://yarkamarket.org)
+[Yarka Market](https://yarkamarket.org)
