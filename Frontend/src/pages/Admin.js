@@ -4,6 +4,7 @@ import "./Admin.css";
 import activate from "../images/activate.png";
 
 function Admin() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [users, setUsers] = useState([]);
   const [conversations, setConversations] = useState([]);
   const [stats, setStats] = useState({
@@ -17,17 +18,17 @@ function Admin() {
     const fetchData = async () => {
       try {
         // Fetch stats
-        const resStats = await fetch("http://localhost:8080/admin/stats");
+        const resStats = await fetch(`${apiUrl}/admin/stats`);
         const statsData = await resStats.json();
         setStats(statsData);
 
         // Fetch users
-        const resUsers = await fetch("http://localhost:8080/admin/users");
+        const resUsers = await fetch(`${apiUrl}/admin/users`);
         const usersData = await resUsers.json();
         setUsers(usersData);
 
         // Fetch conversations
-        const resConvs = await fetch("http://localhost:8080/admin/conversations");
+        const resConvs = await fetch(`${apiUrl}/admin/conversations`);
         const convsData = await resConvs.json();
         setConversations(convsData);
 
@@ -43,10 +44,10 @@ function Admin() {
     e.preventDefault();
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
 
       const res = await fetch(
-        `http://localhost:8080/admin/activate/${userId}`,
+        `${apiUrl}/admin/activate/${userId}`,
         {
           method: "PUT",
           headers: {

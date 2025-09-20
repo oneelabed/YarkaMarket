@@ -1,15 +1,10 @@
 package yarkaMarket.market.controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +22,7 @@ import yarkaMarket.market.entity.Listing.Category;
 import yarkaMarket.market.entity.User;
 import yarkaMarket.market.repository.ListingRepository;
 import yarkaMarket.market.repository.UserRepository;
+import yarkaMarket.market.service.CloudinaryService;
 import yarkaMarket.market.service.ListingService;
 
 @CrossOrigin(origins = "http://localhost:3000") 
@@ -34,12 +30,12 @@ import yarkaMarket.market.service.ListingService;
 @RequiredArgsConstructor
 @RequestMapping("/dashboard")
 public class ListingController {
-    @Value("${upload.path:uploads}")
-    private String uploadDir;
     @Autowired
     private final ListingService listingService;
     private final ListingRepository repository;
     private final UserRepository userRepository;
+    @Autowired
+    private final CloudinaryService cloudinaryService;
 
     @GetMapping("/market")
     public List<Listing> getAllListings() {
@@ -80,16 +76,24 @@ public class ListingController {
             return ResponseEntity.badRequest().body("Invalid category");
         }
 
+        /* Save the file locally
+
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
-        // Save the file locally
+        
         String filename = System.currentTimeMillis() + "_" + image.getOriginalFilename();
         Path filePath = uploadPath.resolve(filename);
         Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-        Listing listing = new Listing(title, description, price, category, filename, user);
+        Listing listing = new Listing(title, description, price, category, filename, user); */
+
+        var uploadResult = cloudinaryService.uploadImageWithResult(image);
+        String imageUrl = uploadResult.get("secure_url").toString();
+        String publicId = uploadResult.get("public_id").toString();
+
+        Listing listing = new Listing(title, description, price, category, imageUrl, publicId, user);
 
         listingService.saveListing(listing);
         return ResponseEntity.ok("Listing created successfully");
@@ -118,26 +122,48 @@ public class ListingController {
             return ResponseEntity.badRequest().body("Invalid category");
         }
 
+        /* Save the file locally
+
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
-        // Save the file locally
+        
         String filename = System.currentTimeMillis() + "_" + image.getOriginalFilename();
         Path filePath = uploadPath.resolve(filename);
-        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING); */
 
-        Listing listing = repository.findById(id).get();
+        Listing listing = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Listing not found"));
 
-        listingService.updateListing(listing, title, description, price, category, filename, user);
+        if (listing.getImagePublicId() != null) {
+            cloudinaryService.deleteImage(listing.getImagePublicId());
+        }
+
+        // Upload new image
+        var uploadResult = cloudinaryService.uploadImageWithResult(image);
+        String imageUrl = uploadResult.get("secure_url").toString();
+        String publicId = uploadResult.get("public_id").toString();
+
+        listingService.updateListing(listing, title, description, price, category, imageUrl, publicId, user);
         return ResponseEntity.ok("Listing updated successfully");
     }
 
     @DeleteMapping("/my-listings/{id}")
     public ResponseEntity<?> deleteListing(@PathVariable Long id) {
-        if (!repository.existsById(id)) {
+        Listing listing = repository.findById(id).orElse(null);
+
+        if (listing == null) {
             return ResponseEntity.notFound().build();
+        }
+
+        if (listing.getImagePublicId() != null) {
+            try {
+                cloudinaryService.deleteImage(listing.getImagePublicId());
+            } catch (Exception e) {
+                e.printStackTrace(); // Log error but proceed with deletion
+            }
         }
 
         repository.deleteById(id);

@@ -23,20 +23,19 @@ public class User {
             generator = "user_sequence"
     )
     private Long id;
-    private String firstName, lastName, phone, email, password, username;
+    private String firstName, lastName, email, password, username;
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
-    private boolean isApproved = false;
+    private boolean isApproved = true;
 
     public User() {
         
     }
 
-    public User(String firstName, String lastName, String phone, String email,
+    public User(String firstName, String lastName, String email,
                    String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phone = phone;
         this.email = email;
         this.password = password;
         this.username = firstName + " " + lastName;
@@ -52,10 +51,6 @@ public class User {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public String getPhone() {
-        return phone;
     }
 
     public String getEmail() {
@@ -86,10 +81,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -116,7 +107,6 @@ public class User {
                 "id=" + id +
                 "firstName" + firstName +
                 "lastName" + lastName +
-                "phone" + phone +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

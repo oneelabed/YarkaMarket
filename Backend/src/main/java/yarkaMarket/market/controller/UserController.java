@@ -51,25 +51,23 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");
         String password = credentials.get("password");
-        Optional<User> userByEmail = userRepository.findUserByEmail(email);
+        //Optional<User> userByEmail = userRepository.findUserByEmail(email);
 
-        System.out.println(userByEmail.get().getPassword());
-
-        if (userByEmail.isPresent()) {
-            if (passwordEncoder.matches(password, userByEmail.get().getPassword()))
+        return userRepository.findUserByEmail(email)
+        .map(user -> {
+            if (passwordEncoder.matches(password, user.getPassword())) {
                 return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(email)));
-            else
+            } else {
                 return ResponseEntity.ok(Map.of("error", "Invalid credentials"));
-        }
-        
-        return ResponseEntity.ok(Map.of("error", "Email not found"));
+            }
+        })
+        .orElseGet(() -> ResponseEntity.ok(Map.of("error", "Email not found")));
     }
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody Map<String, String> credentials) {
         String firstName = credentials.get("firstName");
         String lastName = credentials.get("lastName");
-        String phone = credentials.get("phone");
         String email = credentials.get("email");
         String password = credentials.get("password");
         Optional<User> userByEmail = userRepository.findUserByEmail(email);
@@ -86,7 +84,7 @@ public class UserController {
         if (password.length() > 30)
             return ResponseEntity.ok(Map.of("error", "Password needs to be least than 30 characters"));
 
-        userRepository.save(new User(firstName, lastName, phone, email, passwordEncoder.encode(password)));
+        userRepository.save(new User(firstName, lastName, email, passwordEncoder.encode(password)));
 
         return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(email)));
     }

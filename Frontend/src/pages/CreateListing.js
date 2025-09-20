@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./CreateListing.css"
 
 function CreateListing() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -36,7 +37,7 @@ function CreateListing() {
     }
 
     try {
-      const token = localStorage.getItem("token"); // from login
+      const token = sessionStorage.getItem("token");
 
       const form = new FormData();
       form.append("title", formData.title);
@@ -45,7 +46,7 @@ function CreateListing() {
       form.append("price", formData.price);
       form.append("image", image);
 
-      const response = await fetch("http://localhost:8080/dashboard/create-listing", {
+      const response = await fetch(`${apiUrl}/dashboard/create-listing`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

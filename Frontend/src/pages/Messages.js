@@ -7,11 +7,13 @@ import { useWebSocket } from "../context/WebSocketContext";
 import { Send } from "lucide-react";
 
 function Messages() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const initialConvId = params.get("convId");
   
   const { currentUser } = useContext(UserContext);
+  // eslint-disable-next-line
   const { isConnected: wsConnected, subscribeToMessages } = useWebSocket();
   const [conversations, setConversations] = useState([]);
   const [selectedConvId, setSelectedConvId] = useState(initialConvId);
@@ -20,7 +22,7 @@ function Messages() {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   // Scroll to bottom of messages
   const scrollToBottom = () => {
@@ -34,10 +36,8 @@ function Messages() {
   // Handle incoming WebSocket messages
   const handleWebSocketMessage = useCallback((messageData) => {
     console.log('Messages component received WebSocket message:', messageData);
-    console.log("bbbbbb")
     // Add message if it belongs to the currently selected conversation
     if (messageData.conversationId === parseInt(selectedConvId)) {
-      console.log("aaaaaa")
       setMessages(prev => {
         // Check if message already exists to avoid duplicates
         const exists = prev.some(msg => msg.id === messageData.id);
@@ -86,7 +86,7 @@ function Messages() {
     setLoading(true);
     try {
       // Use your existing REST API endpoint
-      const res = await fetch(`http://localhost:8080/dashboard/conversations/${selectedConvId}/messages`, {
+      const res = await fetch(`${apiUrl}/dashboard/conversations/${selectedConvId}/messages`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -117,7 +117,7 @@ function Messages() {
     const fetchConversations = async () => {
       try {
         setLoading(true);
-        const res = await fetch("http://localhost:8080/dashboard/conversations", {
+        const res = await fetch(`${apiUrl}/dashboard/conversations`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -147,7 +147,7 @@ function Messages() {
     const fetchMessages = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:8080/dashboard/conversations/${selectedConvId}/messages`, {
+        const res = await fetch(`${apiUrl}/dashboard/conversations/${selectedConvId}/messages`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -178,7 +178,7 @@ function Messages() {
       <div className="messages-container">
         {/* Conversations sidebar */}
         <div className="conversations-list">
-          {conversations.length === 0 && <p>No conversations</p>}
+          {conversations.length === 0 && <p>&nbsp;&nbsp;No conversations</p>}
           {conversations.map((conv) => (
             <div
               key={conv.id}

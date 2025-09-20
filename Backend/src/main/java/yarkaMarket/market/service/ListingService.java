@@ -40,7 +40,8 @@ public class ListingService {
         String description,
         Double price,
         Category category, 
-        String filename, 
+        String image,
+        String publicId, 
         User user) {
 
         listing.setTitle(title);
@@ -50,7 +51,8 @@ public class ListingService {
             listing.setPrice(price);
 
         listing.setCategory(category);
-        listing.setImage(filename);
+        listing.setImage(image);
+        listing.setImagePublicId(publicId);
         listing.setCreator(user);
         listing.setUsername();
         listingRepository.save(listing);

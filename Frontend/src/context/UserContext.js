@@ -3,8 +3,10 @@ import { createContext, useState, useEffect } from "react";
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [currentUser, setCurrentUser] = useState(null);
-  const token = localStorage.getItem("token");
+
+  const token = sessionStorage.getItem("token");
 
   useEffect(() => {
     if (!token) {
@@ -14,9 +16,10 @@ export function UserProvider({ children }) {
 
     const fetchCurrentUser = async () => {
       try {
-        const res = await fetch("http://localhost:8080/me", {
+        const res = await fetch(`${apiUrl}/me`, {
           headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            credentials: "include"
           }
         });
         if (!res.ok) throw new Error("Failed to fetch current user");
@@ -28,6 +31,7 @@ export function UserProvider({ children }) {
     };
 
     fetchCurrentUser();
+     // eslint-disable-next-line 
   }, [token]);
 
   return (

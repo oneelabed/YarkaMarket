@@ -6,6 +6,7 @@ const WebSocketContext = createContext();
 
 export const useWebSocket = () => {
   const context = useContext(WebSocketContext);
+
   if (!context) {
     throw new Error('useWebSocket must be used within a WebSocketProvider');
   }
@@ -30,7 +31,7 @@ export const WebSocketProvider = ({ children }) => {
   // Initialize WebSocket connection when user is available
   useEffect(() => {
     const initializeWebSocket = async () => {
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       
       if (currentUser && token && !webSocketService.isConnected()) {
         try {

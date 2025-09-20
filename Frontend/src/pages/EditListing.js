@@ -3,6 +3,7 @@ import "./EditListing.css"
 import { useParams } from "react-router-dom";
 
 function EditListing() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -39,7 +40,7 @@ function EditListing() {
     }
 
     try {
-      const token = localStorage.getItem("token"); // from login
+      const token = sessionStorage.getItem("token"); // from login
 
       const form = new FormData();
       form.append("title", formData.title);
@@ -48,7 +49,7 @@ function EditListing() {
       form.append("price", formData.price);
       form.append("image", image);
 
-      const response = await fetch(`http://localhost:8080/dashboard/edit-listing/${id}`, {
+      const response = await fetch(`${apiUrl}/dashboard/edit-listing/${id}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

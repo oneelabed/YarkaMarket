@@ -28,6 +28,7 @@ public class Listing {
     private String title, description;
     private Double price;
     private String image;
+    private String imagePublicId;
     @Enumerated(EnumType.STRING)
     private Category category;
     @ManyToOne
@@ -40,12 +41,13 @@ public class Listing {
 
     }
 
-    public Listing(String title, String description, Double price, Category category, String image, User creator) {
+    public Listing(String title, String description, Double price, Category category, String image, String imagePublicId, User creator) {
         this.title = title;
         this.description = description;
         this.category = category;
         this.price = price;
         this.image = image;
+        this.imagePublicId = imagePublicId;
         this.creator = creator;
         this.username = creator.getUsername();
     }
@@ -72,6 +74,10 @@ public class Listing {
 
     public String getImage() {
         return image;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
     }
 
     public User getCreator() {
@@ -104,6 +110,10 @@ public class Listing {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public void setCreator(User creator) {

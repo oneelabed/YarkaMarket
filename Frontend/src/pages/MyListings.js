@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./MyListings.css";
 
 function MyListings() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -13,8 +14,8 @@ function MyListings() {
       setError(null);
 
       try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:8080/dashboard/my-listings", {
+        const token = sessionStorage.getItem("token");
+        const response = await fetch(`${apiUrl}/dashboard/my-listings`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -42,9 +43,9 @@ function MyListings() {
     try {
       setLoading(true);
 
-      const token = localStorage.getItem("token"); // or however you store it
+      const token = sessionStorage.getItem("token");
 
-      const response = await fetch(`http://localhost:8080/dashboard/my-listings/${id}`, {
+      const response = await fetch(`${apiUrl}/dashboard/my-listings/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -81,7 +82,7 @@ function MyListings() {
             {listing.image && (
               <img
                 className="listing-image"
-                src={`http://localhost:8080/uploads/${listing.image}`}
+                src={listing.image}
                 alt={listing.title}
               />
             )}
@@ -90,7 +91,7 @@ function MyListings() {
               <p className="listing-description">{listing.description}</p>
               <div className="listing-meta">
                 <span>Category: {listing.category}</span>
-                <span className="listing-price">${listing.price}</span>
+                <span className="listing-price">₪{listing.price}</span>
               </div>
               <p className="listing-person">{listing.username}</p>
             </div>

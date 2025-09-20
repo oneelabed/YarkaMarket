@@ -5,10 +5,15 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
 function Marketplace() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { currentUser } = useContext(UserContext);
   const [listings, setListings] = useState([]);
+  const [filteredListings, setFilteredListings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const categories = ["All", "Electronics", "Furniture", "Clothing", "Tools", "Home", "Sports", "Books", "Other"];
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -16,8 +21,8 @@ function Marketplace() {
       setError(null);
 
       try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:8080/dashboard/market", {
+        const token = sessionStorage.getItem("token");
+        const response = await fetch(`${apiUrl}/dashboard/market`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -29,6 +34,7 @@ function Marketplace() {
 
         const data = await response.json();
         setListings(data);
+        setFilteredListings(data);
       } catch (err) {
         console.error(err);
         setError(err.message || "Error fetching listings");
@@ -38,16 +44,28 @@ function Marketplace() {
     };
 
     fetchListings();
+    // eslint-disable-next-line
   }, []);
 
   const navigate = useNavigate();
-  
+
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    setSelectedCategory(category);
+
+    if (category === "All") {
+        setFilteredListings(listings);
+    } else {
+        setFilteredListings(listings.filter(listing => listing.category === category));
+    }
+  };
+
   const handleStartConversation = async (otherUserId) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
 
       const res = await fetch(
-        `http://localhost:8080/dashboard/conversations/start/${otherUserId}`,
+        `${apiUrl}/dashboard/conversations/start/${otherUserId}`,
         {
           method: "POST",
           headers: {
@@ -75,14 +93,21 @@ function Marketplace() {
   return (
     <div className="marketplace-container">
       <h1>Marketplace</h1><br/>
-      {listings.length === 0 && <p>No listings found.</p>}
+
+      <select value={selectedCategory} onChange={handleCategoryChange}>
+        {categories.map(cat => (
+          <option key={cat} value={cat}>{cat}</option>
+        ))}
+      </select>
+
+      {filteredListings.length === 0 && <p>No listings found.</p>}
       <ul className="listings-list">
-        {listings.map((listing) => (
+        {filteredListings.map((listing) => (
           <li key={listing.id} className="listing-item">
             {listing.image && (
               <img
                 className="listing-image"
-                src={`http://localhost:8080/uploads/${listing.image}`}
+                src={listing.image}
                 alt={listing.title}
               />
             )}

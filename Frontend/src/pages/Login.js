@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
 function Login () {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { setCurrentUser } = useContext(UserContext);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
@@ -27,14 +28,14 @@ function Login () {
     setLoading(true);
 
     try {
-      const response = await fetch("/login", {
+      const response = await fetch(`${apiUrl}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
         credentials: "include"
       });
 
-      //console.log(response);
+      console.log(response);
 
       const responseData = await response.json();
       const key = Object.keys(responseData)[0];
@@ -47,11 +48,11 @@ function Login () {
 
       const token = responseData.token;
 
-      // Store token (in localStorage)
-      localStorage.setItem("token", token);
+      sessionStorage.setItem("token", token);
 
-      const res = await fetch("http://localhost:8080/me", {
-        headers: { Authorization: `Bearer ${token}` }
+      const res = await fetch(`${apiUrl}/me`, {
+        headers: { Authorization: `Bearer ${token}`,
+                    credentials: "include" }
       });
       const data = await res.json();
       setCurrentUser(data);

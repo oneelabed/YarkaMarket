@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./SignUp.css";
 import Nav from "./Nav";
 import { Link } from "react-router-dom"
 
 function SignUp() {
-  const [formData, setFormData] = useState({ firstName: "", lastName: "", phone: "", email: "", password: "" });
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -16,7 +17,7 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.firstName || !formData.lastName || !formData.phone || !formData.email || !formData.password) {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.password) {
       setError("Please fill in missing fields.");
       return;
     }
@@ -24,7 +25,7 @@ function SignUp() {
     setLoading(true);
 
     try {
-      const response = await fetch("/signup", {
+      const response = await fetch(`${apiUrl}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -42,11 +43,10 @@ function SignUp() {
 
       const token = responseData.token;
 
-      // Store token (in localStorage)
-      localStorage.setItem("token", token);
+      sessionStorage.setItem("token", token);
 
       // Redirect (replace with your dashboard path)
-      window.location.href = "/dashboard";
+      window.location.href = "/dashboard/market";
     } catch (err) {
       console.error("Login error:", err);
       setError("Network error. Please try again.");
@@ -61,7 +61,7 @@ function SignUp() {
       <div className="signup-container">
         
         <form className="signup-form">
-          <h2 className="signup-title">Sign Up</h2>
+          <h2 className="signup-title">Sign Up</h2><br/>
 
           <div className="form-group name-fields">
             <div className="name-input">
@@ -76,6 +76,7 @@ function SignUp() {
                 autoComplete="firstName"
               />
             </div>
+
             <div className="name-input">
               <label>Last Name</label>
               <input
@@ -88,18 +89,6 @@ function SignUp() {
                 autoComplete="lastName"
               />
             </div>
-          </div>
-
-          <div className="form-group">
-            <label>Phone Number</label>
-            <input
-              type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="form-input"
-              autoComplete="phone"
-            />
           </div>
 
           <div className="form-group">

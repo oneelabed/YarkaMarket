@@ -19,8 +19,10 @@ class WebSocketService {
         return;
       }
 
+      const apiUrl = process.env.REACT_APP_API_URL;
+
       // Create SockJS connection
-      const socket = new SockJS('http://localhost:8080/ws');
+      const socket = new SockJS(`${apiUrl}/ws`);
       
       // Create STOMP client
       this.stompClient = new Client({

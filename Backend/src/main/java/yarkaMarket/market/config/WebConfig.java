@@ -1,5 +1,6 @@
 package yarkaMarket.market.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -11,13 +12,16 @@ import io.micrometer.common.lang.NonNull;
 @SuppressWarnings("null") 
 public class WebConfig {
   
+  @Value("${frontend.url}")
+  private String frontendUrl;
+
   @Bean
   public WebMvcConfigurer corsConfigurer() {
     return new WebMvcConfigurer() {
       @Override
       public void addCorsMappings(@NonNull CorsRegistry registry) {
-        registry.addMapping("/**")  // allow CORS for all endpoints
-                .allowedOrigins("http://localhost:3000")  // allow only React dev server
+        registry.addMapping("/**")
+                .allowedOrigins(frontendUrl)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowCredentials(true);
       }

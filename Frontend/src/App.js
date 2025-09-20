@@ -9,6 +9,12 @@ import MyListings from "./pages/MyListings.js"
 import EditListing from "./pages/EditListing.js"
 import Admin from "./pages/Admin.js"
 import Messages from "./pages/Messages.js"
+import { Navigate } from "react-router-dom";
+
+function PrivateRoute({ children }) {
+  const token = sessionStorage.getItem("token");
+  return token ? children : <Navigate to="/" />;
+}
 
 function App() {
   return (
@@ -17,14 +23,14 @@ function App() {
         <Route path="/" element={<Home/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/signup" element={<SignUp/>}></Route>
-        <Route path="/dashboard" element={<Dashboard/>}>
-          <Route path="market" element={<Market/>}></Route>
-          <Route path="create-listing" element={<CreateListing/>}></Route>
-          <Route path="my-listings" element={<MyListings/>}></Route>
-          <Route path="conversations" element={<Messages/>}></Route>
-          <Route path="edit-listing/:id" element={<EditListing/>}></Route>
+        <Route path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>}>
+          <Route path="market" element={<PrivateRoute><Market/></PrivateRoute>}></Route>
+          <Route path="create-listing" element={<PrivateRoute><CreateListing/></PrivateRoute>}></Route>
+          <Route path="my-listings" element={<PrivateRoute><MyListings/></PrivateRoute>}></Route>
+          <Route path="conversations" element={<PrivateRoute><Messages/></PrivateRoute>}></Route>
+          <Route path="edit-listing/:id" element={<PrivateRoute><EditListing/></PrivateRoute>}></Route>
         </Route>
-        <Route path="/admin" element={<Admin/>}></Route>
+        <Route path="/admin" element={<PrivateRoute><Admin/></PrivateRoute>}></Route>
       </Routes>
     </div>
   )

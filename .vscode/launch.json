@@ -2,23 +2,13 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-YarkaMarketApplication<student>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}/Backend",
-            "mainClass": "yarkaMarket.market.yarkaMarketApplication",
-            "projectName": "Backend",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        },
-        {
-            "type": "java",
             "name": "Spring Boot-yarkaMarketApplication<market>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "yarkaMarket.market.yarkaMarketApplication",
             "projectName": "market",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.vscode/.env"
         }
     ]
 }
