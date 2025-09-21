@@ -72,8 +72,8 @@ body {
 
 @media (max-width: 600px) and (orientation: landscape){
     .login-form {
-      height: 60%;
-      width: 60%;
+      max-width: 300px;
+      max-height: 80vh;
     }
     
 }
