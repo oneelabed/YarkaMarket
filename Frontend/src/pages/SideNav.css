@@ -79,8 +79,19 @@
     flex-direction: row;
     overflow-x: auto;
   }
+
   .sidenav-item {
     display: flex;
-    gap: 60px;
   }
+
+  .options {
+    display: flex;
+    gap: 30px;
+  }
+
+  .icon {
+    display: flex;
+    gap: 30px;
+  }
+
 }
