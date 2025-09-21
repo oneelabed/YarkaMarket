@@ -83,19 +83,20 @@ body {
 
 @media (max-width: 1000px) and (orientation: landscape){
     .signup-form {
-      max-width: 350px;
-      max-height: 70vh;  
-      padding: 20px;
-      font-size: 14px;
+      max-width: 400px;
+      max-height: 80vh;  
+      margin-bottom: 30px;
+      padding: 16px;
+      font-size: 12px;
     }
 
     .form-input {
-      padding: 8px;
-      font-size: 14px;
+      padding: 6px;
+      font-size: 12px;
     }
 
     .signup-button {
-      padding: 8px 16px;
-      font-size: 14px;
+      padding: 6px 14px;
+      font-size: 12px;
     }
 }

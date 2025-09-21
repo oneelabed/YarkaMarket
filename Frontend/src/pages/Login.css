@@ -72,8 +72,9 @@ body {
 
 @media (max-width: 1000px) and (orientation: landscape){
     .login-form {
-      max-width: 350px;
-      max-height: 70vh;  
+      max-width: 400px;
+      max-height: 80vh;  
+      margin-bottom: 30px;
       padding: 20px;
       font-size: 14px;
     }
