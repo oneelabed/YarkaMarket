@@ -141,7 +141,6 @@
 @media (max-width: 600px) and (orientation: portrait) {
   .marketplace-container {
     padding: 0 10px;
-    height: 450px;
   }
 
   .listing-item {
