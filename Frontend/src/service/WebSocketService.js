@@ -31,7 +31,7 @@ class WebSocketService {
           Authorization: `Bearer ${token}`
         },
         debug: (str) => {
-          console.log('STOMP Debug:', str);
+          // console.log('STOMP Debug:', str);
         },
         reconnectDelay: 5000,
         heartbeatIncoming: 4000,
@@ -40,17 +40,17 @@ class WebSocketService {
 
       // Set up connection callbacks
       this.stompClient.onConnect = (frame) => {
-        console.log('Connected to WebSocket:', frame);
+        // console.log('Connected to WebSocket:', frame);
         this.connected = true;
         
         // Subscribe to personal message queue
         this.stompClient.subscribe('/user/queue/messages', (message) => {
           try {
             const messageData = JSON.parse(message.body);
-            console.log('Received WebSocket message:', messageData);
+            // console.log('Received WebSocket message:', messageData);
             this.messageCallbacks.forEach(callback => callback(messageData));
           } catch (error) {
-            console.error('Error parsing WebSocket message:', error);
+            // console.error('Error parsing WebSocket message:', error);
           }
         });
 
@@ -58,10 +58,10 @@ class WebSocketService {
         this.stompClient.subscribe('/user/queue/errors', (error) => {
           try {
             const errorData = JSON.parse(error.body);
-            console.error('WebSocket error:', errorData);
+            // console.error('WebSocket error:', errorData);
             this.errorCallbacks.forEach(callback => callback(errorData));
           } catch (parseError) {
-            console.error('Error parsing WebSocket error:', parseError);
+            // console.error('Error parsing WebSocket error:', parseError);
           }
         });
 
@@ -71,19 +71,19 @@ class WebSocketService {
       };
 
       this.stompClient.onStompError = (frame) => {
-        console.error('WebSocket STOMP error:', frame);
+        // console.error('WebSocket STOMP error:', frame);
         this.connected = false;
         reject(frame);
       };
 
       this.stompClient.onWebSocketError = (event) => {
-        console.error('WebSocket error:', event);
+        // console.error('WebSocket error:', event);
         this.connected = false;
         reject(event);
       };
 
       this.stompClient.onDisconnect = () => {
-        console.log('Disconnected from WebSocket');
+        // console.log('Disconnected from WebSocket');
         this.connected = false;
         this.disconnectCallbacks.forEach(callback => callback());
       };
@@ -97,7 +97,7 @@ class WebSocketService {
     if (this.stompClient && this.connected) {
       this.stompClient.deactivate();
       this.connected = false;
-      console.log('WebSocket disconnected manually');
+      // console.log('WebSocket disconnected manually');
     }
   }
 
