@@ -113,9 +113,10 @@
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px)  and (orientation: portrait){
   .marketplace-container {
     padding: 0 10px;
+    height: 450px;
   }
 
   .listing-item {
@@ -135,9 +136,7 @@
   .listing-meta {
     justify-content: center;
   }
-}
 
-@media (max-width: 600px) and (orientation: portrait) {
   #message {
     margin-top: 60px;
   }
