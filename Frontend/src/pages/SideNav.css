@@ -79,7 +79,7 @@
     flex-direction: row;
     overflow-x: auto;
   }
-  .options {
+  .sidenav-item {
     display: flex;
     gap: 60px;
   }
