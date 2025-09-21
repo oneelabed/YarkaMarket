@@ -49,6 +49,7 @@
     .nav {
         flex-wrap: wrap;
         padding: 0 15px;
+        height: 600px;
     }
 
     .paths {
