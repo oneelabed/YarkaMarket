@@ -138,6 +138,7 @@ function Messages() {
     if (token) {
       fetchConversations();
     }
+    // eslint-disable-next-line
   }, [token, selectedConvId]);
 
   // Fetch messages whenever selected conversation changes
@@ -163,6 +164,7 @@ function Messages() {
     };
     
     fetchMessages();
+    // eslint-disable-next-line
   }, [selectedConvId, token]);
 
   if (loading && conversations.length === 0) {

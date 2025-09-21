@@ -36,6 +36,7 @@ function MyListings() {
     };
 
     fetchListings();
+    // eslint-disable-next-line
   }, []);
 
   const handleDelete = async (id, e) => {

@@ -38,6 +38,7 @@ function Admin() {
     };
 
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   const handleActivate = async (userId, e) => {
