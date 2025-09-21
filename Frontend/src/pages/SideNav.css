@@ -70,9 +70,9 @@
     font-size: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .sideNav {
-    position: relative; /* ✅ don’t overlay whole screen */
+    position: relative;
     width: 100%;
     height: auto;
     display: flex;
@@ -81,6 +81,6 @@
   }
   .options {
     display: flex;
-    gap: 15px;
+    gap: 30px;
   }
 }

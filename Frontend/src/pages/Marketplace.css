@@ -1,5 +1,3 @@
-/* Marketplace.css */
-
 .marketplace-container {
   max-width: 900px;
   margin: 20px auto;
@@ -84,7 +82,7 @@
   .marketplace-container {
     padding: 0 10px;
   }
-  
+
   .listing-item {
     flex-direction: column;
     align-items: center;
