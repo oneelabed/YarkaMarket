@@ -74,8 +74,6 @@ function Login () {
         <form className="login-form">
           <h2 className="login-title">Login</h2>
 
-          
-
           <div className="form-group">
             <label>Email</label>
             <input

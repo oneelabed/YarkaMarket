@@ -69,3 +69,12 @@ body {
   display: inline-block;
   font-size: 16px;
 }
+
+@media (max-width: 600px) and (orientation: landscape){
+    .login-form {
+      height: 60%;
+      width: 60%;
+    }
+    
+}
+
