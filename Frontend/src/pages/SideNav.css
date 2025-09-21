@@ -80,7 +80,6 @@
     overflow-x: auto;
   }
   .options {
-    display: flex;
     gap: 30px;
   }
 }
