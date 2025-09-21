@@ -72,9 +72,9 @@ body {
 
 @media (max-width: 1000px) and (orientation: landscape){
     .login-container {
-      margin-bottom: 30px;
+      margin-bottom: 150px;
     }
-    
+
     .login-form {
       max-width: 400px;
       max-height: 80vh;  
