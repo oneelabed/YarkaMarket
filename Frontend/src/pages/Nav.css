@@ -30,17 +30,32 @@
     width: 180px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 600px) and (orientation: landscape){
     .nav {
-    flex-wrap: wrap;
-    padding: 0 15px;
+        flex-wrap: wrap;
+        padding: 0 15px;
     }
 
     .paths {
-    flex-wrap: wrap;
+        flex-wrap: wrap;
     }
 
     .nav-item1 {
-    padding-right: 2%;
+        padding-right: 2%;
+    }
+}
+
+@media (max-width: 600px) and (orientation: portrait){
+    .nav {
+        flex-wrap: wrap;
+        padding: 0 15px;
+    }
+
+    .paths {
+        flex-wrap: wrap;
+    }
+
+    .nav-item1 {
+        padding-right: 10%;
     }
 }
