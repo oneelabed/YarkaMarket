@@ -82,21 +82,24 @@ body {
 }
 
 @media (max-width: 1000px) and (orientation: landscape){
+    .signup-container {
+      margin-bottom: 50px;
+    }
+
     .signup-form {
-      max-width: 400px;
-      max-height: 80vh;  
-      margin-bottom: 30px;
+      max-width: 450px;
+      max-height: 90vh;  
       padding: 16px;
-      font-size: 12px;
+      font-size: 14px;
     }
 
     .form-input {
-      padding: 6px;
-      font-size: 12px;
+      padding: 8px;
+      font-size: 14px;
     }
 
     .signup-button {
-      padding: 6px 14px;
-      font-size: 12px;
+      padding: 8px 16px;
+      font-size: 14px;
     }
 }

@@ -71,10 +71,13 @@ body {
 }
 
 @media (max-width: 1000px) and (orientation: landscape){
+    .login-container {
+      margin-bottom: 30px;
+    }
+    
     .login-form {
       max-width: 400px;
       max-height: 80vh;  
-      margin-bottom: 30px;
       padding: 20px;
       font-size: 14px;
     }
