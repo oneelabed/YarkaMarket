@@ -65,7 +65,7 @@
 }
 
 #name {
-    position: fixed;
+    position: relative;
     margin-top: 10px;
     font-size: 20px;
 }
