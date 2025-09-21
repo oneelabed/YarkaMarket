@@ -120,6 +120,11 @@
     margin-bottom: 200px;
   }
 
+  .listings-list {
+    list-style: none;
+    margin-bottom: 100px;
+  }
+
   .listing-item {
     flex-direction: column;
     align-items: center;
@@ -146,5 +151,10 @@
 @media (max-width: 1000px) and (orientation: landscape){
   .marketplace-container {
     margin-bottom: 200px;
+  }
+
+  .listings-list {
+    list-style: none;
+    margin-bottom: 100px;
   }
 }
