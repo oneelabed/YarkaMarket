@@ -138,7 +138,7 @@
   }
 }
 
-@media (max-width: 800px) and (orientation: portrait) {
+@media (max-width: 600px) and (orientation: portrait) {
   .marketplace-container {
     padding: 0 10px;
     margin-bottom: 100px;
