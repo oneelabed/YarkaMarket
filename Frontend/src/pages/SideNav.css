@@ -48,7 +48,7 @@
     text-decoration: none;
     color: black;
     padding-left: 10px;
-    margin-bottom: -30px;
+    margin-top: 30px;
 }
 
 #icon {
@@ -64,7 +64,7 @@
 }
 
 #name {
-    position: relative;
+    position: fixed;
     margin-top: 10px;
     font-size: 20px;
 }
@@ -83,4 +83,10 @@
     display: flex;
     gap: 15px;
   }
+
+  #name {
+    position: relative;
+    margin-top: 10px;
+    font-size: 20px;
+}
 }
