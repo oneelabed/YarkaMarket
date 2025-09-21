@@ -116,7 +116,6 @@
 @media (max-width: 1000px) and (orientation: landscape){
   .marketplace-container {
     padding: 0 10px;
-    margin-bottom: 100px;
   }
 
   .listing-item {
