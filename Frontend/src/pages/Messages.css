@@ -152,3 +152,15 @@ body {
 .conversations-list::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
+
+@media (max-width: 768px) {
+  .messages-container {
+    flex-direction: column; /* ✅ conversations on top, messages below */
+    margin: 10px;
+    height: 90vh;
+  }
+  .conversations-list {
+    width: 100%;
+    height: 200px;
+  }
+}

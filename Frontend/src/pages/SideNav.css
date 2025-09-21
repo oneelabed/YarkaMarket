@@ -69,3 +69,18 @@
     margin-top: 10px;
     font-size: 20px;
 }
+
+@media (max-width: 768px) {
+  .sideNav {
+    position: relative; /* ✅ don’t overlay whole screen */
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .options {
+    display: flex;
+    gap: 15px;
+  }
+}

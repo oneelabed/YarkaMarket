@@ -11,3 +11,11 @@
     left: 220px;
     border: 3px solid;
 }
+
+@media (max-width: 768px) {
+  .dash-container {
+    left: 0; /* ✅ remove fixed left offset on mobile */
+    top: 60px;
+    border: none;
+  }
+}

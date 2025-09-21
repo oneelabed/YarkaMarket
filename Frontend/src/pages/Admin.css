@@ -1,7 +1,21 @@
 .admin-page {
   display: flex;
+  flex-direction: row;
   height: 100vh;
   font-family: Arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+  .admin-page {
+    flex-direction: column; /* ✅ sidebar on top for mobile */
+  }
+  .sidebar {
+    width: 100%;
+    text-align: center;
+  }
+  .stats {
+    flex-direction: column;
+  }
 }
 
 .sidebar {
