@@ -80,18 +80,8 @@
     overflow-x: auto;
   }
 
-  .sidenav-item {
-    display: flex;
-  }
-
   .options {
     display: flex;
-    gap: 30px;
+    gap: 15px;
   }
-
-  .icon {
-    display: flex;
-    gap: 30px;
-  }
-
 }

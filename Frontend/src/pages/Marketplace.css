@@ -78,14 +78,16 @@
   color: #008000;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .marketplace-container {
     padding: 0 10px;
+    margin-bottom: 100px;
   }
 
   .listing-item {
     flex-direction: column;
     align-items: center;
+    height: 300px;
   }
 
   .listing-image {
