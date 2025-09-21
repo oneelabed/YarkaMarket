@@ -48,7 +48,6 @@
     text-decoration: none;
     color: black;
     padding-left: 10px;
-    padding-top: 100px;
 }
 
 #icon {
@@ -65,7 +64,6 @@
 
 #name {
     position: fixed;
-    margin-top: 10px;
     font-size: 20px;
 }
 
