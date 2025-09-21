@@ -45,10 +45,11 @@
 }
 
 .sidenav-word {
-    position: fixed;
+    position: relative;
     text-decoration: none;
     color: black;
     padding-left: 10px;
+    padding-top: -3px;
 }
 
 #icon {
