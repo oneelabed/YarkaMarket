@@ -26,7 +26,7 @@ export function UserProvider({ children }) {
         const data = await res.json();
         setCurrentUser(data);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
       }
     };
 

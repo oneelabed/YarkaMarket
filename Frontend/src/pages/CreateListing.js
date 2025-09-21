@@ -54,7 +54,7 @@ function CreateListing() {
         body: form,
       });
 
-      console.log(response);
+      // console.log(response);
       
       if (!response.ok) {
         throw new Error("Failed to create listing");
@@ -64,7 +64,7 @@ function CreateListing() {
       setFormData({ title: "", description: "", category: "", price: ""});
       setImage();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       setMessage("Error creating listing. Please try again.");
     } finally {
       setLoading(false);

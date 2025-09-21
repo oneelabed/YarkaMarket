@@ -28,7 +28,7 @@ function MyListings() {
         const data = await response.json();
         setListings(data);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
         setError(err.message || "Error fetching listings");
       } finally {
         setLoading(false);
@@ -53,7 +53,7 @@ function MyListings() {
         },
       });
 
-      console.log(response);
+      // console.log(response);
 
       if (!response.ok) {
         throw new Error("Failed to delete listing");
@@ -62,7 +62,7 @@ function MyListings() {
       // Remove listing from state instantly
       setListings((prevListings) => prevListings.filter((listing) => listing.id !== id));
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     } finally {
       setLoading(false);
     }

@@ -48,7 +48,7 @@ function SignUp() {
       // Redirect (replace with your dashboard path)
       window.location.href = "/dashboard/market";
     } catch (err) {
-      console.error("Login error:", err);
+      // console.error("Login error:", err);
       setError("Network error. Please try again.");
     } finally {
       setLoading(false);

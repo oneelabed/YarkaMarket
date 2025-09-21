@@ -33,7 +33,7 @@ function Admin() {
         setConversations(convsData);
 
       } catch (err) {
-        console.error("Failed to fetch admin data:", err);
+        // console.error("Failed to fetch admin data:", err);
       }
     };
 
@@ -64,7 +64,7 @@ function Admin() {
         u.id === userId ? { ...u, isApproved: true } : u
       ));
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       alert("Could not activate user. Please try again.");
     }
   };

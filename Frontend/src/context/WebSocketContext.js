@@ -37,32 +37,32 @@ export const WebSocketProvider = ({ children }) => {
         try {
           await webSocketService.connect(token);
           setIsConnected(true);
-          console.log('Global WebSocket connected for user:', currentUser.username);
+          // console.log('Global WebSocket connected for user:', currentUser.username);
 
           // Set up global message handler
           const handleMessage = (messageData) => {
-            console.log('Global WebSocket message received:', messageData);
+            // console.log('Global WebSocket message received:', messageData);
             messageCallbacksRef.current.forEach(callback => {
               try {
                 callback(messageData);
               } catch (error) {
-                console.error('Error in message callback:', error);
+                // console.error('Error in message callback:', error);
               }
             });
           };
 
           const handleConnect = () => {
             setIsConnected(true);
-            console.log('WebSocket connected globally');
+            // console.log('WebSocket connected globally');
           };
 
           const handleDisconnect = () => {
             setIsConnected(false);
-            console.log('WebSocket disconnected globally');
+            // console.log('WebSocket disconnected globally');
           };
 
           const handleError = (error) => {
-            console.error('Global WebSocket error:', error);
+            // console.error('Global WebSocket error:', error);
           };
 
           // Remove any existing callbacks to prevent duplicates
@@ -77,7 +77,7 @@ export const WebSocketProvider = ({ children }) => {
           webSocketService.onError(handleError);
 
         } catch (error) {
-          console.error('Failed to initialize global WebSocket:', error);
+          // console.error('Failed to initialize global WebSocket:', error);
           setIsConnected(false);
         }
       } else if (!currentUser || !token) {
@@ -85,7 +85,7 @@ export const WebSocketProvider = ({ children }) => {
         if (webSocketService.isConnected()) {
           webSocketService.disconnect();
           setIsConnected(false);
-          console.log('WebSocket disconnected - user logged out');
+          // console.log('WebSocket disconnected - user logged out');
         }
       }
     };

@@ -36,7 +36,7 @@ function Marketplace() {
         setListings(data);
         setFilteredListings(data);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
         setError(err.message || "Error fetching listings");
       } finally {
         setLoading(false);
@@ -82,7 +82,7 @@ function Marketplace() {
       // Navigate to notifications page and select the new conversation
       navigate(`/dashboard/conversations?convId=${conversation.id}`);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       alert("Could not start conversation. Please try again.");
     }
   };

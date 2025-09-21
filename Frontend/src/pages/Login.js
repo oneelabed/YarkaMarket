@@ -35,7 +35,7 @@ function Login () {
         credentials: "include"
       });
 
-      console.log(response);
+      // console.log(response);
 
       const responseData = await response.json();
       const key = Object.keys(responseData)[0];
@@ -60,7 +60,7 @@ function Login () {
       // Redirect
       window.location.href = "/dashboard/market";
     } catch (err) {
-      console.error("Login error:", err);
+      // console.error("Login error:", err);
       setError("Network error. Please try again.");
     } finally {
       setLoading(false);

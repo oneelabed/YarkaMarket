@@ -35,7 +35,7 @@ function Messages() {
 
   // Handle incoming WebSocket messages
   const handleWebSocketMessage = useCallback((messageData) => {
-    console.log('Messages component received WebSocket message:', messageData);
+    // console.log('Messages component received WebSocket message:', messageData);
     // Add message if it belongs to the currently selected conversation
     if (messageData.conversationId === parseInt(selectedConvId)) {
       setMessages(prev => {
@@ -105,7 +105,7 @@ function Messages() {
       // The WebSocket notification will be sent automatically by MessagingService
       
     } catch (err) {
-      console.error('Failed to send message:', err);
+      // console.error('Failed to send message:', err);
       alert('Failed to send message. Please try again.');
     } finally {
       setLoading(false);
@@ -129,7 +129,7 @@ function Messages() {
           setSelectedConvId(data[0].id.toString());
         }
       } catch (err) {
-        console.error(err);
+        // console.error(err);
       } finally {
         setLoading(false);
       }
@@ -157,7 +157,7 @@ function Messages() {
         const data = await res.json();
         setMessages(data);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
       } finally {
         setLoading(false);
       }
