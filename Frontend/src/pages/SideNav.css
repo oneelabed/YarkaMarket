@@ -73,6 +73,7 @@
   .sideNav {
     position: relative;
     width: 100%;
+    height: 50px;
     height: auto;
     display: flex;
     flex-direction: row;
