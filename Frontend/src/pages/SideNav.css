@@ -45,6 +45,7 @@
 }
 
 .sidenav-word {
+    position: fixed;
     text-decoration: none;
     color: black;
     padding-left: 10px;
@@ -64,6 +65,7 @@
 
 #name {
     position: fixed;
+    margin-top: 10px;
     font-size: 20px;
 }
 
