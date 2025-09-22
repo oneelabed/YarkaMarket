@@ -58,9 +58,17 @@
 /* Mobile: hide sidebar by default */
 @media (max-width: 600px) {
   .sideNav {
-    transform: translateX(-100%);
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;       /* width of the sidebar */
+    height: 100%;       /* full screen height */
+    background-color: white;
+    transform: translateX(-100%);  /* hidden by default */
+    transition: transform 0.3s ease;
     z-index: 1000;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+
   }
 
   .sideNav.active {
