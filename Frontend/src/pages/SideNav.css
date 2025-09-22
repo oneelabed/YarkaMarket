@@ -58,13 +58,21 @@
 /* Mobile: hide sidebar by default */
 @media (max-width: 600px) {
   .sideNav {
-    transform: translateX(-100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: white;
+    transform: translateX(-100%); /* hidden by default */
     transition: transform 0.3s ease;
+    z-index: 1000;
     box-shadow: 2px 0 8px rgba(0,0,0,0.2);
   }
 
   .sideNav.active {
-    transform: translateX(0);
+    transform: translateX(0); /* Show sidebar by moving it to position 0 */
+    transition: transform 0.3s ease;
   }
 
   .hamburger {
@@ -91,7 +99,7 @@
   .sidenav-word { 
     font-size: 14px; 
   }
-  
+
   #blackLogo { 
     width: 150px; height: auto; margin-left: 10px; 
   }
