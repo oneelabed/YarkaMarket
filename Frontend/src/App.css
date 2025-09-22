@@ -118,9 +118,4 @@
     left: 0 !important;
     border: none !important;
   }
-
-  .messages-list, .conversations-list {
-    height: auto !important;
-  }
-
 }

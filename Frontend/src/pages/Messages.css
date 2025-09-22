@@ -162,7 +162,8 @@ body {
   .messages-container {
     flex-direction: column;
     margin: 10px;
-    height: 90vh;
+    height: 80vh;
+    width: 90%;
   }
 
   .conversations-list {
