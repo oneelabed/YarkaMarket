@@ -1,33 +1,47 @@
 .sideNav {
-  width: 200px;
-  height: 100%;
-  background-color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding-top: 10px;
-  overflow-y: auto;
-  transition: transform 0.3s ease-in-out;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;    
+    z-index: 1000;
 }
 
-/* Links & Items */
-
-.unactive-sidenav, .active-sidenav {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-radius: 8px;
-  text-decoration: none;
-}
-
-.active-sidenav {
-  background-color: #e0e0e0;
-}
+.options {
+    padding-top: 15px;
+    border-color: black;
+}  
 
 .sidenav-item {
+    text-decoration: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-left: 10px;
+}
+
+.unactive-sidenav {
+    text-decoration: none;
+}   
+
+.unactive-sidenav:hover {
+    text-decoration: none;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    border-radius: 10px;
+    padding-right: 35px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}   
+
+.active-sidenav {
+    text-decoration: none;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    border-radius: 10px;
+    padding-right: 35px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .sidenav-word {
@@ -35,7 +49,11 @@
     text-decoration: none;
     color: black;
     padding-left: 10px;
-    padding-top: 3px;
+}
+
+#icon {
+    position: relative;
+    margin-left: 15px;
 }
 
 #blackLogo {
@@ -47,53 +65,29 @@
 
 #name {
     position: fixed;
-    margin-top: 7px;
+    margin-top: 10px;
     font-size: 20px;
 }
 
-.hamburger {
-  display: none;
-}
-
-/* Mobile: hide sidebar by default */
 @media (max-width: 1000px) {
   .sideNav {
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-  }
-
-  .activated {
-    transform: translateX(0);
-  }
-
-  .hamburger {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    height: auto;
     display: flex;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 25px;
-    cursor: pointer;
-    z-index: 1100;
+    flex-direction: row;
+    overflow-x: auto;
   }
 
-  .hamburger span {
-    display: block;
-    height: 4px;
-    background: black;
-    border-radius: 2px;
+  .options {
+    display: flex;
+    gap: 15px;
   }
 
-  /* Optional: adjust logo and text */
-  .sidenav-word { 
-    font-size: 14px; 
-  }
-
-  #blackLogo { 
-    left: -300px;
-    top: -300px;
-  }
+  #name {
+    position: relative;
+    margin-top: 10px;
+    font-size: 20px;
+}
 }
