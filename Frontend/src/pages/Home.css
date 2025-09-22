@@ -127,8 +127,8 @@
   text-decoration: underline;
 }
 
-@media (max-width: 600px) {
+/*@media (max-width: 600px) {
   .hero-buttons {
-    flex-direction: column; /* ✅ stack buttons */
+    flex-direction: column; 
   }
-}
+}*/

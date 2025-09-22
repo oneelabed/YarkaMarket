@@ -10,6 +10,7 @@ import EditListing from "./pages/EditListing.js"
 import Admin from "./pages/Admin.js"
 import Messages from "./pages/Messages.js"
 import { Navigate } from "react-router-dom";
+import "./App.css"
 
 function PrivateRoute({ children }) {
   const token = sessionStorage.getItem("token");

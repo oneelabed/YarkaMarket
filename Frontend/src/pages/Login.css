@@ -70,10 +70,10 @@ body {
   font-size: 16px;
 }
 
-@media (max-width: 1000px) and (orientation: landscape){
+/*@media (max-width: 1000px) and (orientation: landscape){
     .login-container {
       margin-top: 100px;
       margin-bottom: 20px;
     }
-}
+}*/
 

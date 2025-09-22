@@ -30,7 +30,7 @@
     width: 180px;
 }
 
-@media (max-width: 600px) and (orientation: landscape){
+/*@media (max-width: 600px) and (orientation: landscape){
     .nav {
         flex-wrap: wrap;
         padding: 0 15px;
@@ -59,4 +59,4 @@
     .nav-item1 {
         padding-right: 40px;
     }
-}
+}*/

@@ -5,9 +5,9 @@
   font-family: Arial, sans-serif;
 }
 
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
   .admin-page {
-    flex-direction: column; /* ✅ sidebar on top for mobile */
+    flex-direction: column; 
   }
   .sidebar {
     width: 100%;
@@ -16,7 +16,7 @@
   .stats {
     flex-direction: column;
   }
-}
+}*/
 
 .sidebar {
   width: 200px;

@@ -8,7 +8,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-@media (max-width: 600px) {
+/*@media (max-width: 600px) {
   .create-listing-container {
     padding: 20px;
     margin: 20px;
@@ -16,7 +16,7 @@
   .create-listing-container h2 {
     font-size: 20px;
   }
-}
+}*/
 
 /* Heading */
 .create-listing-container h2 {

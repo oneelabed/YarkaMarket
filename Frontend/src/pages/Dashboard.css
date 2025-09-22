@@ -12,10 +12,10 @@
     border: 3px solid;
 }
 
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
   .dash-container {
-    left: 0; /* ✅ remove fixed left offset on mobile */
+    left: 0;
     top: 60px;
     border: none;
   }
-}
+}*/
