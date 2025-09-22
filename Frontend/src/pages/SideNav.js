@@ -7,7 +7,7 @@ import blackLogo from "../images/marketLogoBlack.png"
 
 function SideNav() {
   const { currentUser } = useContext(UserContext);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return(
     <div>
