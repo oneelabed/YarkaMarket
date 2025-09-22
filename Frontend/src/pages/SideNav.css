@@ -58,25 +58,15 @@
 /* Mobile: hide sidebar by default */
 @media (max-width: 600px) {
   .sideNav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200px;       /* width of the sidebar */
-    height: 100%;       /* full screen height */
-    background-color: white;
-    transform: translateX(-100%);  /* hidden by default */
+    transform: translateX(-100%);
     transition: transform 0.3s ease;
-    z-index: 1000;
     box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-
   }
 
   .sideNav.active {
-    transform: translateX(220px);
-    transition: transform 0.3s ease;
+    transform: translateX(0);
   }
 
-  /* Hamburger button */
   .hamburger {
     display: flex;
     position: fixed;
@@ -97,14 +87,12 @@
     border-radius: 2px;
   }
 
-  /* Hide the sidenav-word text for smaller screens if needed */
-  .sidenav-word {
-    font-size: 14px;
+  /* Optional: adjust logo and text */
+  .sidenav-word { 
+    font-size: 14px; 
   }
-
-  #blackLogo {
-    width: 150px;
-    height: auto;
-    margin-left: 10px;
+  
+  #blackLogo { 
+    width: 150px; height: auto; margin-left: 10px; 
   }
 }
