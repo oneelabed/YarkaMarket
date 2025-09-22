@@ -219,7 +219,6 @@ function Messages() {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Message input */}
               <div className="message-input-container">
                 <input
                   className="message-input"

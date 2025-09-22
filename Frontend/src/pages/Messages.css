@@ -160,17 +160,14 @@ body {
 
 @media (max-width: 1000px) {
   .messages-container {
-    
-    margin: 10px;
+    flex-direction: column;
     margin-top: 50px;
-    height: 1000vh;
-  }
-
-  .messages-pane {
+    height: 90vh;
   }
 
   .conversations-list {
     width: 100%;
+    height: 300px;
   }
 
   #title {
