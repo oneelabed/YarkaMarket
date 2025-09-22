@@ -113,7 +113,7 @@
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
-/*@media (max-width: 800px) and (orientation: portrait){
+@media (max-width: 800px) and (orientation: portrait){
   .marketplace-container {
     padding: 0 10px;
     height: 400px;
@@ -147,14 +147,3 @@
     margin-top: 40px;
   }
 }
-
-@media (max-width: 1000px) and (orientation: landscape){
-  .marketplace-container {
-    margin-bottom: 200px;
-  }
-
-  .listings-list {
-    list-style: none;
-    margin-bottom: 100px;
-  }
-}*/
