@@ -158,16 +158,22 @@ body {
   margin-top: 50px;
 }
 
-/*@media (max-width: 1000px) {
+@media (max-width: 1000px) {
   .messages-container {
     flex-direction: column;
-    margin: 0px 0px 0px 0px;
+    margin: 10px;
     height: 90vh;
   }
 
   .conversations-list {
     width: 100%;
-    height: 300px;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    height: 30vh;
+  }
+
+  .messages-pane {
+    width: 100%;
   }
 
   #title {
@@ -175,4 +181,4 @@ body {
     margin-top: 100px;
     left: 20px;
   }
-}*/
+}

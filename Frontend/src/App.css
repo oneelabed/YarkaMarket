@@ -1,7 +1,8 @@
 /* ======================
    Mobile Responsive
 ====================== */
-@media (max-width: 600px) {
+
+@media (max-width: 1000px) {
   /* General Containers */
   .create-listing-container,
   .login-form,
@@ -51,23 +52,6 @@
     max-width: 100% !important;
     max-height: 150px !important;
     margin: 0 auto !important;
-  }
-
-  /* Messages */
-  .messages-container {
-    flex-direction: column !important;
-    margin: 10px !important;
-    height: 100vh !important;
-  }
-
-  .conversations-list {
-    width: 100% !important;
-    border-right: none !important;
-    border-bottom: 1px solid #ddd !important;
-  }
-
-  .messages-pane {
-    width: 100% !important;
   }
 
   /* Sidebar & Navbar */
