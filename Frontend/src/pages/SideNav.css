@@ -73,6 +73,7 @@
 
   .sideNav.active {
     transform: translateX(220px);
+    transition: transform 0.3s ease;
   }
 
   /* Hamburger button */
