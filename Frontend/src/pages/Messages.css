@@ -166,12 +166,12 @@ body {
   }
 
   .messages-pane {
-    height: 100vh;
+    height: 1000vh;
   }
-  
+
   .conversations-list {
     width: 100%;
-    height: 200vh;
+    height: 700vh;
   }
 
   #title {
