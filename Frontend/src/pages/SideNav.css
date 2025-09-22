@@ -38,11 +38,6 @@
     padding-top: 3px;
 }
 
-#icon {
-    position: relative;
-    margin-left: 15px;
-}
-
 #blackLogo {
     height: 120px;
     width: 250px;
@@ -54,6 +49,10 @@
     position: fixed;
     margin-top: 7px;
     font-size: 20px;
+}
+
+.hamburger {
+  display: none;
 }
 
 /* Mobile: hide sidebar by default */
@@ -99,8 +98,4 @@
     height: auto;
     margin-left: 10px;
   }
-}
-
-.hamburger {
-  display: none;
 }
