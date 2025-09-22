@@ -168,7 +168,7 @@ function Messages() {
   }, [selectedConvId, token]);
 
   if (loading && conversations.length === 0) {
-    return <div style={{marginLeft:"250px", marginTop:"50px"}}>Loading conversations...</div>;
+    return <div>Loading conversations...</div>;
   }
 
   return (
