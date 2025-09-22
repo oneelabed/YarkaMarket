@@ -17,7 +17,7 @@ function SideNav() {
         <span></span>
         <span></span>
       </div>
-      <nav className="sideNav">
+      <nav className={`sideNav ${sidebarOpen ? "active" : ""}`}>
         <Link to="/"><img alt="logo" src={blackLogo} id="blackLogo"></img><br/></Link>
         <div className="options">
           <User className="icon" color="black" size={40} style={{marginLeft:"7px"}}></User><b className="sidenav-word" id="name"> {currentUser && currentUser.username}</b><br/><br/><br/><br/>
