@@ -163,11 +163,15 @@ body {
     flex-direction: column;
     margin: 10px;
     margin-top: 50px;
-    height: 200vh;
   }
+
+  .messages-pane {
+    height: 100vh;
+  }
+  
   .conversations-list {
     width: 100%;
-    height: 600px;
+    height: 200vh;
   }
 
   #title {
