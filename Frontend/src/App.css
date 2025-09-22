@@ -57,7 +57,7 @@
   .messages-container {
     flex-direction: column !important;
     margin: 10px !important;
-    height: auto !important;
+    height: 100vh !important;
   }
 
   .conversations-list {
