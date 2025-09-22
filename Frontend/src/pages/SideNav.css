@@ -56,7 +56,7 @@
 }
 
 /* Mobile: hide sidebar by default */
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .sideNav {
     position: fixed;
     top: 0;
