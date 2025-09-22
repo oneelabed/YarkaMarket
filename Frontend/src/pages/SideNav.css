@@ -93,6 +93,7 @@
   }
 
   #blackLogo { 
-    left: -300px
+    left: -300px;
+    top: -300px;
   }
 }
