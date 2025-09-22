@@ -153,6 +153,11 @@ body {
   background: #a8a8a8;
 }
 
+#title {
+  margin-left: 250px;
+  margin-top: 50px;
+}
+
 @media (max-width: 768px) {
   .messages-container {
     flex-direction: column;
@@ -166,5 +171,7 @@ body {
 
   #title {
     margin-left: 0px;
+    margin-top: 0px;
+    left: 20px;
   }
 }

@@ -173,7 +173,7 @@ function Messages() {
 
   return (
     <div>
-      <h1 id="title" style={{marginLeft:"250px" , marginTop:"50px"}}>
+      <h1 id="title">
         Messages 
       </h1> 
       
