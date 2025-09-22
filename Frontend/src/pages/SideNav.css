@@ -53,7 +53,7 @@
 
 .icon {
     position: relative;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 #blackLogo {
@@ -70,47 +70,59 @@
 }
 
 @media (max-width: 1000px) {
-  .sideNav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background-color: white;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-  }
+    .sideNav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: white;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+    }
 
-  .options {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-  }
+    .options {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
 
-  .sidenav-word {
-    display: none; /* hide text labels, show icons only */
-  }
+    .sidenav-word {
+        display: none; /* hide text labels, show icons only */
+    }
 
-  #blackLogo,
-  #name {
-    display: none; /* hide logo + username on mobile */
-  }
+    #blackLogo,
+    #name {
+        display: none; /* hide logo + username on mobile */
+    }
 
-  .sidenav-item {
-    padding: 0;
-  }
+    .sidenav-item {
+        padding: 0;
+    }
 
-  .icon {
-    margin-left: 0;
-  }
+    .icon {
+        margin-left: 0;
+    }
 
-  #user-icon {
-    display: none;
-  }
+    #user-icon {
+        display: none;
+    }
+
+    .unactive-sidenav:hover {
+        box-shadow: none;
+        border-radius: 0px;
+        padding: 0px;
+    }   
+
+    .active-sidenav {
+        box-shadow: none;
+        border-radius: 0px;
+        padding: 0px;
+    }
 }
