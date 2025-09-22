@@ -20,7 +20,7 @@ function SideNav() {
       <nav className={`${sidebarOpen ? "activated" : "sideNav"}`}>
         <Link to="/"><img alt="logo" src={blackLogo} id="blackLogo"></img><br/></Link>
         <div className="options">
-          <User className="icon" color="black" size={40} style={{marginLeft:"7px"}}></User><b className="sidenav-word" id="name"> {currentUser && currentUser.username}</b><br/><br/><br/><br/>
+          <User className="icon" color="black" size={40} style={{marginLeft:"7px"}} id="user-icon"></User><b className="sidenav-word" id="name"> {currentUser && currentUser.username}</b><br/><br/><br/><br/>
           <div className="sidenav-item">
             <NavLink to="market" 
               className={({ isActive }) => `${ isActive ? "active-sidenav" : "unactive-sidenav"}`}>
