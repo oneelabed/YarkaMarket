@@ -2,8 +2,7 @@
    Mobile Responsive
 ====================== */
 
-@media (max-width: 1000px) {
-  /* General Containers */
+/*@media (max-width: 1000px) {
   .create-listing-container,
   .login-form,
   .signup-form,
@@ -18,29 +17,25 @@
     top: 80px !important;
   }
 
-  /* Typography */
-  h1, h2, h3, .login-title, .signup-title, .create-listing-container h2 {
+  h1, h2, h3, .login-title, .signup-title {
     font-size: 1.2rem !important;
     text-align: center !important;
   }
 
-  p, .listing-description, .listing-person, .listing-meta {
+  .listing-description, .listing-person, .listing-meta {
     font-size: 0.85rem !important;
   }
 
-  /* Inputs & Buttons */
   input, textarea, select, .form-input, .signup-button, .login-button, .create-listing-container button {
     font-size: 14px !important;
     padding: 8px !important;
   }
 
-  /* Form Layouts */
   .name-fields {
     flex-direction: column !important;
     gap: 10px !important;
   }
 
-  /* Listings & Marketplace */
   .listing-item, .reason-card, .card {
     flex-direction: column !important;
     align-items: center !important;
@@ -54,7 +49,6 @@
     margin: 0 auto !important;
   }
 
-  /* Sidebar & Navbar */
   .sidebar, .sideNav {
     display: none !important;
   }
@@ -74,7 +68,6 @@
     font-size: 12px !important;
   }
 
-  /* Hero Section */
   .hero {
     padding: 40px 10px !important;
   }
@@ -92,13 +85,11 @@
     gap: 10px !important;
   }
 
-  /* Footer */
   .footer {
     font-size: 12px !important;
     padding: 10px !important;
   }
 
-  /* Misc */
   .uploader-container {
     gap: 8px !important;
   }
@@ -118,4 +109,4 @@
     left: 0 !important;
     border: none !important;
   }
-}
+}*/
