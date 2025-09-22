@@ -1,15 +1,22 @@
 import "./SideNav.css"
 import { Link, NavLink } from "react-router-dom"
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { Home, MessageCircle, Plus, User, ShoppingBag, UserCog} from "lucide-react";
 import blackLogo from "../images/marketLogoBlack.png"
 
 function SideNav() {
   const { currentUser } = useContext(UserContext);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return(
     <div>
+      {/* Hamburger button for mobile */}
+      <div className="hamburger" onClick={() => setSidebarOpen(!sidebarOpen)}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <nav className="sideNav">
         <Link to="/"><img alt="logo" src={blackLogo} id="blackLogo"></img><br/></Link>
         <div className="options">
