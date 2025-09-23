@@ -14,7 +14,6 @@ function Marketplace() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const categories = ["All", "Electronics", "Furniture", "Clothing", "Tools", "Home", "Sports", "Books", "Other"];
-  const isMobile = window.innerWidth <= 1000; 
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -91,11 +90,7 @@ function Marketplace() {
   if (loading) {
     return (
       <div className="loading-screen">
-        {isMobile ? (
-          <div className="loading-spinner"></div>
-        ) : (
-          "Loading conversations..."
-        )}
+        <div className="loading-spinner"></div>
       </div>
     );
   }
