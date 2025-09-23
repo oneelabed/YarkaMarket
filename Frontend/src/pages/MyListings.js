@@ -7,6 +7,7 @@ function MyListings() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const isMobile = window.innerWidth <= 1000; 
   
   useEffect(() => {
     const fetchListings = async () => {
@@ -69,7 +70,17 @@ function MyListings() {
   };
 
 
-  if (loading) return <p style={{textAlign: "center", marginTop: "50px"}}>Loading listings...</p>;
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        {isMobile ? (
+          <div className="loading-spinner"></div>
+        ) : (
+          "Loading conversations..."
+        )}
+      </div>
+    );
+  }
   if (error) return <p style={{textAlign: "center", marginTop: "50px"}}>Error: {error}</p>;
 
   return (
