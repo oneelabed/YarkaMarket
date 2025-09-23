@@ -17,9 +17,7 @@
 
 .sidenav-item {
     text-decoration: none;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
+    padding: 10px;
 }
 
 .unactive-sidenav {
@@ -46,6 +44,7 @@
 
 .sidenav-word {
     position: relative;
+    vertical-align: top;
     text-decoration: none;
     color: black;
     padding-left: 10px;
@@ -54,6 +53,7 @@
 .icon {
     position: relative;
     margin-left: 10px;
+    margin-top: -3px;
 }
 
 #blackLogo {
@@ -65,7 +65,7 @@
 
 #name {
     position: fixed;
-    margin-top: 10px;
+    margin-top: 8px;
     font-size: 20px;
 }
 
