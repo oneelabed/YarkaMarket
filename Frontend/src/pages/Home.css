@@ -135,14 +135,17 @@
     width: 200px;
   }
 
-  #arrow-right {
-    margin-left: 20px;
-    margin-right: 20px;
+  #share-sign {
     margin-bottom: -1px;
   }
 
+  #arrow-right {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: -2x;
+  }
+
   #plus-sign {
-    margin-left: 0px;
-    margin-bottom: -1px;
+    margin-bottom: -2px;
   }
 }

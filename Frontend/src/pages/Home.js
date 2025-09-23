@@ -16,7 +16,7 @@ function Home() {
           <p>Buy and sell anything in your community — fast, simple, secure.</p>
           {isMobile && <>
             <p>For better mobile experience:-</p>
-            <p>Share <Share size={20}></Share> 
+            <p>Share <Share size={20} id="share-sign"></Share> 
               <ArrowRight size={20} id="arrow-right"></ArrowRight>
               Add to Home Screen <PlusSquare size={20} id="plus-sign"></PlusSquare></p>
           </>}
