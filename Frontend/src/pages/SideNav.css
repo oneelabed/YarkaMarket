@@ -94,12 +94,12 @@
     }
 
     .sidenav-word {
-        display: none; /* hide text labels, show icons only */
+        display: none;
     }
 
     #blackLogo,
     #name {
-        display: none; /* hide logo + username on mobile */
+        display: none;
     }
 
     .sidenav-item {

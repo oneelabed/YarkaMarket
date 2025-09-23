@@ -11,6 +11,7 @@ function Messages() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const initialConvId = params.get("convId");
+  const isMobile = window.innerWidth <= 1000; 
   
   const { currentUser } = useContext(UserContext);
   // eslint-disable-next-line
@@ -168,8 +169,18 @@ function Messages() {
   }, [selectedConvId, token]);
 
   if (loading && conversations.length === 0) {
-    return <div style={{textAlign: "center", marginTop: "50px"}}>Loading conversations...</div>;
+    return (
+      <div className="loading-screen">
+        {isMobile ? (
+          <div className="loading-spinner"></div>
+        ) : (
+          "Loading conversations..."
+        )}
+      </div>
+    );
   }
+
+
 
   return (
     <div>
