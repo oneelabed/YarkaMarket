@@ -163,7 +163,7 @@ function Admin() {
                     <td>{conv.id}</td>
                     <td>{conv.user1.email}</td>
                     <td>{conv.user2.email}</td>
-                    <td>{conv.lastUpdated}</td>
+                    <td>{conv.lastUpdated && conv.lastUpdated.toString().slice(0,10)}</td>
                   </tr>
                 ))}
               </tbody>

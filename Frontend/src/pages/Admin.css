@@ -5,19 +5,6 @@
   font-family: Arial, sans-serif;
 }
 
-/*@media (max-width: 768px) {
-  .admin-page {
-    flex-direction: column; 
-  }
-  .sidebar {
-    width: 100%;
-    text-align: center;
-  }
-  .stats {
-    flex-direction: column;
-  }
-}*/
-
 .sidebar {
   width: 200px;
   background-color: #1e1e2f;
@@ -100,4 +87,38 @@ th {
 #link {
   text-decoration: none;
   color: white;
+}
+
+@media (max-width: 1000px) {
+  .admin-page {
+    flex-direction: column; 
+  }
+
+  .admin-page h1 {
+    text-align: center;
+  }
+
+  .sidebar {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+  }
+  .stats {
+    flex-direction: column;
+  }
+
+  .card {
+    background-color: white;
+    width: 85%;
+    align-self: center;
+  }
+
+  .main-content {
+    padding-left: 0px;
+  }
+
+  th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
 }
