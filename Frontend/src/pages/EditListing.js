@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./EditListing.css"
 import { useParams } from "react-router-dom";
 
 function EditListing() {
