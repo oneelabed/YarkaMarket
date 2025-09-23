@@ -11,13 +11,7 @@ function SideNav() {
 
   return(
     <div>
-      {/* Hamburger button for mobile */}
-      <div className="hamburger" onClick={() => setSidebarOpen(!sidebarOpen)}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <nav className={`${sidebarOpen ? "activated" : "sideNav"}`}>
+      <nav className="sideNav">
         <Link to="/"><img alt="logo" src={blackLogo} id="blackLogo"></img><br/></Link>
         <div className="options">
           <User className="icon" color="black" size={40} style={{marginLeft:"7px"}} id="user-icon"></User><b className="sidenav-word" id="name"> {currentUser && currentUser.username}</b><br/><br/><br/><br/>

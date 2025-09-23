@@ -70,10 +70,19 @@ body {
   font-size: 16px;
 }
 
-/*@media (max-width: 1000px) and (orientation: landscape){
-    .login-container {
-      margin-top: 100px;
-      margin-bottom: 20px;
-    }
-}*/
+@media (max-width: 1000px){
+  .login-form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 70%;
+    height: 37%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  #signUpMsg {
+    padding-left: 30px;
+    font-size: 14px;
+  }
+}
 

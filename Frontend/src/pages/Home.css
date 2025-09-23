@@ -1,10 +1,8 @@
-/* General layout */
 .homepage {
   font-family: Arial, sans-serif;
-  color: #1f2937; /* gray-800 */
+  color: #1f2937;
 }
 
-/* Hero Section */
 .hero {
   background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white;
@@ -28,10 +26,9 @@
   gap: 16px;
 }
 
-/* Hero Buttons */
 .primary-btn {
-  background-color: #facc15; /* yellow-400 */
-  color: #1f2937; /* gray-800 */
+  background-color: #facc15; 
+  color: #1f2937;
   padding: 12px 20px;
   border: none;
   border-radius: 8px;
@@ -41,7 +38,7 @@
 }
 
 .primary-btn:hover {
-  background-color: #eab308; /* darker yellow */
+  background-color: #eab308;
   transform: translateY(-2px);
 }
 
@@ -57,15 +54,14 @@
 }
 
 .secondary-btn:hover {
-  background-color: #f3f4f6; /* gray-100 */
+  background-color: #f3f4f6;
   transform: translateY(-2px);
 }
 
-/* Why Use Section */
 .why-use {
   padding: 60px 20px;
   text-align: center;
-  background: #f9fafb; /* gray-50 */
+  background: #f9fafb;
 }
 
 .why-use h2 {
@@ -101,10 +97,9 @@
   margin-bottom: 12px;
 }
 
-/* Footer */
 .footer {
-  background: #1f2937; /* gray-800 */
-  color: #d1d5db; /* gray-300 */
+  background: #1f2937;
+  color: #d1d5db;
   text-align: center;
   padding: 20px;
 }
@@ -117,18 +112,34 @@
 }
 
 .footer-links a {
-  color: #93c5fd; /* blue-300 */
+  color: #93c5fd;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 }
 
 .footer-links a:hover {
-  color: #60a5fa; /* blue-400 */
+  color: #60a5fa;
   text-decoration: underline;
 }
 
-/*@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .hero-buttons {
-    flex-direction: column; 
+    flex-direction: column;
   }
-}*/
+
+  .homepage h1 {
+    font-size: 28px;
+  }
+
+  .homepage p {
+    font-size: 18px;
+  }
+
+  .homepage h2 {
+    font-size: 25px;
+  }
+
+  .reason-card {
+    width: 200px;
+  }
+}
