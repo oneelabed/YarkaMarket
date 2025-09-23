@@ -214,7 +214,7 @@ function Messages() {
                   >
                     {msg.content}
                     <div className="message-time">
-                      {new Date(msg.timestamp).toLocaleTimeString().slice(0, -3)}
+                      {new Date(msg.timestamp).toString().slice(4, 10) + " | " + new Date(msg.timestamp).toLocaleTimeString().slice(0, -3)}
                     </div>
                   </div>
                 ))}
