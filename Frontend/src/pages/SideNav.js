@@ -1,6 +1,6 @@
 import "./SideNav.css"
 import { Link, NavLink } from "react-router-dom"
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { Home, MessageCircle, Plus, User, ShoppingBag, UserCog} from "lucide-react";
 import blackLogo from "../images/marketLogoBlack.png"

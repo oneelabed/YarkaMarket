@@ -1,8 +1,11 @@
 import "./Home.css";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
+import { ArrowRight, Share, PlusSquare } from "lucide-react";
 
 function Home() {
+  const isMobile = window.innerWidth <= 1000;
+
   return (
     <div className="homepage">
       <Nav/>
@@ -11,6 +14,12 @@ function Home() {
           <h1>Welcome to Yarka Market</h1>
           <p>The first ever yarka citizens only Marketplace!</p>
           <p>Buy and sell anything in your community — fast, simple, secure.</p>
+          {isMobile && <>
+            <p>For better mobile experience:-</p>
+            <p>Share <Share size={20}></Share> 
+              <ArrowRight size={20} id="arrow-right"></ArrowRight>
+              Add to Home Screen <PlusSquare size={20} id="plus-sign"></PlusSquare></p>
+          </>}
         </div>
       </section>
 
