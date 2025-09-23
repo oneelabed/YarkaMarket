@@ -1,0 +1,9 @@
+body {
+    background-color: white;
+}
+
+#arrow {
+    float: right;
+    margin: 20px;
+    color: black;
+}
