@@ -80,6 +80,26 @@
   color: #008000;
 }
 
+#edit {
+    margin-top: 120px;
+    margin-right: 20px;
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+}
+
+#delete {
+    margin-top: 0px;
+    margin-right: -70px;
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+    background-color: transparent;
+    border: none;
+    font-size: inherit; 
+    cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .mylistings-container {
     padding: 0 10px;
@@ -102,24 +122,16 @@
   .listing-meta {
     justify-content: center;
   }
+
+  #edit {
+    margin: 0px;
+    margin-top: -38px;
+    align-self: flex-start;
+  }
+
+  #delete {
+    margin: 0px;
+    align-self: flex-end;
+  }
 }
 
-#edit {
-    margin-top: 120px;
-    margin-right: 20px;
-    text-decoration: none;
-    color: black;
-    font-family: sans-serif;
-}
-
-#delete {
-    margin-top: 0px;
-    margin-right: -70px;
-    text-decoration: none;
-    color: black;
-    font-family: sans-serif;
-    background-color: transparent;
-    border: none;
-    font-size: inherit; 
-    cursor: pointer;
-}
