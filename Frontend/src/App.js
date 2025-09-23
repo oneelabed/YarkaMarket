@@ -9,6 +9,9 @@ import MyListings from "./pages/MyListings.js"
 import EditListing from "./pages/EditListing.js"
 import Admin from "./pages/Admin.js"
 import Messages from "./pages/Messages.js"
+import TermsOfUse from "./pages/TermsOfUse";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+
 import { Navigate } from "react-router-dom";
 import "./App.css"
 
@@ -22,6 +25,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home/>}></Route>
+        <Route path="/terms" element={<TermsOfUse />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/signup" element={<SignUp/>}></Route>
         <Route path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>}>

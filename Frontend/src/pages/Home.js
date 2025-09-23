@@ -1,11 +1,11 @@
 import "./Home.css";
 import Nav from "./Nav";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
     <div className="homepage">
       <Nav/>
-      {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
           <h1>Welcome to Yarka Market</h1>
@@ -14,7 +14,6 @@ function Home() {
         </div>
       </section>
 
-      {/* Why Use Yarka Market Section */}
       <section className="why-use">
         <h2>Why Use Yarka Market?</h2>
         <div className="reasons">
@@ -33,9 +32,12 @@ function Home() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         <p>© {new Date().getFullYear()} Yarka Market. All rights reserved.</p>
+        <p>
+          <Link to="/terms" className="footer-link">Terms of Use</Link> |{" "}
+          <Link to="/privacy" className="footer-link">Privacy Policy</Link>
+        </p>
       </footer>
     </div>
   );
