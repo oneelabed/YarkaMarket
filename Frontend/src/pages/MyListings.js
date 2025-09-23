@@ -69,8 +69,8 @@ function MyListings() {
   };
 
 
-  if (loading) return <p>Loading listings...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p style={{textAlign: "center", top: "50px"}}>Loading listings...</p>;
+  if (error) return <p style={{textAlign: "center", top: "50px"}}>Error: {error}</p>;
 
   return (
     <div className="mylistings-container">

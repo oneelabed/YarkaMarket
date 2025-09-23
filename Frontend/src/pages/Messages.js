@@ -168,7 +168,7 @@ function Messages() {
   }, [selectedConvId, token]);
 
   if (loading && conversations.length === 0) {
-    return <div>Loading conversations...</div>;
+    return <div style={{textAlign: "center", marginTop: "50px"}}>Loading conversations...</div>;
   }
 
   return (
@@ -178,7 +178,6 @@ function Messages() {
       </h1> 
       
       <div className="messages-container">
-        {/* Conversations sidebar */}
         <div className="conversations-list">
           {conversations.length === 0 && <p>&nbsp;&nbsp;No conversations</p>}
           {conversations.map((conv) => (
@@ -195,7 +194,6 @@ function Messages() {
           ))}
         </div>
 
-        {/* Messages pane */}
         <div className="messages-pane">
           {selectedConvId ? (
             <>
