@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Nav from "./Nav";
+import "./ForgotPassword.css";
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -61,6 +62,7 @@ function ResetPassword() {
             onChange={(e) => setNewPassword(e.target.value)}
             required
             style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+            id="input-forgot"
             />
             <input
             type="password"

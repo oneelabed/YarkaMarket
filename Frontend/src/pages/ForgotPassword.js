@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Nav from "./Nav";
+import "./ForgotPassword";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -41,6 +42,7 @@ function ForgotPassword() {
             onChange={(e) => setEmail(e.target.value)}
             required
             style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+            id="input-forgot"
             />
             <button type="submit" disabled={loading} style={{ padding: "10px 20px" }}>
             {loading ? "Sending..." : "Send Reset Link"}
