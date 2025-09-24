@@ -41,7 +41,7 @@ function PrivacyPolicy() {
         <h2>5. Your Rights</h2>
         <p>
           You may request deletion of your account and personal information. You may contact
-          us at <strong>oneelabed123@gmail.com</strong> for privacy-related requests.
+          us at <strong>yarkamarket2025@gmail.com</strong> for privacy-related requests.
         </p>
 
         <h2>6. Updates</h2>

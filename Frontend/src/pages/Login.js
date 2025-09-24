@@ -104,6 +104,7 @@ function Login () {
           <button type="button" className="login-button" onClick={handleSubmit} disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </button>
+          <Link to="/forgot-password" id="forgot">Forgot Password?</Link>
         </form>
       </div>
     </div>

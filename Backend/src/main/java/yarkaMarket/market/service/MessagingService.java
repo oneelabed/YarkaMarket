@@ -23,13 +23,13 @@ public class MessagingService {
     private final ConversationRepository conversationRepository;
     private final MessageRepository messageRepository;
     private final SimpMessagingTemplate messagingTemplate;
+    private final EmailService emailService;
 
     // Get all conversations for a user
     public List<Conversation> getConversationsForUser(User user) {
         return conversationRepository.findByUser(user);
     }
 
-    // Find or create conversation between two users
     public Conversation findOrCreateConversation(User user1, User user2) {
         Optional<Conversation> conv = conversationRepository.findByUser1AndUser2(user1, user2);
         if (conv.isPresent()) return conv.get();
@@ -38,7 +38,6 @@ public class MessagingService {
         return conversationRepository.save(newConv);
     }
 
-    // Get messages in conversation
     public List<Message> getMessagesInConversation(Long conversationId, User user) 
         throws Exception{
         Conversation conversation = conversationRepository.findById(conversationId)
@@ -50,7 +49,6 @@ public class MessagingService {
         return messageRepository.findByConversation(conversation);
     }
 
-    // Send message - now with WebSocket notification
     public Message sendMessage(Long conversationId, User sender, String content) {
         Conversation conversation = conversationRepository.findById(conversationId)
             .orElseThrow(() -> new RuntimeException("Conversation not found"));
@@ -60,20 +58,24 @@ public class MessagingService {
         conversationRepository.save(conversation);
         Message savedMessage = messageRepository.save(message);
         
-        // Send real-time notification via WebSocket
         sendWebSocketNotification(savedMessage, conversation, sender);
+
+        User recipient = conversation.getUser1().getId().equals(sender.getId())
+                ? conversation.getUser2() 
+                : conversation.getUser1();
+
+        String preview = content.length() > 100 ? content.substring(0, 100) + "..." : content;
+        emailService.sendNewMessageNotification(recipient, sender, preview, conversationId);
         
         return savedMessage;
     }
     
     private void sendWebSocketNotification(Message message, Conversation conversation, User sender) {
         try {
-            // Determine the recipient (the other user in the conversation)
             User recipient = conversation.getUser1().getId().equals(sender.getId()) 
                     ? conversation.getUser2() 
                     : conversation.getUser1();
 
-            // Create response message DTO
             WebSocketMessageNotification notification = new WebSocketMessageNotification(
                     message.getId(),
                     message.getConversation().getId(),
@@ -83,7 +85,6 @@ public class MessagingService {
                     message.getTimestamp()
             );
 
-            // Send to the recipient via WebSocket (using email as unique identifier)
             messagingTemplate.convertAndSendToUser(
                     recipient.getEmail(),
                     "/queue/messages",
@@ -93,13 +94,11 @@ public class MessagingService {
             System.out.println("WebSocket notification sent to: " + recipient.getEmail());
             
         } catch (Exception e) {
-            // Log the error but don't fail the message sending
             System.err.println("Failed to send WebSocket notification: " + e.getMessage());
             e.printStackTrace();
         }
     }
     
-    // DTO class for WebSocket message notifications
     public static class WebSocketMessageNotification {
         private Long id;
         private Long conversationId;
@@ -119,7 +118,6 @@ public class MessagingService {
             this.timestamp = timestamp;
         }
 
-        // Getters
         public Long getId() { return id; }
         public Long getConversationId() { return conversationId; }
         public Long getSenderId() { return senderId; }

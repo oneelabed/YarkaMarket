@@ -1,0 +1,55 @@
+import { useState } from "react";
+import Nav from "./Nav";
+
+function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const res = await fetch(`${apiUrl}/forgot-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ email }),
+      });
+
+      const data = await res.text();
+      setMessage(data);
+    } catch (err) {
+      setMessage("Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+        <Nav/>
+        <div style={{ maxWidth: "400px", margin: "100px auto", textAlign: "center" }}>
+        <h2>Forgot Password</h2>
+        <form onSubmit={handleSubmit}>
+            <input
+            type="email"
+            placeholder="Your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+            />
+            <button type="submit" disabled={loading} style={{ padding: "10px 20px" }}>
+            {loading ? "Sending..." : "Send Reset Link"}
+            </button>
+        </form>
+        {message && <p style={{ marginTop: "20px" }}>{message}</p>}
+        </div>
+    </div>
+  );
+}
+
+export default ForgotPassword;

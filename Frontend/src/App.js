@@ -11,6 +11,9 @@ import Admin from "./pages/Admin.js"
 import Messages from "./pages/Messages.js"
 import TermsOfUse from "./pages/TermsOfUse";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+
 
 import { Navigate } from "react-router-dom";
 import "./App.css"
@@ -24,19 +27,21 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home/>}></Route>
+        <Route path="/" element={<Home/>} />
         <Route path="/terms" element={<TermsOfUse />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/login" element={<Login/>}></Route>
-        <Route path="/signup" element={<SignUp/>}></Route>
+        <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>}>
-          <Route path="market" element={<PrivateRoute><Market/></PrivateRoute>}></Route>
-          <Route path="create-listing" element={<PrivateRoute><CreateListing/></PrivateRoute>}></Route>
-          <Route path="my-listings" element={<PrivateRoute><MyListings/></PrivateRoute>}></Route>
-          <Route path="conversations" element={<PrivateRoute><Messages/></PrivateRoute>}></Route>
-          <Route path="edit-listing/:id" element={<PrivateRoute><EditListing/></PrivateRoute>}></Route>
+          <Route path="market" element={<PrivateRoute><Market/></PrivateRoute>} />
+          <Route path="create-listing" element={<PrivateRoute><CreateListing/></PrivateRoute>} />
+          <Route path="my-listings" element={<PrivateRoute><MyListings/></PrivateRoute>} />
+          <Route path="conversations" element={<PrivateRoute><Messages/></PrivateRoute>} />
+          <Route path="edit-listing/:id" element={<PrivateRoute><EditListing/></PrivateRoute>} />
         </Route>
-        <Route path="/admin" element={<PrivateRoute><Admin/></PrivateRoute>}></Route>
+        <Route path="/admin" element={<PrivateRoute><Admin/></PrivateRoute>} />
       </Routes>
     </div>
   )

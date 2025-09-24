@@ -6,12 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import yarkaMarket.market.Security.JwtTokenProvider;
 import yarkaMarket.market.entity.User;
 import yarkaMarket.market.repository.UserRepository;
+import yarkaMarket.market.service.PasswordResetService;
 import yarkaMarket.market.service.UserService;
 
 import java.security.Principal;
@@ -27,6 +29,8 @@ public class UserController {
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
+    private final PasswordResetService resetService;
+
 
     @GetMapping
     public List<User> getUsers() {
@@ -49,7 +53,6 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");
         String password = credentials.get("password");
-        //Optional<User> userByEmail = userRepository.findUserByEmail(email);
 
         return userRepository.findUserByEmail(email)
         .map(user -> {
@@ -80,18 +83,38 @@ public class UserController {
             return ResponseEntity.ok(Map.of("error", "Password needs to be at least 8 characters"));
 
         if (password.length() > 30)
-            return ResponseEntity.ok(Map.of("error", "Password needs to be least than 30 characters"));
+            return ResponseEntity.ok(Map.of("error", "Password needs to be less than 30 characters"));
 
         userRepository.save(new User(firstName, lastName, email, passwordEncoder.encode(password)));
 
         return ResponseEntity.ok(Map.of("token", jwtTokenProvider.generateToken(email)));
     }
 
-    /*@DeleteMapping(path = "{studentId}")
-    public void deleteStudent(@PathVariable("studentId") long id) {
-        studentService.deleteStudent(id);
+    @PostMapping("/forgot-password")
+    public String forgotPassword(@RequestParam String email) {
+        try {
+            resetService.createPasswordResetToken(email);
+            return "Reset link sent to your email";
+        } catch (Exception e) {
+            return "Error sending link";
+        }
     }
-    */
+
+    @PostMapping("/reset-password")
+    public String resetPassword(@RequestParam String token, @RequestParam String newPassword) {
+        try {
+            if (newPassword.length() < 8)
+                return "Password needs to be at least 8 characters";
+
+            if (newPassword.length() > 30)
+                return "Password needs to be less than 30 characters";
+
+            resetService.resetPassword(token, newPassword);
+            return "Password successfully updated";
+        } catch (Exception e) {
+            return "Error reseting password";
+        }
+    }
 
     private boolean isValidEmail(String email) {
         // Basic null or length check
