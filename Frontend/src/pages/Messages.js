@@ -144,7 +144,6 @@ function Messages() {
     
     const fetchMessages = async () => {
       try {
-        setLoading(true);
         const res = await fetch(`${apiUrl}/dashboard/conversations/${selectedConvId}/messages`, {
           headers: {
             Authorization: `Bearer ${token}`
@@ -155,9 +154,7 @@ function Messages() {
         setMessages(data);
       } catch (err) {
         // console.error(err);
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
     
     fetchMessages();
