@@ -12,7 +12,7 @@ import yarkaMarket.market.entity.User;
 
 public interface ConversationRepository extends JpaRepository<Conversation, Long> {
     // Find all conversations where user is participant
-    @Query("SELECT c FROM Conversation c WHERE c.user1 = ?1OR c.user2 = ?1") // ORDER BY c.last_updated ASC
+    @Query("SELECT c FROM Conversation c WHERE c.user1 = ?1OR c.user2 = ?1")
     List<Conversation> findByUser(User user);
 
     // Find conversation between two users regardless of order

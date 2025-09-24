@@ -1,6 +1,6 @@
 package yarkaMarket.market.repository;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +14,6 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     List<Message> findByConversation(Conversation conversation);
 
     @Query("SELECT COUNT(*) FROM Message m WHERE m.timestamp > ?1")
-    long countByCreatedAtAfter(LocalDateTime time);
+    long countByCreatedAtAfter(ZonedDateTime time);
 
 }

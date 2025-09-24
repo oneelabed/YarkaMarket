@@ -9,7 +9,7 @@ import yarkaMarket.market.repository.ConversationRepository;
 import yarkaMarket.market.repository.MessageRepository;
 import yarkaMarket.market.repository.UserRepository;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class AdminController {
         Map<String, Object> stats = new HashMap<>();
         stats.put("totalUsers", userRepository.count());
         stats.put("totalConversations", conversationRepository.count());
-        stats.put("messagesToday", messageRepository.countByCreatedAtAfter(LocalDateTime.now().minusDays(1)));
+        stats.put("messagesToday", messageRepository.countByCreatedAtAfter(ZonedDateTime.now().minusDays(1)));
         return stats;
     }
 

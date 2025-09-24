@@ -12,28 +12,18 @@ function Admin() {
     totalConversations: 0,
     messagesToday: 0
   });
-
   const [activeTab, setActiveTab] = useState("dashboard");
-  const token = sessionStorage.getItem("token");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch stats
-        const resStats = await fetch(`${apiUrl}/admin/stats`, {
-          headers: { 
-            Authorization: `Bearer ${token}` 
-          }
-        });
+        const resStats = await fetch(`${apiUrl}/admin/stats`);
         const statsData = await resStats.json();
         setStats(statsData);
 
         // Fetch users
-        const resUsers = await fetch(`${apiUrl}/admin/users`, {
-          headers: { 
-            Authorization: `Bearer ${token}` 
-          }
-        });
+        const resUsers = await fetch(`${apiUrl}/admin/users`);
         const usersData = await resUsers.json();
         setUsers(usersData);
 
@@ -55,6 +45,8 @@ function Admin() {
     e.preventDefault();
 
     try {
+      const token = sessionStorage.getItem("token");
+
       const res = await fetch(
         `${apiUrl}/admin/activate/${userId}`,
         {
