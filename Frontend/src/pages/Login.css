@@ -87,14 +87,14 @@
   }
 
   #forgot {
-    padding-left: 80px;
+    padding-left: 75px;
     font-size: 14px;
   }
 }
 
 @media (max-width: 370px) {
   #forgot {
-    padding-left: 50px;
+    padding-left: 45px;
     font-size: 14px;
   }
 }
