@@ -96,7 +96,7 @@ function SignUp() {
             <input
               type="text"
               name="email"
-              value={formData.email}
+              value={formData.email.toLowerCase()}
               onChange={handleChange}
               className="form-input"
               autoComplete="email"

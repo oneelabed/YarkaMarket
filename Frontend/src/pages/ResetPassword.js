@@ -61,7 +61,6 @@ function ResetPassword() {
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             required
-            id="input-forgot"
             />
             <input
             type="password"
@@ -69,7 +68,6 @@ function ResetPassword() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
-            style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
             />
             <button type="submit" disabled={loading} style={{ padding: "10px 20px" }}>
             {loading ? "Resetting..." : "Reset Password"}
