@@ -83,7 +83,6 @@ function Messages() {
   const sendMessage = async () => {
     if (!newMsg.trim()) return;
     
-    setLoading(true);
     try {
       // Use your existing REST API endpoint
       const res = await fetch(`${apiUrl}/dashboard/conversations/${selectedConvId}/messages`, {
@@ -107,8 +106,6 @@ function Messages() {
     } catch (err) {
       // console.error('Failed to send message:', err);
       alert('Failed to send message. Please try again.');
-    } finally {
-      setLoading(false);
     }
   };
 
