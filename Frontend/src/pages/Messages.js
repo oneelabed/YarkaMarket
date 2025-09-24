@@ -136,7 +136,7 @@ function Messages() {
       fetchConversations();
     }
     // eslint-disable-next-line
-  }, [token, selectedConvId]);
+  }, [token]);
 
   // Fetch messages whenever selected conversation changes
   useEffect(() => {
