@@ -32,7 +32,7 @@ function ForgotPassword() {
   return (
     <div>
         <Nav/>
-        <div style={{ maxWidth: "400px", margin: "100px auto", textAlign: "center" }}>
+        <div style={{ maxWidth: "400px", margin: "100px auto", textAlign: "center" }} className="forgot-container">
         <h2>Forgot Password</h2>
         <form onSubmit={handleSubmit}>
             <input
@@ -41,7 +41,6 @@ function ForgotPassword() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
             id="input-forgot"
             />
             <button type="submit" disabled={loading} style={{ padding: "10px 20px" }}>
