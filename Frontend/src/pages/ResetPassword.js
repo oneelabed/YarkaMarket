@@ -52,7 +52,7 @@ function ResetPassword() {
   return (
     <div>
         <Nav/>
-        <div style={{ maxWidth: "400px", margin: "100px auto", textAlign: "center" }}>
+        <div style={{ maxWidth: "400px", margin: "100px auto", textAlign: "center" }} className="forgot-container">
         <h2>Reset Password</h2>
         <form onSubmit={handleSubmit}>
             <input
@@ -61,7 +61,6 @@ function ResetPassword() {
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             required
-            style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
             id="input-forgot"
             />
             <input
