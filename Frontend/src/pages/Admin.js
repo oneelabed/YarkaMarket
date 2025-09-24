@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Admin.css";
 import activate from "../images/activate.png";
@@ -12,18 +12,28 @@ function Admin() {
     totalConversations: 0,
     messagesToday: 0
   });
+
   const [activeTab, setActiveTab] = useState("dashboard");
+  const token = sessionStorage.getItem("token");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch stats
-        const resStats = await fetch(`${apiUrl}/admin/stats`);
+        const resStats = await fetch(`${apiUrl}/admin/stats`, {
+          headers: { 
+            Authorization: `Bearer ${token}` 
+          }
+        });
         const statsData = await resStats.json();
         setStats(statsData);
 
         // Fetch users
-        const resUsers = await fetch(`${apiUrl}/admin/users`);
+        const resUsers = await fetch(`${apiUrl}/admin/users`, {
+          headers: { 
+            Authorization: `Bearer ${token}` 
+          }
+        });
         const usersData = await resUsers.json();
         setUsers(usersData);
 
@@ -45,8 +55,6 @@ function Admin() {
     e.preventDefault();
 
     try {
-      const token = sessionStorage.getItem("token");
-
       const res = await fetch(
         `${apiUrl}/admin/activate/${userId}`,
         {
