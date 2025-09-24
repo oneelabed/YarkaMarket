@@ -105,11 +105,11 @@ public class MessagingService {
         private Long senderId;
         private String senderUsername;
         private String content;
-        private java.time.LocalDateTime timestamp;
+        private java.time.ZonedDateTime timestamp;
 
         public WebSocketMessageNotification(Long id, Long conversationId, Long senderId, 
                                            String senderUsername, String content, 
-                                           java.time.LocalDateTime timestamp) {
+                                           java.time.ZonedDateTime timestamp) {
             this.id = id;
             this.conversationId = conversationId;
             this.senderId = senderId;
@@ -123,7 +123,7 @@ public class MessagingService {
         public Long getSenderId() { return senderId; }
         public String getSenderUsername() { return senderUsername; }
         public String getContent() { return content; }
-        public java.time.LocalDateTime getTimestamp() { return timestamp; }
+        public java.time.ZonedDateTime getTimestamp() { return timestamp; }
     }
 }
 

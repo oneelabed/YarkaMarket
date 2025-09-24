@@ -161,16 +161,6 @@ function Messages() {
     // eslint-disable-next-line
   }, [selectedConvId, token]);
 
-  function formatMessageDate(date) {
-    return date.toLocaleString("en-GB", {
-      timeZone: "Asia/Jerusalem",
-      month: "short", 
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    }).replace(",", " |"); 
-  }
-
   if (loading) {
     return (
       <div className="loading-screen">
@@ -218,7 +208,7 @@ function Messages() {
                   >
                     {msg.content}
                     <div className="message-time">
-                      {formatMessageDate(new Date(msg.timestamp))}
+                      {new Date(msg.timestamp).toString().slice(4, 10) + " | " + new Date(msg.timestamp).toLocaleTimeString().slice(0, -3)}
                     </div>
                   </div>
                 ))}

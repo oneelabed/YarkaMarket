@@ -1,6 +1,8 @@
 package yarkaMarket.market.entity;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +25,7 @@ public class Message {
     @JoinColumn(name = "sender")
     private User sender;
     private String content;
-    private LocalDateTime timestamp;
+    private ZonedDateTime timestamp;
 
     public Message() {
 
@@ -33,6 +35,6 @@ public class Message {
         this.conversation = conversation;
         this.sender = sender;
         this.content = content;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = ZonedDateTime.now(ZoneId.of("Asia/Jerusalem"));
     }
 }
