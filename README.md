@@ -5,7 +5,8 @@ A full-stack marketplace platform where users can sign up, create product listin
 - **User Authentication**: Secure login & signup with JWT.  
 - **Create & Manage Listings**: Post, edit, and delete product listings with images.  
 - **Real-Time Messaging**: WebSocket-based chat between buyers and sellers.  
-- **Responsive UI**: Optimized for desktop and mobile.  
+- **Responsive UI**: Optimized for desktop and mobile.
+- **Email Notifications**: Automatic email alerts when users receive new messages, and a Forgot password flow with secure email reset links.
 - **Deployment Ready**: Dockerized with separate frontend & backend hosting.
 
 ## 🛠️ Tech Stack
