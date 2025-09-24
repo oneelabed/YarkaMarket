@@ -15,10 +15,13 @@ import java.util.Map;
 
 @Service
 public class EmailService {
-
     @Autowired
-    private JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
     private final Map<Long, LocalDateTime> lastNotified = new HashMap<>();
+
+    public EmailService(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
 
     @Async
     public void sendNewMessageNotification(User recipient, User sender, String messagePreview, Long conversationId) {
