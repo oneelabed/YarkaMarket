@@ -101,10 +101,13 @@ function Login () {
           {error && <div className="error-message">{error}</div>}<br/>
           
           <b id="signUpMsg">Don't have an account? <Link to="/signup" id="SignUpLink">Sign Up</Link></b><br/><br/>
-          <button type="button" className="login-button" onClick={handleSubmit} disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
-          <Link to="/forgot-password" id={loading ? "forgot1" : "forgot2"}>Forgot Password?</Link>
+          <div className="forgot-signup">
+            <button type="button" className="login-button" onClick={handleSubmit} disabled={loading}>
+              Login
+            </button>
+            <Link to="/forgot-password" id="forgot">Forgot Password?</Link>
+          </div>
+          
         </form>
       </div>
     </div>

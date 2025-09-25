@@ -119,7 +119,7 @@ function SignUp() {
 
           <b id="LoginMsg">Already have an account? <Link to="/login" id="LoginLink">Log In</Link></b><br/><br/>
           <button type="button" className="signup-button" onClick={handleSubmit} disabled={loading}>
-            {loading ? "Signing up..." : "Sign Up"}
+            Sign Up
           </button>
         </form>
       </div>
