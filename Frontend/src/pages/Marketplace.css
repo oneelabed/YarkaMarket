@@ -1,7 +1,9 @@
 .marketplace-container {
   max-width: 900px;
+  min-height: 100vh;
   margin: 20px auto;
   padding: 0 15px;
+  padding-bottom: 50px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -140,12 +142,7 @@
 @media (max-width: 1000px){
   .marketplace-container {
     padding: 30px;
-    height: 1000px;
-  }
-
-  .listings-list {
-    list-style: none;
-    margin-bottom: 100px;
+    padding-bottom: 100px;
   }
 
   .listing-item {
