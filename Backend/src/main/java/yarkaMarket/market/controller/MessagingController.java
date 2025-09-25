@@ -71,6 +71,16 @@ public class MessagingController {
         return ResponseEntity.ok(message);
     }
 
+    @GetMapping("/unreadCount/{userId}")
+    public long getUnreadCount(@PathVariable Long userId) {
+        return messagingService.getUnreadCount(userId);
+    }
+
+    @PostMapping("/markAsRead/{conversationId}/{userId}")
+    public void markAsRead(@PathVariable Long conversationId, @PathVariable Long userId) {
+        messagingService.markConversationAsRead(conversationId, userId);
+    }
+
     // DTO classes for requests
     public static class MessageRequest {
         private String content;

@@ -46,6 +46,14 @@ public class MessagingService {
         if (conversation.getUser1() != user && conversation.getUser2() != user) 
             throw new Exception("User not in conversation");
 
+        if (conversation.getUser1().getId().equals(user.getId())) {
+            conversation.setUnreadUser1(0);
+        } else {
+            conversation.setUnreadUser2(0);
+        }
+
+        conversationRepository.save(conversation);
+
         return messageRepository.findByConversation(conversation);
     }
 
@@ -54,20 +62,48 @@ public class MessagingService {
             .orElseThrow(() -> new RuntimeException("Conversation not found"));
 
         Message message = new Message(conversation, sender, content);
-        conversation.setLastUpdated(message.getTimestamp());    
-        conversationRepository.save(conversation);
-        Message savedMessage = messageRepository.save(message);
-        
-        sendWebSocketNotification(savedMessage, conversation, sender);
+        conversation.setLastUpdated(message.getTimestamp());   
 
         User recipient = conversation.getUser1().getId().equals(sender.getId())
                 ? conversation.getUser2() 
                 : conversation.getUser1();
 
+        if (recipient.getId().equals(conversation.getUser1().getId())) {
+            conversation.setUnreadUser1(conversation.getUnreadUser1() + 1);
+        } else {
+            conversation.setUnreadUser2(conversation.getUnreadUser2() + 1);
+        }
+
+        conversationRepository.save(conversation);
+        Message savedMessage = messageRepository.save(message);
+        
+        sendWebSocketNotification(savedMessage, conversation, sender);
+
         String preview = content.length() > 100 ? content.substring(0, 100) + "..." : content;
         emailService.sendNewMessageNotification(recipient, sender, preview, conversationId);
         
         return savedMessage;
+    }
+
+    @Transactional
+    public void markConversationAsRead(Long conversationId, Long userId) {
+        @SuppressWarnings("unused")
+        Conversation conversation = conversationRepository.findById(conversationId)
+                .orElseThrow(() -> new RuntimeException("Conversation not found"));
+
+        messageRepository.findAll().stream()
+                .filter(m -> m.getConversation().getId().equals(conversationId)
+                        && !m.getSender().getId().equals(userId)
+                        && !m.isRead())
+                .forEach(m -> {
+                    m.setRead(true);
+                    messageRepository.save(m);
+                });
+
+    }
+
+    public long getUnreadCount(Long userId) {
+        return messageRepository.countUnreadMessages(userId);
     }
     
     private void sendWebSocketNotification(Message message, Conversation conversation, User sender) {

@@ -2,6 +2,7 @@ package yarkaMarket.market.entity;
 
 import java.time.ZonedDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -22,6 +23,10 @@ public class Conversation {
     @ManyToOne
     @JoinColumn(name = "user2")
     private User user2;
+    @Column(nullable = true)
+    private int unreadUser1 = 0;
+    @Column(nullable = true)
+    private int unreadUser2 = 0;
     private ZonedDateTime lastUpdated;
 
     public Conversation() {

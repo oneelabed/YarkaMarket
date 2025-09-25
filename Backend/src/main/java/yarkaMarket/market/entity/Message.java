@@ -3,6 +3,7 @@ package yarkaMarket.market.entity;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -25,6 +26,8 @@ public class Message {
     private User sender;
     private String content;
     private ZonedDateTime timestamp;
+    @Column(nullable = true)
+    private boolean isRead = false;
 
     public Message() {
 
@@ -35,5 +38,6 @@ public class Message {
         this.sender = sender;
         this.content = content;
         this.timestamp = ZonedDateTime.now(ZoneId.of("Asia/Jerusalem"));
+        this.isRead = false;
     }
 }

@@ -171,6 +171,25 @@
   animation: spin 1s linear infinite;
 }
 
+.badge-container {
+  position: relative;
+  padding-top: 10px;
+}
+
+.message-badge-conv {
+  background-color: #007bff;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);

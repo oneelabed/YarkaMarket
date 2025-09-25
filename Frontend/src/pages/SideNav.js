@@ -1,12 +1,36 @@
 import "./SideNav.css"
 import { Link, NavLink } from "react-router-dom"
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { Home, MessageCircle, Plus, User, ShoppingBag, UserCog} from "lucide-react";
+import { Home, MessageCircle, Plus, User, ShoppingBag, UserCog } from "lucide-react";
 import blackLogo from "../images/marketLogoBlack.png"
 
 function SideNav() {
   const { currentUser } = useContext(UserContext);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const token = sessionStorage.getItem("token");
+
+  useEffect(() => {
+    if (!token)
+      return;
+
+    const fetchUnreadCount = async () => {
+      const res = await fetch(`${apiUrl}/dashboard/unreadCount/${currentUser.id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const count = await res.json();
+        setUnreadCount(count);
+      }
+    };
+
+    if (currentUser) {
+      fetchUnreadCount();
+      const interval = setInterval(fetchUnreadCount, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [currentUser, token, apiUrl]);
 
   return(
     <div>
@@ -24,7 +48,12 @@ function SideNav() {
           <div className="sidenav-item">
             <NavLink to="conversations" 
               className={({ isActive }) => `${ isActive ? "active-sidenav" : "unactive-sidenav"}`}>
-            <MessageCircle className="icon" color="blue" size={20}></MessageCircle>
+            <div className="message-icon-container">
+              <MessageCircle className="icon" color="blue" size={20}/>
+              {unreadCount > 0 && (
+                <span className="message-badge">{unreadCount}</span>
+              )}
+            </div>
             <span className="sidenav-word">Messages&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             </NavLink>
           </div><br/>

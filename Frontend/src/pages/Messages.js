@@ -152,6 +152,13 @@ function Messages() {
         if (!res.ok) throw new Error("Failed to fetch messages");
         const data = await res.json();
         setMessages(data);
+
+        await fetch(`${apiUrl}/dashboard/markAsRead/${selectedConvId}/${currentUser.id}`, {
+          method: "POST",
+          headers: { 
+            Authorization: `Bearer ${token}` 
+          }
+        });
       } catch (err) {
         // console.error(err);
       } 
@@ -160,6 +167,25 @@ function Messages() {
     fetchMessages();
     // eslint-disable-next-line
   }, [selectedConvId, token]);
+
+  const handleSelectConversation = (convId) => {
+    setSelectedConvId(convId);
+
+    setConversations(prev =>
+      prev.map(conv => {
+        if (conv.id.toString() === convId) {
+          // Reset unread count for the current user
+          if (conv.user1.id === currentUser.id) {
+            return { ...conv, unreadUser1: 0 };
+          } else if (conv.user2.id === currentUser.id) {
+            return { ...conv, unreadUser2: 0 };
+          }
+        }
+        return conv;
+      })
+    );
+  };
+
 
   if (loading) {
     return (
@@ -178,18 +204,29 @@ function Messages() {
       <div className="messages-container">
         <div className="conversations-list">
           {conversations.length === 0 && <p>&nbsp;&nbsp;No conversations</p>}
-          {conversations.map((conv) => (
-            <div
-              key={conv.id}
-              className={
-                "conversation-item " +
-                (conv.id.toString() === selectedConvId ? "selected" : "")
-              }
-              onClick={() => setSelectedConvId(conv.id.toString())}
-            >
-              {`${conv.user1.id === currentUser.id ? conv.user2.username : conv.user1.username}`}
-            </div>
-          ))}
+          {conversations.map((conv) => {
+            const isUser1 = conv.user1.id === currentUser.id;
+            const otherUser = isUser1 ? conv.user2 : conv.user1;
+            const unreadCount = isUser1 ? conv.unreadUser1 : conv.unreadUser2;
+
+            return (
+              <div
+                key={conv.id}
+                className={
+                  "conversation-item " +
+                  (conv.id.toString() === selectedConvId ? "selected" : "")
+                }
+                onClick={() => handleSelectConversation(conv.id.toString())}
+              >
+                <span>{otherUser.username}</span>
+                {unreadCount > 0 && (
+                  <div className="badge-container">
+                    <span className="message-badge-conv">{unreadCount}</span>
+                  </div>
+                )}
+              </div> 
+            );
+          })}
         </div>
 
         <div className="messages-pane">
