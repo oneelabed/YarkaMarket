@@ -63,13 +63,17 @@
 }
 
 .login-button {
-  background-color: #04AA6D; /* Green */
+  background-color: #04AA6D;
   border: none;
   color: white;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
+}
+
+.login-button:active {
+  transform: scale(0.95);
 }
 
 #forgot {
