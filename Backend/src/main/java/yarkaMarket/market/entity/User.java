@@ -49,10 +49,6 @@ public class User {
         this.role = Role.ADMIN;
     }
 
-    public void setApproved() {
-        this.isApproved = true;
-    }
-
     @Override
     public String toString() {
         return "User{" +

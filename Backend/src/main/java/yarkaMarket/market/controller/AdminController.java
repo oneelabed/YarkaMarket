@@ -58,7 +58,7 @@ public class AdminController {
         }
 
         User user = userRepository.findById(id).get();
-        user.setApproved();
+        user.setApproved(true);
         userRepository.save(user);
 
         return ResponseEntity.ok().build();

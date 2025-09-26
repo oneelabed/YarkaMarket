@@ -133,8 +133,8 @@ function Admin() {
                     <td>{user.id}</td>
                     <td>{user.email}</td>
                     <td>{user.username}</td>
-                    <td>{user.isApproved ? "Active" : "Banned"} 
-                        {!user.isApproved && <button type="button" onClick={(e) => handleActivate(user.id, e)}
+                    <td>{user.approved ? "Active" : "Banned"}
+                        {!user.approved && <button type="button" onClick={(e) => handleActivate(user.id, e)}
                           id="activateButton"><img alt="activateButton" 
                           src={activate} id="activate" ></img></button>}
                     </td>
