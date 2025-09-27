@@ -17,17 +17,14 @@ function Admin() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch stats
         const resStats = await fetch(`${apiUrl}/admin/stats`);
         const statsData = await resStats.json();
         setStats(statsData);
 
-        // Fetch users
         const resUsers = await fetch(`${apiUrl}/admin/users`);
         const usersData = await resUsers.json();
         setUsers(usersData);
 
-        // Fetch conversations
         const resConvs = await fetch(`${apiUrl}/admin/conversations`);
         const convsData = await resConvs.json();
         setConversations(convsData);
@@ -38,8 +35,7 @@ function Admin() {
     };
 
     fetchData();
-    // eslint-disable-next-line
-  }, []);
+  }, [apiUrl]);
 
   const handleActivate = async (userId, e) => {
     e.preventDefault();

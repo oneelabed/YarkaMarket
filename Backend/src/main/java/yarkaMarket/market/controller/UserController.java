@@ -117,31 +117,24 @@ public class UserController {
     }
 
     private boolean isValidEmail(String email) {
-        // Basic null or length check
         if (email == null || email.length() < 6) return false;
 
-        // Must contain exactly one '@'
         int atIndex = email.indexOf('@');
         if (atIndex == -1 || email.indexOf('@', atIndex + 1) != -1) return false;
 
-        // Split local and domain parts
         String localPart = email.substring(0, atIndex);
         String domainPart = email.substring(atIndex + 1);
 
-        // Local part must not be empty
         if (localPart.isEmpty()) return false;
 
-        // Domain part must contain at least one '.'
         int dotIndex = domainPart.lastIndexOf('.');
         if (dotIndex == -1 || dotIndex == 0 || dotIndex == domainPart.length() - 1) return false;
 
-        // Domain name and extension must not be empty
         String domainName = domainPart.substring(0, dotIndex);
         String domainExtension = domainPart.substring(dotIndex + 1);
 
         if (domainName.isEmpty() || domainExtension.length() < 2) return false;
 
-        // No spaces allowed
         if (email.contains(" ")) return false;
 
         return true;

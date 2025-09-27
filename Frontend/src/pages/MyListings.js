@@ -36,8 +36,7 @@ function MyListings() {
     };
 
     fetchListings();
-    // eslint-disable-next-line
-  }, []);
+  }, [apiUrl]);
 
   const handleDelete = async (id, e) => {
     e.preventDefault();
@@ -59,7 +58,6 @@ function MyListings() {
         throw new Error("Failed to delete listing");
       }
 
-      // Remove listing from state instantly
       setListings((prevListings) => prevListings.filter((listing) => listing.id !== id));
     } catch (error) {
       // console.error(error);

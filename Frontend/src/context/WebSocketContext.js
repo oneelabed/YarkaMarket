@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback, useRef } from 'react';
-import webSocketService from '../service/WebSocketService'; // Adjust path as needed
-import { UserContext } from './UserContext'; // Adjust path as needed
+import webSocketService from '../service/WebSocketService';
+import { UserContext } from './UserContext';
 
 const WebSocketContext = createContext();
 

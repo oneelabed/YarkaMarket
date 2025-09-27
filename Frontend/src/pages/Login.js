@@ -57,7 +57,6 @@ function Login () {
       const data = await res.json();
       setCurrentUser(data);
 
-      // Redirect
       window.location.href = "/dashboard/market";
     } catch (err) {
       // console.error("Login error:", err);

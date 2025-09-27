@@ -24,7 +24,6 @@ function Messages() {
 
   const token = sessionStorage.getItem("token");
 
-  // Scroll to bottom of messages
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -33,7 +32,6 @@ function Messages() {
     scrollToBottom();
   }, [messages]);
 
-  // Handle incoming WebSocket messages
   const handleWebSocketMessage = useCallback((messageData) => {
     // console.log('Messages component received WebSocket message:', messageData);
     // Add message if it belongs to the currently selected conversation
@@ -79,12 +77,10 @@ function Messages() {
     }
   }, [subscribeToMessages, handleWebSocketMessage]);
 
-  // Send message function - uses REST API (your existing endpoint)
   const sendMessage = async () => {
     if (!newMsg.trim()) return;
     
     try {
-      // Use your existing REST API endpoint
       const res = await fetch(`${apiUrl}/dashboard/conversations/${selectedConvId}/messages`, {
         method: "POST",
         headers: {
@@ -109,7 +105,6 @@ function Messages() {
     }
   };
 
-  // Fetch conversations once when component mounts
   useEffect(() => {
     const fetchConversations = async () => {
       try {
@@ -135,10 +130,8 @@ function Messages() {
     if (token) {
       fetchConversations();
     }
-    // eslint-disable-next-line
-  }, [token]);
+  }, [apiUrl, token, selectedConvId]);
 
-  // Fetch messages whenever selected conversation changes
   useEffect(() => {
     if (!selectedConvId || !token) return;
     
@@ -165,8 +158,7 @@ function Messages() {
     };
     
     fetchMessages();
-    // eslint-disable-next-line
-  }, [selectedConvId, token]);
+  }, [currentUser, selectedConvId, token, apiUrl]);
 
   const handleSelectConversation = (convId) => {
     setSelectedConvId(convId);
@@ -174,7 +166,6 @@ function Messages() {
     setConversations(prev =>
       prev.map(conv => {
         if (conv.id.toString() === convId) {
-          // Reset unread count for the current user
           if (conv.user1.id === currentUser.id) {
             return { ...conv, unreadUser1: 0 };
           } else if (conv.user2.id === currentUser.id) {

@@ -42,10 +42,8 @@ public class ListingController {
 
     @GetMapping("/my-listings")
     public List<Listing> getMyListings(Principal principal) {
-        // Get the username from the token
         String email = principal.getName();
 
-        // Find the user in DB
         User user = userRepository.findUserByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -60,10 +58,8 @@ public class ListingController {
         @RequestParam("image") MultipartFile image,
         Principal principal) throws IOException {
 
-        // Get the username from the token
         String email = principal.getName();
         
-        // Find the user in DB
         User user = userRepository.findUserByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -73,19 +69,6 @@ public class ListingController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("Invalid category");
         }
-
-        /* Save the file locally
-
-        Path uploadPath = Paths.get(uploadDir);
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
-        }
-
-        
-        String filename = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-        Path filePath = uploadPath.resolve(filename);
-        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-        Listing listing = new Listing(title, description, price, category, filename, user); */
 
         var uploadResult = cloudinaryService.uploadImageWithResult(image);
         String imageUrl = uploadResult.get("secure_url").toString();
@@ -106,10 +89,8 @@ public class ListingController {
         @RequestParam("image") MultipartFile image,
         Principal principal) throws IOException {
 
-        // Get the username from the token
         String email = principal.getName();
         
-        // Find the user in DB
         User user = userRepository.findUserByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -120,18 +101,6 @@ public class ListingController {
             return ResponseEntity.badRequest().body("Invalid category");
         }
 
-        /* Save the file locally
-
-        Path uploadPath = Paths.get(uploadDir);
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
-        }
-
-        
-        String filename = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-        Path filePath = uploadPath.resolve(filename);
-        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING); */
-
         Listing listing = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Listing not found"));
 
@@ -139,7 +108,6 @@ public class ListingController {
             cloudinaryService.deleteImage(listing.getImagePublicId());
         }
 
-        // Upload new image
         var uploadResult = cloudinaryService.uploadImageWithResult(image);
         String imageUrl = uploadResult.get("secure_url").toString();
         String publicId = uploadResult.get("public_id").toString();
@@ -160,7 +128,7 @@ public class ListingController {
             try {
                 cloudinaryService.deleteImage(listing.getImagePublicId());
             } catch (Exception e) {
-                e.printStackTrace(); // Log error but proceed with deletion
+                e.printStackTrace();
             }
         }
 

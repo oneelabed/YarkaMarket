@@ -31,8 +31,7 @@ export function UserProvider({ children }) {
     };
 
     fetchCurrentUser();
-     // eslint-disable-next-line 
-  }, [token]);
+  }, [apiUrl, token]);
 
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>

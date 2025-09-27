@@ -27,16 +27,12 @@ public class MessagingController {
         this.userRepository = userRepository;
         this.conversationService = conversationService;
     }
-
-    // Get all conversations for logged in user
     @GetMapping("/conversations")
     public List<Conversation> getConversations(Principal userDetails) {
         User user = userRepository.findUserByEmail(userDetails.getName())
             .orElseThrow(() -> new RuntimeException("User not found"));
         return messagingService.getConversationsForUser(user);
     }
-
-    // Get messages in a conversation
     @GetMapping("/conversations/{id}/messages")
     public List<Message> getMessages(@PathVariable Long id, Principal userDetails) 
         throws Exception{
@@ -46,7 +42,6 @@ public class MessagingController {
         return messagingService.getMessagesInConversation(id, user);
     }
 
-    // Start a conversation with a user (or find existing)
     @PostMapping("/conversations")
     public ResponseEntity<?> startConversation(@RequestBody ConversationRequest request,
                                                Principal userDetails) {
@@ -59,7 +54,6 @@ public class MessagingController {
         return ResponseEntity.ok(conversation);
     }
 
-    // Send message
     @PostMapping("/conversations/{id}/messages")
     public ResponseEntity<?> sendMessage(@PathVariable Long id,
                                          @RequestBody MessageRequest request,
@@ -81,7 +75,6 @@ public class MessagingController {
         messagingService.markConversationAsRead(conversationId, userId);
     }
 
-    // DTO classes for requests
     public static class MessageRequest {
         private String content;
         public String getContent() { return content; }

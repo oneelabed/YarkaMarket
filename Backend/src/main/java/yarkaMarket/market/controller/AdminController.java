@@ -39,13 +39,11 @@ public class AdminController {
         return stats;
     }
 
-    // GET /api/admin/users
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    // GET /api/admin/conversations
     @GetMapping("/conversations")
     public List<Conversation> getAllConversations() {
         return conversationRepository.findAll();

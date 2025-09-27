@@ -21,7 +21,7 @@ function CreateListing() {
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
-      setImage(e.target.files[0]); // ONLY the first file
+      setImage(e.target.files[0]);
     }
   };
 
@@ -112,7 +112,6 @@ function CreateListing() {
           required
         />
         <div className="uploader-container">
-          {/* Styled upload button */}
           <label htmlFor="image-upload" className="upload-btn">
             Upload Image
           </label>

@@ -45,7 +45,6 @@ function SignUp() {
 
       sessionStorage.setItem("token", token);
 
-      // Redirect (replace with your dashboard path)
       window.location.href = "/dashboard/market";
     } catch (err) {
       // console.error("Login error:", err);

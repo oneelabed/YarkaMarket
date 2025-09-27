@@ -33,14 +33,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        // Enable a simple memory-based message broker to carry messages back to the client
-        // on destinations prefixed with "/queue" for individual users
         config.enableSimpleBroker("/queue", "/topic");
-        
-        // Designate the "/app" prefix for messages that are bound for methods annotated with @MessageMapping
         config.setApplicationDestinationPrefixes("/app");
-        
-        // Set user destination prefix for private messaging
         config.setUserDestinationPrefix("/user");
     }
 
@@ -64,11 +58,11 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                     if (authHeader != null && authHeader.startsWith("Bearer ")) {
                         String token = authHeader.substring(7);
                         try {
-                            // Validate token using your existing JwtTokenProvider
+                            // Validate token using existing JwtTokenProvider
                             if (jwtTokenProvider.validateToken(token)) {
                                 String email = jwtTokenProvider.getUsernameFromToken(token);
                                 
-                                // Create authentication token (same as in your JwtTokenFilter)
+                                // Create authentication token
                                 UsernamePasswordAuthenticationToken authentication = 
                                     new UsernamePasswordAuthenticationToken(
                                         email, 

@@ -21,7 +21,7 @@ function EditListing() {
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
-      setImage(e.target.files[0]); // ONLY the first file
+      setImage(e.target.files[0]);
     }
   };
 
@@ -39,7 +39,7 @@ function EditListing() {
     }
 
     try {
-      const token = sessionStorage.getItem("token"); // from login
+      const token = sessionStorage.getItem("token");
 
       const form = new FormData();
       form.append("title", formData.title);
@@ -113,7 +113,6 @@ function EditListing() {
           onChange={handleChange}
         />
         <div className="uploader-container">
-          {/* Styled upload button */}
           <label htmlFor="image-upload" className="upload-btn">
             Upload Image
           </label>

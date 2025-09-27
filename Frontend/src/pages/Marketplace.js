@@ -14,14 +14,15 @@ function Marketplace() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const categories = ["All", "Electronics", "Furniture", "Clothing", "Tools", "Home", "Sports", "Books", "Other"];
-
+  const token = sessionStorage.getItem("token");
+  
   useEffect(() => {
     const fetchListings = async () => {
       setLoading(true);
       setError(null);
 
       try {
-        const token = sessionStorage.getItem("token");
+        
         const response = await fetch(`${apiUrl}/dashboard/market`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -44,8 +45,7 @@ function Marketplace() {
     };
 
     fetchListings();
-    // eslint-disable-next-line
-  }, []);
+  }, [apiUrl, token]);
 
   const navigate = useNavigate();
 
@@ -79,7 +79,6 @@ function Marketplace() {
 
       const conversation = await res.json();
 
-      // Navigate to notifications page and select the new conversation
       navigate(`/dashboard/conversations?convId=${conversation.id}`);
     } catch (err) {
       // console.error(err);
