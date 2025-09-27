@@ -130,7 +130,8 @@ function Messages() {
     if (token) {
       fetchConversations();
     }
-  }, [apiUrl, token, selectedConvId]);
+    // eslint-disable-next-line
+  }, [apiUrl, token]);
 
   useEffect(() => {
     if (!selectedConvId || !token) return;
