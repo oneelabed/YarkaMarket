@@ -100,8 +100,9 @@ function MyListings() {
               </div>
               <p className="listing-person">{listing.username}</p>
             </div>
-            <button type="button" id="delete" onClick={(e) => handleDelete(listing.id, e)}>Delete</button>
-            <Link to={`/dashboard/edit-listing/${listing.id}`} id="edit">Edit</Link>
+            
+            <Link to={`/dashboard/edit-listing/${listing.id}`} className="edit-btn">Edit</Link>
+            <button type="button" className="delete-btn" onClick={(e) => handleDelete(listing.id, e)}>Delete</button>
           </li>
         ))}
       </ul>

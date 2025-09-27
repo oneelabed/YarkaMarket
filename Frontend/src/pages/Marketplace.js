@@ -15,7 +15,7 @@ function Marketplace() {
 
   const categories = ["All", "Electronics", "Furniture", "Clothing", "Tools", "Home", "Sports", "Books", "Other"];
   const token = sessionStorage.getItem("token");
-  
+
   useEffect(() => {
     const fetchListings = async () => {
       setLoading(true);
@@ -126,7 +126,7 @@ function Marketplace() {
               <p className="listing-person">{listing.username}</p>
             </div>
             {currentUser && currentUser.id !== listing.creator.id && 
-              (<button onClick={() => handleStartConversation(listing.creator.id)} id="message">
+              (<button onClick={() => handleStartConversation(listing.creator.id)} className="message-btn">
                 Message
               </button>)}
           </li>

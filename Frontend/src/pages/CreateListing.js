@@ -89,6 +89,7 @@ function CreateListing() {
           value={formData.description}
           onChange={handleChange}
           required
+          wrap="hard"
         ></textarea>
         <select
           name="category"

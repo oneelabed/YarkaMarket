@@ -14,107 +14,39 @@
   margin-top: -10px;
 }
 
-.listings-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.listing-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px 20px;
-  margin-bottom: 20px;
-  background-color: #fafafa;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 0.05);
-  transition: box-shadow 0.3s ease;
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-.listing-item:hover {
-  box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
-}
-
-.listing-image {
-  max-width: 180px;
-  max-height: 140px;
-  object-fit: cover;
+.edit-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  text-decoration: none;
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: white;
   border-radius: 6px;
-  flex-shrink: 0;
-  box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
-}
-
-.listing-details {
-  flex-grow: 1;
-}
-
-.listing-title {
-  margin: 0 0 8px;
-  font-size: 1.25rem;
-  color: #222;
-}
-
-.listing-description {
-  margin: 0 0 12px;
-  color: #555;
-  line-height: 1.4;
-}
-
-.listing-person {
-  margin: 0 0 12px;
-  color: #555;
-  line-height: 2.8;
-}
-
-.listing-meta {
   font-size: 0.9rem;
-  color: #666;
-  display: flex;
-  gap: 15px;
+  font-family: sans-serif;
 }
 
-.listing-price {
-  font-weight: 600;
-  color: #008000;
+.edit-btn:hover {
+  background-color: #0056b3;
 }
 
-#edit {
-    margin-top: 120px;
-    margin-right: 20px;
-    text-decoration: none;
-    color: black;
-    font-family: sans-serif;
+.delete-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 6px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: sans-serif;
+  cursor: pointer;
 }
 
-#delete {
-    margin-top: 0px;
-    margin-right: -70px;
-    text-decoration: none;
-    color: black;
-    font-family: sans-serif;
-    background-color: transparent;
-    border: none;
-    font-size: inherit; 
-    cursor: pointer;
-}
-
-.loading-screen {
-  display: flex;
-  justify-content: center; 
-  align-items: center;     
-  height: 100vh;
-  width: 100%;
-}
-
-.loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #09f;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.delete-btn:hover {
+  background-color: #a71d2a;
 }
 
 @keyframes spin {
@@ -147,15 +79,11 @@
     justify-content: center;
   }
 
-  #edit {
-    margin: 0px;
-    margin-top: -38px;
-    align-self: flex-start;
-  }
-
-  #delete {
-    margin: 0px;
-    align-self: flex-end;
+  .edit-btn {
+    top:auto;
+    right: auto;
+    bottom: 20px;
+    left: 20px;
   }
 }
 
