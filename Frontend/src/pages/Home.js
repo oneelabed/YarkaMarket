@@ -2,12 +2,17 @@ import "./Home.css";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import { ArrowRight, Share, PlusSquare } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 function Home() {
   const isMobile = window.innerWidth <= 1000;
 
   return (
     <div className="homepage">
+      <Helmet>
+        <title>Yarka Market - Home</title>
+        <link rel="canonical" href="https://yarkamarket.org/" />
+      </Helmet>
       <Nav/>
       <section className="hero">
         <div className="hero-content">

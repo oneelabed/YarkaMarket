@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function EditListing() {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -75,6 +76,10 @@ function EditListing() {
 
   return (
     <div className="create-listing-container">
+      <Helmet>
+        <title>Yarka Market - Edit Listing</title>
+        <link rel="canonical" href="https://yarkamarket.org/dashboard/edit-listing" />
+      </Helmet>
       <h2>Edit Listing</h2>
       <form onSubmit={handleSubmit}>
         <input

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Admin.css";
 import activate from "../images/activate.png";
+import { Helmet } from "react-helmet-async";
 
 function Admin() {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -67,6 +68,10 @@ function Admin() {
 
   return (
     <div className="admin-page">
+      <Helmet>
+        <title>Yarka Market - Admin</title>
+        <link rel="canonical" href="https://yarkamarket.org/admin" />
+      </Helmet>
       <aside className="sidebar">
         <h2>Admin Panel</h2>
         <ul>
@@ -98,6 +103,10 @@ function Admin() {
         <br/><br/>
         {activeTab === "dashboard" && (
           <>
+            <Helmet>
+              <title>Yarka Market - Admin</title>
+              <link rel="canonical" href="https://yarkamarket.org/admin/dashboard" />
+            </Helmet>
             <h1>Dashboard</h1>
             <div className="stats">
               <div className="card">Total Users: {stats.totalUsers}</div>
@@ -113,6 +122,10 @@ function Admin() {
 
         {activeTab === "users" && (
           <>
+            <Helmet>
+              <title>Yarka Market - Admin</title>
+              <link rel="canonical" href="https://yarkamarket.org/admin/users" />
+            </Helmet>
             <h1>Users</h1>
             <table>
               <thead>
@@ -143,6 +156,10 @@ function Admin() {
 
         {activeTab === "conversations" && (
           <>
+            <Helmet>
+              <title>Yarka Market - Admin</title>
+              <link rel="canonical" href="https://yarkamarket.org/admin/conversations" />
+            </Helmet>
             <h1>Conversations</h1>
             <table>
               <thead>

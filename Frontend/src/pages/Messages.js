@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useWebSocket } from "../context/WebSocketContext";
 import { Send } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 function Messages() {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -189,6 +190,10 @@ function Messages() {
 
   return (
     <div>
+      <Helmet>
+        <title>Yarka Market - Home</title>
+        <link rel="canonical" href="https://yarkamarket.org/dashboard/conversations" />
+      </Helmet>
       <h1 id="title">
         Messages 
       </h1> 

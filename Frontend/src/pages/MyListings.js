@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./MyListings.css";
+import { Helmet } from "react-helmet-async";
 
 function MyListings() {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -78,6 +79,10 @@ function MyListings() {
 
   return (
     <div className="mylistings-container">
+      <Helmet>
+        <title>Yarka Market - My Listings</title>
+        <link rel="canonical" href="https://yarkamarket.org/my-listings" />
+      </Helmet>
       <br></br><br></br>
       <h1>My Listings</h1><br/>
       {listings.length === 0 && <p>You don't have any listings.</p>}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./CreateListing.css"
+import { Helmet } from "react-helmet-async";
 
 function CreateListing() {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -73,6 +74,10 @@ function CreateListing() {
 
   return (
     <div className="create-listing-container">
+      <Helmet>
+        <title>Yarka Market - Create Listing</title>
+        <link rel="canonical" href="https://yarkamarket.org/dashboard/create-listing" />
+      </Helmet>
       <h2>Create Listing</h2>
       <form onSubmit={handleSubmit}>
         <input

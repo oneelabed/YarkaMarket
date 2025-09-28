@@ -4,6 +4,7 @@ import Nav from "./Nav";
 import { Link } from "react-router-dom"
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { Helmet } from "react-helmet-async";
 
 function Login () {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -68,6 +69,10 @@ function Login () {
 
   return (
     <div>
+      <Helmet>
+        <title>Yarka Market - Login</title>
+        <link rel="canonical" href="https://yarkamarket.org/login" />
+      </Helmet>
       <Nav/>
       <div className="login-container">
         <form className="login-form">

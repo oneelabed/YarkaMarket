@@ -3,6 +3,7 @@ import "./Marketplace.css";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { Helmet } from "react-helmet-async";
 
 function Marketplace() {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -97,6 +98,10 @@ function Marketplace() {
 
   return (
     <div className="marketplace-container">
+      <Helmet>
+        <title>Yarka Market - Marketplace</title>
+        <link rel="canonical" href="https://yarkamarket.org/dashboard/market" />
+      </Helmet>
       <h1>Marketplace</h1><br/>
 
       <select value={selectedCategory} onChange={handleCategoryChange}>
