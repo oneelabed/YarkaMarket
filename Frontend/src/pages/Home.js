@@ -8,19 +8,8 @@ import { useEffect, useState } from "react";
 function Home() {
   const isMobile = window.innerWidth <= 1000;
 
-  const [currentPath, setCurrentPath] = useState("/");
-
-  useEffect(() => {
-    // Only run in the browser
-    setCurrentPath(window.location.pathname);
-  }, []);
-
   return (
     <div className="homepage">
-      <Helmet>
-        <title>Yarka Market - Home</title>
-        <link rel="canonical" href={`https://yarkamarket.org${currentPath}`} />
-      </Helmet>
       <Nav/>
       <section className="hero">
         <div className="hero-content">
