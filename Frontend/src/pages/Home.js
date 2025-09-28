@@ -11,7 +11,7 @@ function Home() {
     <div className="homepage">
       <Helmet>
         <title>Yarka Market - Home</title>
-        <link rel="canonical" href="https://yarkamarket.org/" />
+        <link rel="canonical" href="https://yarkamarket.org" />
       </Helmet>
       <Nav/>
       <section className="hero">
