@@ -10,7 +10,7 @@ function Admin() {
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalConversations: 0,
-    messagesToday: 0
+    totalListings: 0
   });
   const [activeTab, setActiveTab] = useState("dashboard");
 
@@ -105,7 +105,7 @@ function Admin() {
                 Active Conversations: {stats.totalConversations}
               </div>
               <div className="card">
-                Messages Today: {stats.messagesToday}
+                Active Listings: {stats.totalListings}
               </div>
             </div>
           </>

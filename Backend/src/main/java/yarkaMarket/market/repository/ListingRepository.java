@@ -16,4 +16,7 @@ public interface ListingRepository extends JpaRepository<Listing, Long> {
 
     @Query("SELECT l FROM Listing l WHERE l.id = ?1")
     Optional<Listing> findById(Long id);
+
+    @Query("SELECT COUNT(l) FROM Listing l")
+    long countActive();
 }

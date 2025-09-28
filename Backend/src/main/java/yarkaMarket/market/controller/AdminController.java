@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import yarkaMarket.market.entity.Conversation;
 import yarkaMarket.market.entity.User;
 import yarkaMarket.market.repository.ConversationRepository;
-import yarkaMarket.market.repository.MessageRepository;
+import yarkaMarket.market.repository.ListingRepository;
 import yarkaMarket.market.repository.UserRepository;
 
-import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,14 +19,14 @@ public class AdminController {
 
     private final UserRepository userRepository;
     private final ConversationRepository conversationRepository;
-    private final MessageRepository messageRepository;
+    private final ListingRepository listingRepository;
 
     public AdminController(UserRepository userRepository,
                            ConversationRepository conversationRepository,
-                           MessageRepository messageRepository) {
+                           ListingRepository listingRepository) {
         this.userRepository = userRepository;
         this.conversationRepository = conversationRepository;
-        this.messageRepository = messageRepository;
+        this.listingRepository = listingRepository;
     }
 
     @GetMapping("/stats")
@@ -35,7 +34,7 @@ public class AdminController {
         Map<String, Object> stats = new HashMap<>();
         stats.put("totalUsers", userRepository.count());
         stats.put("totalConversations", conversationRepository.count());
-        stats.put("messagesToday", messageRepository.countByCreatedAtAfter(ZonedDateTime.now().minusDays(1)));
+        stats.put("totalListings", listingRepository.countActive());
         return stats;
     }
 
