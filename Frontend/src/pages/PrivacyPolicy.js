@@ -1,15 +1,10 @@
 import { Link } from "react-router-dom";
 import "./PrivacyAndTerms.css";
 import { ArrowLeft } from "lucide-react";
-import { Helmet } from "react-helmet-async";
 
 function PrivacyPolicy() {
   return (
     <div>
-      <Helmet>
-        <title>Yarka Market - Privacy Policy</title>
-        <link rel="canonical" href="https://yarkamarket.org/privacy" />
-      </Helmet>
       <Link to="/" id="arrow"><ArrowLeft size={40}></ArrowLeft></Link>
       <div style={{ padding: "20px", maxWidth: "800px", margin: "0 auto"}}>
         <h1>Privacy Policy</h1> 

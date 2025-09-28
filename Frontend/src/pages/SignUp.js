@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./SignUp.css";
 import Nav from "./Nav";
 import { Link } from "react-router-dom"
-import { Helmet } from "react-helmet-async";
 
 function SignUp() {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -57,10 +56,6 @@ function SignUp() {
 
   return (
     <div>
-      <Helmet>
-        <title>Yarka Market - SignUp</title>
-        <link rel="canonical" href="https://yarkamarket.org/signup" />
-      </Helmet>
       <Nav/>
       <div className="signup-container">
         

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Nav from "./Nav";
 import "./ForgotPassword.css";
-import { Helmet } from "react-helmet-async";
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -52,10 +51,6 @@ function ResetPassword() {
 
   return (
     <div>
-        <Helmet>
-          <title>Yarka Market - Reset Password</title>
-          <link rel="canonical" href="https://yarkamarket.org/reset-password" />
-        </Helmet>
         <Nav/>
         <div style={{ maxWidth: "400px", margin: "100px auto", textAlign: "center" }} className="forgot-container">
         <h2>Reset Password</h2>

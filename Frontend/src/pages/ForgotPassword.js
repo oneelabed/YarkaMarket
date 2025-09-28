@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Nav from "./Nav";
 import "./ForgotPassword";
-import { Helmet } from "react-helmet-async";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -32,10 +31,6 @@ function ForgotPassword() {
 
   return (
     <div>
-        <Helmet>
-          <title>Yarka Market - Forgot Password</title>
-          <link rel="canonical" href="https://yarkamarket.org/forgot-password" />
-        </Helmet>
         <Nav/>
         <div style={{ maxWidth: "400px", margin: "100px auto", textAlign: "center" }} className="forgot-container">
         <h2>Forgot Password</h2>

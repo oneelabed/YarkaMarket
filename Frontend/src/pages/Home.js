@@ -2,8 +2,6 @@ import "./Home.css";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import { ArrowRight, Share, PlusSquare } from "lucide-react";
-import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
 
 function Home() {
   const isMobile = window.innerWidth <= 1000;

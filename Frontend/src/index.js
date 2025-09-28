@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from "./context/UserContext"
 import { WebSocketProvider } from './context/WebSocketContext';
-import { HelmetProvider } from "react-helmet-async";
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -14,9 +13,7 @@ root.render(
     <React.StrictMode>
       <UserProvider>
         <WebSocketProvider>
-          <HelmetProvider>
             <App />
-          </HelmetProvider>
         </WebSocketProvider>
       </UserProvider>
     </React.StrictMode>
