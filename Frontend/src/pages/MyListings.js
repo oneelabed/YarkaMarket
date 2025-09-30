@@ -40,29 +40,31 @@ function MyListings() {
 
   const handleDelete = async (id, e) => {
     e.preventDefault();
-    try {
-      setLoading(true);
+    if (window.confirm("Are you sure you want to delete this listing?")) {
+      try {
+        setLoading(true);
 
-      const token = sessionStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
 
-      const response = await fetch(`${apiUrl}/dashboard/my-listings/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+        const response = await fetch(`${apiUrl}/dashboard/my-listings/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      // console.log(response);
+        // console.log(response);
 
-      if (!response.ok) {
-        throw new Error("Failed to delete listing");
+        if (!response.ok) {
+          throw new Error("Failed to delete listing");
+        }
+
+        setListings((prevListings) => prevListings.filter((listing) => listing.id !== id));
+      } catch (error) {
+        // console.error(error);
+      } finally {
+        setLoading(false);
       }
-
-      setListings((prevListings) => prevListings.filter((listing) => listing.id !== id));
-    } catch (error) {
-      // console.error(error);
-    } finally {
-      setLoading(false);
     }
   };
 
