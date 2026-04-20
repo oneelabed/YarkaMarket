@@ -50,7 +50,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/signup", "/uploads/**", "/ws/**", "/admin/**", "/forgot-password", "/reset-password")
+                .requestMatchers("/login", "/signup", "/uploads/**", "/ws/**", "/admin/**", "/forgot-password", "/reset-password", "/healthz")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
